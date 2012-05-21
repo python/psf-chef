@@ -2,9 +2,15 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     chef-client (1.1.2)
+    haproxy (1.0.4)
+    heartbeat (0.7.1)
+    jn_sysctl (1.1.0)
     sudo (1.1.0)
 
 DEPENDENCIES
   chef-client (>= 0)
+  haproxy (>= 0)
+  heartbeat (>= 0)
+  jn_sysctl (>= 0)
   sudo (>= 0)
 
