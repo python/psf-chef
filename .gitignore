@@ -2,4 +2,4 @@ cookbooks
 tmp
 .chef/psf-validator.pem
 .rake_test_cache
-
+site-cookbooks/**/metadata.json
