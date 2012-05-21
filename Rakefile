@@ -31,11 +31,11 @@ require File.join(File.dirname(__FILE__), 'config', 'rake')
 #
 # Comment out these lines to skip the update.
 
-if File.directory?(File.join(TOPDIR, ".svn"))
-  $vcs = :svn
-elsif File.directory?(File.join(TOPDIR, ".git"))
-  $vcs = :git
-end
+# if File.directory?(File.join(TOPDIR, ".svn"))
+#   $vcs = :svn
+# elsif File.directory?(File.join(TOPDIR, ".git"))
+#   $vcs = :git
+# end
 
 # Load common, useful tasks from Chef.
 # rake -T to see the tasks this loads.
