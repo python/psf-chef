@@ -63,3 +63,8 @@ task :bundle_cookbook, :cookbook do |t, args|
 
   FileUtils.rm_rf temp_dir
 end
+
+desc "Run librarian"
+task :librarian do
+  system("librarian-chef install")
+end
