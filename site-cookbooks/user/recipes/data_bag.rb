@@ -21,7 +21,7 @@ include_recipe 'sudo'
 
 bag   = node['user']['data_bag']
 
-admin_groups = []
+admin_group = []
 
 search(bag, "*:*") do |u|
   username = u['username'] || u['id']
@@ -48,7 +48,7 @@ search(bag, "*:*") do |u|
     u['sudo'].each_pair do |role, cmd|
       cmds << cmd if node['roles'].include?(role)
     end
-    if cmds.present?
+    if !cmds.empty?
       sudo username do
         user username
         commands cmds
@@ -61,7 +61,7 @@ search(bag, "*:*") do |u|
 
 end
 
-if admin_groups.present?
+if !admin_group.empty?
   group "admin" do
     action [:create, :manage]
     members admin_group
@@ -71,4 +71,5 @@ end
 sudo "admin" do
   group "admin"
   nopasswd true
+  commands ["ALL"]
 end
