@@ -3,9 +3,15 @@ SITE
   specs:
     chef-client (1.1.2)
     haproxy (1.0.4)
-    heartbeat (0.7.1)
     jn_sysctl (1.1.0)
     sudo (1.1.0)
+
+GIT
+  remote: https://github.com/coderanger/heartbeat.git
+  ref: master
+  sha: eae58f2b400a4a5264984fe885224733e0bcf509
+  specs:
+    heartbeat (0.7.1)
 
 DEPENDENCIES
   chef-client (>= 0)

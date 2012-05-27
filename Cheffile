@@ -2,6 +2,6 @@ site "http://community.opscode.com/api/v1"
 
 cookbook "chef-client"
 cookbook "sudo"
-cookbook "heartbeat"
 cookbook "jn_sysctl"
 cookbook "haproxy"
+cookbook "heartbeat", :git => "https://github.com/coderanger/heartbeat.git"
