@@ -66,5 +66,11 @@ end
 
 desc "Run librarian"
 task :librarian do
+  puts "** Syncing with Cheffile"
   system("librarian-chef install")
+end
+
+# Extend the existing task to also call librarian
+task :update do
+  Rake::Task[:librarian].invoke
 end
