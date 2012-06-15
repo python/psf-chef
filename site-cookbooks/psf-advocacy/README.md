@@ -10,3 +10,5 @@ rsync -avz ximinez.python.org:/data/webstats/advocacy /data/webstats
 create /etc/webalizer/advocacy.conf
 move logfiles to /var/log/apache2
 change /etc/logrotate.d/apache2 to daily, four days
+apt-get install munin
+ln -s /var/cache/munin/www munin
