@@ -4,6 +4,7 @@ run_list [
   "recipe[chef-client::cron]",
   "recipe[chef-client::delete_validation]",
   "recipe[user::data_bag]",
+  "recipe[ntp]",
 ]
 override_attributes({
   :authorization => {
@@ -16,6 +17,9 @@ override_attributes({
       :minute => "*/30",
       :hour => "*",
     }
+  },
+  :ntp => {
+    :servers => ["time.osuosl.org"],
   },
   :user => {
     :ssh_keygen => false,

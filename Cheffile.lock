@@ -4,6 +4,7 @@ SITE
     chef-client (1.1.2)
     haproxy (1.0.4)
     jn_sysctl (1.1.0)
+    ntp (1.1.8)
     sudo (1.1.0)
 
 GIT
@@ -18,5 +19,6 @@ DEPENDENCIES
   haproxy (>= 0)
   heartbeat (>= 0)
   jn_sysctl (>= 0)
+  ntp (>= 0)
   sudo (>= 0)
 
