@@ -14,11 +14,19 @@ GIT
   specs:
     heartbeat (0.7.1)
 
+GIT
+  remote: https://github.com/coderanger/motd-tail.git
+  ref: master
+  sha: 573988be26dca2ab4d649f7b0b0ab66cdcd239be
+  specs:
+    motd-tail (1.0.0)
+
 DEPENDENCIES
   chef-client (>= 0)
   haproxy (>= 0)
   heartbeat (>= 0)
   jn_sysctl (>= 0)
+  motd-tail (>= 0)
   ntp (>= 0)
   sudo (>= 0)
 

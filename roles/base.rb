@@ -6,6 +6,7 @@ run_list [
   "recipe[user::data_bag]",
   "recipe[psf-misc::sudo]",
   "recipe[ntp]",
+  "recipe[motd-tail]",
 ]
 override_attributes({
   :authorization => {
