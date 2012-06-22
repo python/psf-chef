@@ -4,6 +4,7 @@ run_list [
   "recipe[chef-client::cron]",
   "recipe[chef-client::delete_validation]",
   "recipe[user::data_bag]",
+  "recipe[psf-misc::sudo]",
   "recipe[ntp]",
 ]
 override_attributes({
