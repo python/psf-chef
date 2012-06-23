@@ -1,0 +1,22 @@
+Setup of wiki.python.org
+------------------------
+
+apt-get install apache2
+apt-get install python-moinmoin
+apt-get install libapache2-mod-wsgi
+apt-get install python-openid
+apt-get install munin
+mkdir -p /data/www
+rsync -avz root@dinsdale:/data/moin /data
+touch /data/moin/synced (to allow removing modified files)
+rsync -avz root@dinsdale:/data/www/wiki /data/www
+adduser --system --uid 1071 --home /data/moin --no-create-home --disabled-password moin
+addgroup --system --gid 1071 moin
+create /etc/apache2/sites-available/wiki
+a2ensite wiki
+a2dissite 000-default
+ moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/moin maint cleancache
+ moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/jython maint cleancache
+ moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/psf maint cleancache
+ moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/moin-pycon maint cleancache
+drop url_prefix_static modification from farmconfig.py
