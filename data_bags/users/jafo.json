@@ -1,0 +1,8 @@
+{
+  "id": "jafo",
+  "comment": "Sean Reifschneider",
+  "sudo": true,
+  "ssh_keys": [
+    "ssh-dss AAAAB3NzaC1kc3MAAACBAPyIPM0G6XhAPjzo0vsGbhnP8yav14STOh2W7hjH3dVweja7bWmjyfeDdSo3Ld/ZdaGjkhDpgbELmSK8fjHthC3S5Mmvat8cwrdcNMLyCEsbiUDpIzNAGvpp90xwRxd+m0iRwBXCMmPo4LEp5DPkKHxdr+kbG0m6nLexu5ikfFIVAAAAFQD/px7n7s8vQZLBZOGeXGZ2rm7S+wAAAIBXSB5Ls67RYuOYIII7oH2Rs6PZMxvCAd/PMNR3g6W4blc8yXiFkCjmVcdfUNAylk5gyQIE+UVKDxl4p2AQklTAVDRlqVUchQr1GMpl6mN0+SbsINZMuGpCs3ZCikwmGhqbcWOOqdGVH5OTm5hJQG4mFZAGdbasFGp5+N5yZSYLDQAAAIBq5w+VuN/iINGSSJ083ia/qKb80jkoSuJsqajo3t5WzTGKIuvndZRd7w2uJiw+BYm2wm0PPLl0loDO7ATYmVeNOvckgik3PzQOCVim/uNb5L+Vk2RGdhTxiUZnLUvBKT/AAg6uROp5j6sys0+kHmCN5xJ+Iday2YZ0YJVjNxjaZw== jafo@guin.tummy.com"
+  ]
+}
