@@ -1,0 +1,25 @@
+apt-get install git
+apt-get install python-twisted-web
+apt-get install python-twisted-words
+apt-get install apache2
+apt-get install python-sqlalchemy
+apt-get install python-jinja2
+apt-get install python-migrate
+apt-get install python-setuptools
+apt-get install postfix
+addgroup --system buildbot
+adduser --system --group  --shell /bin/bash --home /data/buildbot buildbot
+git clone -b pydotorg-0.8.6 git@github.com:loewis/buildbot.git
+rsync -avz dinsdale:/data/buildbot/master /data/buildbot
+create /etc/apache2/site-available/buildbot
+a2dissite 000-default
+a2ensite buildbot
+a2enmod proxy
+a2enmod proxy_http
+rsync -avz dinsdale:/data/www/buildbot /data/www
+create /home/buildbot/buildbot.sh
+python setup.py install --root /home/buildbot/ --install-lib /lib/python --install-scripts /bin
+upgrade master.cfg
+./buildbot.sh upgrade-master master
+
+
