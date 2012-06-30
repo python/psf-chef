@@ -9,7 +9,7 @@ directory "/root/.ssh" do
 end
 
 template "/root/.ssh/authorized_keys" do
-  cookbook "users"
+  cookbook "user"
   source "authorized_keys.erb"
   owner "root"
   group "root"
