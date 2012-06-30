@@ -5,6 +5,7 @@ run_list [
   "recipe[chef-client::delete_validation]",
   "recipe[user::data_bag]",
   "recipe[psf-misc::sudo]",
+  "recipe[psf-misc::backup]",
   "recipe[ntp]",
   "recipe[motd-tail]",
 ]
