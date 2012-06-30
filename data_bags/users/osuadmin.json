@@ -1,0 +1,11 @@
+{
+  "id": "osuadmin",
+  "comment": "OSU Admin group account",
+  "sudo": true,
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDb8mIhrDs4wX7bBEV+anf7Gh3m98lQ0MQbyfSClNjwPIF4BHwczOct6m2mr+V4ft5I8JGUDk2ke20v3+bR5NIsEtGh3fRd+KeLOVPiboIPWADAAqm4WSuW10ow3IPF6BLWv/3RnAv1l8tVbCdUz3i1U/ryFcOHS9BLdTy+tprfc8amEfNfVrx/WpwSl4eXZImsOaQAKvzAPsCSDK/2DOQ0NPfUD1ECm0AqxVBWemDCITP3g+GRMueRRo1ui89BvhnK+B8bApJeUVMw3Ltw0cgps2fKfeGqKf9Ree9Twt6Mpkr04owVLXCdNMU4p2ilhcWmgvVJRQxAfH1yx519vAtv mythmon@gmail.com # added automatically for ganeti web manager user: mythmon",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAs8yFI2vksQUZtkQAsj2CY5Fw5xBDSIIPpqUtG3l06PxaNtj+JJ2JrGhU18qOtJZUCZDXPPLiBvrMCiGR+IgQy7CM6+tJr7PKlT63nF126eU1nrZTJL6+0GqomFV5p4lhJS48l2NQmTD0Z0ZoUGaKPhbfNHVYC1Dbn6EeNopB+hnJi2jCv5DaJ3JeMrGLV2K1PS3SfSIxCDjy7doxcqooz/HqrptDvTAsWEC3A3Sgyh+6uS01ON4NLOJ4vJNW7L3jj9iVeietCcGLYalZPQrsK4L+4G1kwLjN5Tyv4E4FbiiSY4NtoasTeXersoK8Vi3PV17mZcLUTb6qnBdgCi9gzQ== jordane@Gonff # added automatically for ganeti web manager user: osuadmin",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDb8mIhrDs4wX7bBEV+anf7Gh3m98lQ0MQbyfSClNjwPIF4BHwczOct6m2mr+V4ft5I8JGUDk2ke20v3+bR5NIsEtGh3fRd+KeLOVPiboIPWADAAqm4WSuW10ow3IPF6BLWv/3RnAv1l8tVbCdUz3i1U/ryFcOHS9BLdTy+tprfc8amEfNfVrx/WpwSl4eXZImsOaQAKvzAPsCSDK/2DOQ0NPfUD1ECm0AqxVBWemDCITP3g+GRMueRRo1ui89BvhnK+B8bApJeUVMw3Ltw0cgps2fKfeGqKf9Ree9Twt6Mpkr04owVLXCdNMU4p2ilhcWmgvVJRQxAfH1yx519vAtv mythmon@gmail.com # added automatically for ganeti web manager user: osuadmin",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3ri8+ysHfdNpqlMidI9tbHaHxBaAozzym/iPvyChkDLugppyoyPKyJGn42dcpKJA7xRdNFDaZTDtSkOMxah+/6Ov/y5doOvGFoR4ykZVzb7pVUmRGAXNVzIoiQgzjhhha/YOnyab5NyMUA9JVZV+3lsoz0YBjlYuvbRyQ3C38HD11X2Y9T7ZqPJ4MB6s0Dnfe88SnuZFdzBxZzLCsZ/jXgTXqB8WbUbSs5ShtK3YW5DIHw2+3k7hw1QOROcS4ibrV8JOwCjE2Csm3UZklQd3cz7S9Sp34KSy8XxQ4YasGojw8Ut5zklJhgbebAwm5ckkW27WrS+qw12k7R91fnWrd relud@nitrogen # added automatically for ganeti web manager user: relud"
+  ]
+}
