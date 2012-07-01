@@ -1,0 +1,76 @@
+sudo adduser hg --home /data/hg --disabled-password
+sudo adduser hgaccounts --home /data/hgaccounts --disabled-password
+sudo usermod antoine -G hg
+sudo usermod hg -G hgaccounts
+
+sudo apt-get install mercurial make gettext python-dev buildbot libapache2-mod-wsgi python-pygments munin
+
+-> edit ~hg/.bashrc and add the following at the beginning:
+
+------------------
+# WANT. ALWAYS
+export PYTHONPATH=~/lib/python
+export HGPUSHER=local-hg
+------------------
+
+rsync -avz dinsdale.python.org:/data/hg/bin /data/hg
+rsync -avz dinsdale.python.org:/data/hg/mercurial /data/hg
+cd /data/hg/mercurial/
+make
+make install-home
+
+(as user hg, type "which hg" and "hg version" to check that our compiled hg is there)
+
+cd ~hg
+rsync -avz dinsdale.python.org:/data/hg/wsgi /data/hg
+rsync -avz dinsdale.python.org:/data/hg/src /data/hg
+rsync -aHvz dinsdale.python.org:/data/hg/repos /data/hg
+
+(at this point, you can quick-test the Web UI by typing "hg serve --web-conf repos.conf")
+
+cd ~hgaccounts
+rsync -aHvz dinsdale.python.org:/data/hgaccounts/bin /data/hgaccounts
+rsync -aHvz dinsdale.python.org:/data/hgaccounts/repo /data/hgaccounts
+cd ~hgaccounts/bin
+touch genauth-wrapper.c
+make genauth-wrapper
+sudo chown hg:hg genauth-wrapper
+sudo chmod +s genauth-wrapper
+# Add SSH keys of SSH key admins to ~hgaccounts/.ssh/authorized_keys
+
+cd ~hg
+mkdir web
+hg clone /data/hgaccounts/repo keys
+
+(at this point, you can test pulling from/pushing to the SSH keys repo:
+  hg clone ssh://hgaccounts@hg2.python.org/repo sshkeys)
+
+# Add the following to ~hg/.hgrc (create if doesn't exist):
+
+--------------
+[smtp]
+host = mail.python.org
+port = 25
+
+[hgroundup]
+#mailrelay = bugs.python.org
+--------------
+
+(at this point, you can pull/push to the test repo:
+  hg clone ssh://hg@hg2.python.org/test/ )
+
+
+# Create /etc/apache2/sites-available/hg with appropriate contents
+a2ensite hg
+a2dissite default
+service apache2 reload
+
+(at this point, the Web UI is fully functional at http://hg2.python.org )
+
+
+XXX Various settings
+--------------------
+
+changed X11Forwarding to no in /etc/ssh/sshd_config
+
+
