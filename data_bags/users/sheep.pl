@@ -1,0 +1,9 @@
+{
+  "id": "sheep",
+  "comment": "Radomir Dopiralski",
+  "sudo": ["wiki"],
+  "ssh_keys": [
+    "ssh-dss AAAAB3NzaC1kc3MAAACBAPedoK6QQN1A/vEK1XacvyjwyqCAKPmDoLQqcFKS2SIS+28JAYdKTdCWeBsCfV1X5eP6Flx97hS71DGHl5zRe5oRKTzlC9hbYvrzluEt6RBSdgAFS258QLpmIJx0wY42QCHl+R8hgOiXCazmZYhqZXV4n0ano1xoNaR+gwlz0yrPAAAAFQCQxuffMBiYpT/D9+CAQwEJFkQx1wAAAIEAuTKVLJhZA64MG11xJl32I8whSWPmJs+e0L9cKn+gIaywfqrMyBzuQyP8Ayfxol43ZhF3+v6hSJKqrz28lMC84H4xCI+ZjiNjai9qsZD1Xdv4AfWMwLDtkaOjuKHqueFPoz3+tp3op9OUspRnDbd7tWWSW55SwamGljGvN9jqFcEAAACBALob/qkcsmBPr9J+5wNgTZysMIGwKqmCdPY/dNv9htW6ybvtrQ0rTgRImoqAtztyRFVkNmwhJF8Yi9KM5d8+/yUz37FN4IUhBZ54zroYE0KjfTHd8iXXjVliAfr8R9bM/d1v/Vsb+uLYZqQ7g55Q1+letgAiF9G1Qoe7i8VTJCFc sheep@atos",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtpcQYFmuI4mnghdgHpkYNE5Gs1oLfmB/cmM4h+8anzNHEVr8tUVJqGRphhTQRRvFVAmxh/akXqiefmLWsANAAqsS80On5tJn2v8y3QyM5xncTrIeU0J7GoMSXnI/FSVkGBO51VvWdwK0K4d7MQQZzRjvZ+wUGRNzqXVJeO3DUIhBLaFL5Rouosn/Q+fSwJW5x02en5zoKXhbhwKd7OllCkKbZXkVkYnRpY7hqAE13yBelbEQFbxQpve7LFbB3Ki4EGJqaoJkcbu2K4OiE83wsyFGF7MlHaPf0n9AjVQKj5QD5a6Tm/CgnJ4R78AxG7qh7OcGfkzSnDVZAHhFhxcXFw== sheep@ghostwheel"
+  ]
+}
