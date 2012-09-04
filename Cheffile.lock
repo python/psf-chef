@@ -1,6 +1,7 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    build-essential (1.1.0)
     chef-client (1.1.2)
     haproxy (1.0.4)
     jn_sysctl (1.1.0)
@@ -18,6 +19,7 @@ GIT
   specs:
 
 DEPENDENCIES
+  build-essential (>= 0)
   chef-client (>= 0)
   haproxy (>= 0)
   heartbeat (>= 0)
