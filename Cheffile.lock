@@ -4,6 +4,7 @@ SITE
     chef-client (1.1.2)
     haproxy (1.0.4)
     jn_sysctl (1.1.0)
+    motd-tail (1.1.0)
     ntp (1.1.8)
     sudo (1.1.0)
 
@@ -14,12 +15,7 @@ GIT
   specs:
     heartbeat (0.7.1)
 
-GIT
-  remote: https://github.com/coderanger/motd-tail.git
-  ref: master
-  sha: 573988be26dca2ab4d649f7b0b0ab66cdcd239be
   specs:
-    motd-tail (1.0.0)
 
 DEPENDENCIES
   chef-client (>= 0)
