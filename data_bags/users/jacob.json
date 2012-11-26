@@ -1,0 +1,8 @@
+{
+  "id": "jacob",
+  "comment": "Jacob Kaplan-Moss",
+  "sudo": ["redesign-staging"],
+  "ssh_keys": [
+    "ssh-dss AAAAB3NzaC1kc3MAAACBALyQYE4QhhyJFyM4ic6TOaqxaqYseg+p61P/5oemFnuvhJhse9enA1CG47Jgm4gqssZEKaMjwNKqaJ4h3Bj8QUEZMuAEQ4wj0+uVvJtC03hU2W3LyVu0gDp209qvOpucnb8T8cbxb2RfalH5Ha3BCv2c5IBtvN9xrWESHfmD6kZJAAAAFQDa41XqM/keyrfgX6FieWKTm2n+swAAAIAQdoE21GAI9nEkW5iesrgQZnBZYcjdGmb7oYpRHmjDHL0o1yOCvGCWYLCV4ypo2RDcm7t3RFeRast6V0r/EWUr1rWTSCt0+vdhsLJsoM7gG62ISSI0WqxMN5RvGv5pfREFxLH4UQ1TQMUWlxeoKKkwG2Ex4jVSSNtZVRc5eTCuLwAAAIA/zeN2EioRmFeNRL7rTRZp0AmVIdHJqIPKrNPYybmXlU+Q+nPe7YLWoZSivumvU7cdLHPKFtuB+3VLaQkuujZY/PbW2zwrozJYPN4H+SerJQ7bMtfl+Z75ryXD4kNX4SgvDocrKqpvo7tH/Z/JBkK/PXvOGIOCzwkrqgDj+bJMDg== jacob@jacobian.org"
+  ]
+}
