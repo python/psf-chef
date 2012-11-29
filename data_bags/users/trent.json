@@ -1,0 +1,8 @@
+{
+  "id": "trent",
+  "comment": "Trent Nelson",
+  "sudo": ["buildmaster"],
+  "ssh_keys": [
+    "ssh-dss AAAAB3NzaC1kc3MAAACBAIUOkkcw+6VRaJmXkDoEsRXFkb1z2xKtOAD2RaN7JrbWjPmW/QSxIyB5CMcw3fuvdR5IXjjTcI+plfbAm/f+irA5xxFb0Wm75Vehr3fcUYXxSFXbOWrvMTjP8PGx+Q8V95JZKeyoZ++sppa2JMpcpG9Ai4WjkYeC1q1+zVwfPYgRAAAAFQCLaTYXBaRByL5d6pP9QE7YA1RsnwAAAIB0bJDPVOp3IsPvUNHwAQfAK2g+0V3Fzbu0ZIk2U5+ngZZnumFSEIkInN4pIaiAiv1ArN9dbErnTEQwoVJoqg+swB7jceho+GFQmAO8SrGeV5WPXEDRwEPt/aV9knmS1cbhETcSs5+M16FGXNklCzlIr1jDud7Aipq0Hj0nv+hafQAAAIA+8JA3uX1lDi1o07W5xBkFY0wOURJl4mfdEUMUys24jk5YlyyhECaRMENsbbeQkZYYkBpziwCm1sX0P1biq6I1LCYvkBTj7io76l+zxLsCWcmeiYiTmtL/9Qh3OD0H96fxOZ+fOIZDXze7cWuZBoTd8VooupscCpg28+JJYzaCMg== tnelson@dark.teleri.net"
+  ]
+}
