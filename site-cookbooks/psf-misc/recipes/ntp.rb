@@ -1,6 +1,6 @@
 
-cron "ntpdate" do
+cron "ntp resync" do
   hour "0"
   minute "0"
-  command "/usr/sbin/ntpd -qgx"
+  command "service ntp restart"
 end
