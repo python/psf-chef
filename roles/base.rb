@@ -6,6 +6,7 @@ run_list [
   "recipe[user::data_bag]",
   "recipe[psf-misc::sudo]",
   "recipe[psf-misc::backup]",
+  "recipe[psf-misc::npt]",
   "recipe[ntp]",
   "recipe[motd-tail]",
 ]
