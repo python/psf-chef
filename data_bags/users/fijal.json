@@ -1,0 +1,8 @@
+{
+  "id": "fijal",
+  "comment": "Maciej Fijalkowski",
+  "sudo": ["pypy-codespeed"],
+  "ssh_keys": [
+    ""
+  ]
+}
