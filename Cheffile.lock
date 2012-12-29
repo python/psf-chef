@@ -8,6 +8,7 @@ SITE
     motd-tail (1.1.0)
     ntp (1.1.8)
     sudo (1.1.0)
+    zsh (1.0.0)
 
 GIT
   remote: https://github.com/coderanger/heartbeat.git
@@ -27,4 +28,5 @@ DEPENDENCIES
   motd-tail (>= 0)
   ntp (>= 0)
   sudo (>= 0)
+  zsh (>= 0)
 
