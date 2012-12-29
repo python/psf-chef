@@ -9,6 +9,7 @@ run_list [
   "recipe[psf-misc::ntp]",
   "recipe[ntp]",
   "recipe[motd-tail]",
+  "recipe[zsh]",
 ]
 override_attributes({
   :authorization => {
