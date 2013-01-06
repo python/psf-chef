@@ -6,10 +6,11 @@ application "speed.pypy.org" do
   packages ["libpq-dev", "git-core", "mercurial", "subversion"]
 
   django do
-    requirements "examples/requirements.txt"
+    requirements "example/requirements.txt"
     packages ["psycopg2"]
     # TODO: write this
     settings_template "settings.py.erb"
+    local_settings_file "example/settings.py"
     collectstatic "collectstatic --noinput"
     settings :secret_key => data_bag_item("secrets", "pypy-codespeed")["secret_key"]
     database do
