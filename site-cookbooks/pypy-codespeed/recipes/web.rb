@@ -22,6 +22,12 @@ application "speed.pypy.org" do
     end
   end
 
+  before_restart do
+    link "/srv/pypy-codespeed/current/manage.py" do
+      to "example/manage.py"
+    end
+  end
+
   gunicorn do
     app_module :django
   end
