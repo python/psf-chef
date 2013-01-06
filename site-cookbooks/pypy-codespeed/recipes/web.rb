@@ -1,3 +1,6 @@
+db = data_bag_item("secrets", "postgres")["pypy-codespeed"]
+secrets = data_bag_item("secrets", "pypy-codespeed")
+
 application "speed.pypy.org" do
   path "/srv/speed.pypy.org"
   repository "https://github.com/alex/codespeed.git"
@@ -12,13 +15,13 @@ application "speed.pypy.org" do
     settings_template "settings.py.erb"
     local_settings_file "example/settings.py"
     collectstatic "collectstatic --noinput"
-    settings :secret_key => data_bag_item("secrets", "pypy-codespeed")["secret_key"]
+    settings :secret_key => secrets["secret_key"]
     database do
       engine "postgresql_psycopg2"
-      database data_bag_item("secrets", "postgres")["pypy-codespeed"]["database"]
-      hostname data_bag_item("secrets", "postgres")["pypy-codespeed"]["hostname"]
-      username data_bag_item("secrets", "postgres")["pypy-codespeed"]["user"]
-      password data_bag_item("secrets", "postgres")["pypy-codespeed"]["password"]
+      database db["database"]
+      hostname db["hostname"]
+      username db["user"]
+      password db["password"]
     end
   end
 
