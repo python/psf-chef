@@ -1,13 +1,34 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    application (2.0.0)
+    application_nginx (1.0.2)
+      application (>= 0.0.0)
+      nginx (>= 0.0.0)
+    application_python (1.0.4)
+      application (>= 0.0.0)
+      gunicorn (>= 0.0.0)
+      python (>= 0.0.0)
+      supervisor (>= 0.0.0)
     build-essential (1.1.0)
     chef-client (1.1.2)
     haproxy (1.0.4)
+    gunicorn (1.1.0)
+      python (>= 0.0.0)
     jn_sysctl (1.1.0)
     motd-tail (1.1.0)
+    nginx (1.1.2)
+      build-essential (>= 0.0.0)
+      ohai (>= 1.1.2)
     ntp (1.1.8)
+    ohai (1.1.6)
+    python (1.2.0)
+      build-essential (>= 0.0.0)
+      yum (>= 0.0.0)
     sudo (1.1.0)
+    supervisor (0.3.0)
+      python (>= 0.0.0)
+    yum (2.0.6)
     zsh (1.0.0)
 
 GIT
@@ -20,6 +41,9 @@ GIT
   specs:
 
 DEPENDENCIES
+  application (>= 0)
+  application_nginx (>= 0)
+  application_python (>= 0)
   build-essential (>= 0)
   chef-client (>= 0)
   haproxy (>= 0)
