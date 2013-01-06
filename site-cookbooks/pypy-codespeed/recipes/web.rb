@@ -11,7 +11,6 @@ application "speed.pypy.org" do
   django do
     requirements "example/requirements.txt"
     packages ["psycopg2"]
-    # TODO: write this
     settings_template "settings.py.erb"
     local_settings_file "example/settings.py"
     collectstatic "collectstatic --noinput"
