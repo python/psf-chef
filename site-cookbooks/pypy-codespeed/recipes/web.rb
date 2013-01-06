@@ -22,6 +22,7 @@ application "speed.pypy.org" do
     end
 
     nginx_load_balancer do
+        application_server_role "pypy-codespeed"
         # TODO: is this right?
         static_files "/static" => "codespeed/sitestatic/"
     end
