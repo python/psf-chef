@@ -37,6 +37,7 @@ application "speed.pypy.org" do
 
   nginx_load_balancer do
     application_server_role "pypy-codespeed"
+    server_name node['fqdn']
     static_files "/static" => "example/sitestatic/"
   end
 end
