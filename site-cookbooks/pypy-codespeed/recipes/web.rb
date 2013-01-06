@@ -7,10 +7,11 @@ application "speed.pypy.org" do
 
   django do
     requirements "examples/requirements.txt"
+    packages ["psycopg2"]
     # TODO: write this
     settings_template "settings.py.erb"
-    debug false
     collectstatic "collectstatic --noinput"
+    settings :secret_key => data_bag_item("secrets", "pypy-codespeed")["secret_key"]
     database do
       engine "postgresql_psycopg2"
       database data_bag_item("secrets", "postgres")["pypy-codespeed"]["database"]
