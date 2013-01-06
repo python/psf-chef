@@ -38,8 +38,6 @@ GIT
   specs:
     heartbeat (0.7.1)
 
-  specs:
-
 DEPENDENCIES
   application (>= 0)
   application_nginx (>= 0)
