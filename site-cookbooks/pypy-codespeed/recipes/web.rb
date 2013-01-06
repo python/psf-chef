@@ -10,7 +10,6 @@ application "speed.pypy.org" do
         # TODO: write this
         settings_template "settings.py.erb"
         debug false
-        # TODO: wtf am I doing?
         collectstatic "collectstatic --noinput"
         database do
             engine "postgresql_psycopg2"
@@ -23,7 +22,6 @@ application "speed.pypy.org" do
 
     nginx_load_balancer do
         application_server_role "pypy-codespeed"
-        # TODO: is this right?
         static_files "/static" => "example/sitestatic/"
     end
 end
