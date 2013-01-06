@@ -10,7 +10,6 @@ application "speed.pypy.org" do
     packages ["psycopg2"]
     # TODO: write this
     settings_template "settings.py.erb"
-    debug false
     collectstatic "collectstatic --noinput"
     database do
       engine "postgresql_psycopg2"
