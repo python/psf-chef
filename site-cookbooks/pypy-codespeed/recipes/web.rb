@@ -10,6 +10,8 @@ application "speed.pypy.org" do
         # TODO: write this
         settings_template "settings.py.erb"
         debug false
+        # TODO: wtf am I doing?
+        collectstatic "collectstatic --noinput"
         database do
             engine "postgresql_psycopg2"
             database data_bag_item("secrets", "postgres")["pypy-codespeed"]["database"]
@@ -17,5 +19,10 @@ application "speed.pypy.org" do
             username data_bag_item("secrets", "postgres")["pypy-codespeed"]["user"]
             password data_bag_item("secrets", "postgres")["pypy-codespeed"]["password"]
         end
+    end
+
+    nginx_load_balancer do
+        # TODO: is this right?
+        static_files "/static" => "codespeed/sitestatic/"
     end
 end
