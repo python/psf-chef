@@ -29,7 +29,7 @@ SITE
 GIT
   remote: https://github.com/coderanger/application_python-1.git
   ref: patch-1
-  sha: c5c29d332cea26996e12fe62a9037632763b1e7e
+  sha: a98385da81ccce2c5b6c56461b812bedde5bac69
   specs:
     application_python (1.0.4)
       application (>= 0.0.0)
