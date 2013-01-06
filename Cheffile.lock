@@ -5,16 +5,11 @@ SITE
     application_nginx (1.0.2)
       application (>= 0.0.0)
       nginx (>= 0.0.0)
-    application_python (1.0.4)
-      application (>= 0.0.0)
-      gunicorn (>= 0.0.0)
-      python (>= 0.0.0)
-      supervisor (>= 0.0.0)
     build-essential (1.1.0)
     chef-client (1.1.2)
-    haproxy (1.0.4)
     gunicorn (1.1.0)
       python (>= 0.0.0)
+    haproxy (1.0.4)
     jn_sysctl (1.1.0)
     motd-tail (1.1.0)
     nginx (1.1.2)
@@ -30,6 +25,17 @@ SITE
       python (>= 0.0.0)
     yum (2.0.6)
     zsh (1.0.0)
+
+GIT
+  remote: https://github.com/coderanger/application_python-1.git
+  ref: patch-1
+  sha: c5c29d332cea26996e12fe62a9037632763b1e7e
+  specs:
+    application_python (1.0.4)
+      application (>= 0.0.0)
+      gunicorn (>= 0.0.0)
+      python (>= 0.0.0)
+      supervisor (>= 0.0.0)
 
 GIT
   remote: https://github.com/coderanger/heartbeat.git
