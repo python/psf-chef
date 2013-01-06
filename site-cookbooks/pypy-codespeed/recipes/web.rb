@@ -22,6 +22,10 @@ application "speed.pypy.org" do
     end
   end
 
+  gunicorn do
+    app_module :django
+  end
+
   nginx_load_balancer do
     application_server_role "pypy-codespeed"
     static_files "/static" => "example/sitestatic/"
