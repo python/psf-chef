@@ -32,5 +32,6 @@ application "speed.pypy.org" do
     application_server_role "pypy-codespeed"
     server_name node['fqdn']
     static_files "/static" => "example/sitestatic/"
+    application_port 8080
   end
 end
