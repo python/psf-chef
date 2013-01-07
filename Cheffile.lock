@@ -1,6 +1,7 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    apache2 (1.4.0)
     application (2.0.0)
     application_nginx (1.0.2)
       application (>= 0.0.0)
@@ -45,6 +46,7 @@ GIT
     heartbeat (0.7.1)
 
 DEPENDENCIES
+  apache2 (>= 0)
   application (>= 0)
   application_nginx (>= 0)
   application_python (>= 0)
