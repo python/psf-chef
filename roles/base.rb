@@ -7,6 +7,7 @@ run_list [
   "recipe[psf-misc::sudo]",
   "recipe[psf-misc::backup]",
   "recipe[psf-misc::ntp]",
+  "recipe[psf-misc::ack]",
   "recipe[ntp]",
   "recipe[motd-tail]",
   "recipe[zsh]",
