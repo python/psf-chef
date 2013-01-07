@@ -8,9 +8,14 @@ python_virtualenv '/srv/moin' do
   group 'root'
 end
 
-%w{moin python-openid docutils}.each do |name|
+{
+  'moin' => '1.9.6',
+  'python-openid' => '2.2.5',
+  'docutils' => '0.10',
+}.each do |name, ver|
   python_pip name do
     action :upgrade
+    version ver
     virtualenv '/srv/moin'
     user 'root'
     group 'root'
