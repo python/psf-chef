@@ -1,0 +1,71 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@python.org
+    ServerName wiki.jython.org
+        RedirectMatch /(.*) http://wiki.python.org/jython/$1
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@python.org
+    DocumentRoot /data/www/wiki
+    ServerName wiki.python.org
+
+    CustomLog /var/log/apache2/wiki.access.log combined
+    ErrorLog /var/log/apache2/wiki.error.log
+    
+    Alias /wiki /srv/moin/lib/python2.7/site-packages/MoinMoin/web/static/htdocs
+    Alias /pics /data/www/wiki/pics
+    Alias /europython /data/moin/europython
+
+    WSGIDaemonProcess moin processes=4 maximum-requests=1000 display-name=wsgi-moin user=moin group=moin python-path=/srv/moin/lib/python2.7/site-packages
+    WSGIProcessGroup moin
+
+    WSGIScriptAlias /moin /srv/moin/moin.wsgi
+    <Location /moin>
+        # Spammers
+        # deny from xxx.xxx.xxx.xxx
+    </Location>
+
+    WSGIScriptAlias /psf /srv/moin/moin.wsgi
+    <Location /psf>
+        # Spammers
+        # deny from xxx.xxx.xxx.xxx
+    </Location>
+
+    WSGIScriptAlias /moin-pycon /srv/moin/moin.wsgi
+    <Location /moin-pycon>
+        # Spammers
+        # deny from xxx.xxx.xxx.xxx
+    </Location>
+    <LocationMatch /moin-pycon/.*>
+        AuthName "PyCon Committee Wiki"
+        AuthType Basic
+        AuthUserFile /etc/apache2/moin-pycon.pass
+        require valid-user
+    </LocationMatch>
+
+    WSGIScriptAlias /jython /srv/moin/moin.wsgi
+    <Location /jython>
+        # Spammers
+        # deny from xxx.xxx.xxx.xxx
+        deny from 112.201.71.118
+        deny from 121.96.204.167
+        deny from 122.3.171.14
+        deny from 180.190.160.34
+        deny from 180.190.162.72
+        deny from 180.190.163.120
+        deny from 180.190.168.213
+        deny from 180.190.195.208
+        deny from 180.190.198.63
+        deny from 180.190.207.172
+        deny from 180.190.213.117
+        deny from 180.190.214.241
+        deny from 180.190.217.230
+        deny from 180.190.220.191
+        deny from 180.190.222.65
+        deny from 180.190.235.252
+        deny from 203.177.74.140
+        deny from 222.127.169.83
+        deny from 58.71.32.78
+    </Location>
+
+</VirtualHost>
