@@ -12,9 +12,11 @@
     CustomLog /var/log/apache2/wiki.access.log combined
     ErrorLog /var/log/apache2/wiki.error.log
     
+    Alias /wiki/python /data/moin/europython
     Alias /wiki /srv/moin/lib/python2.7/site-packages/MoinMoin/web/static/htdocs
     Alias /pics /data/www/wiki/pics
     Alias /europython /data/moin/europython
+    Alias /common /srv/moin/lib/python2.7/site-packages/MoinMoin/web/static/htdocs/common
 
     WSGIDaemonProcess moin processes=4 maximum-requests=1000 display-name=wsgi-moin user=moin group=moin python-path=/srv/moin/lib/python2.7/site-packages
     WSGIProcessGroup moin
