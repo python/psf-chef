@@ -21,13 +21,11 @@ action :install do
   if new_resource.server_role
     server = search(:node, "roles:#{new_resource.server_role}").first
     if server
-      template '/home/rsnapshot/.ssh/authorized_keys' do
-        cookbook 'user'
-        source 'authorized_keys.erb'
+      file '/home/rsnapshot/.ssh/authorized_keys' do
         owner 'rsnapshot'
         group 'rsnapshot'
         mode '644'
-        variables :user => 'rsnapshot', :ssh_keys => [server['rsnapshot']['server_key']]
+        content %Q{no-pty,no-agent-forwarding,no-X11-forwarding,no-port-forwarding,from="#{server['ipaddress']}" #{server['rsnapshot']['server_key']}}
       end
     end
   end
