@@ -9,7 +9,7 @@ rsnapshot_server 'rsnapshot' do
   cmd_ssh node['rsnapshot']['server']['cmd_ssh']
   cmd_logger node['rsnapshot']['server']['cmd_logger']
   cmd_du node['rsnapshot']['server']['cmd_du']
-  cmd_snapshot_diff node['rsnapshot']['server']['cmd_snapshot_diff']
+  cmd_rsnapshot_diff node['rsnapshot']['server']['cmd_rsnapshot_diff']
   cmd_preexec node['rsnapshot']['server']['cmd_preexec']
   cmd_postexec node['rsnapshot']['server']['cmd_postexec']
   linux_lvm_cmd_lvcreate node['rsnapshot']['server']['linux_lvm_cmd_lvcreate']

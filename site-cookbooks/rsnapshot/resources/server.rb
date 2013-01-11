@@ -14,7 +14,7 @@ attribute :cmd_rsync, :kind_of => [String, NilClass], :default => '/usr/bin/rsyn
 attribute :cmd_ssh, :kind_of => [String, NilClass], :default => '/usr/bin/ssh'
 attribute :cmd_logger, :kind_of => [String, NilClass], :default => '/usr/bin/logger'
 attribute :cmd_du, :kind_of => [String, NilClass], :default => '/usr/bin/du'
-attribute :cmd_snapshot_diff, :kind_of => [String, NilClass], :default => '/usr/bin/rsnapshot-diff'
+attribute :cmd_rsnapshot_diff, :kind_of => [String, NilClass], :default => '/usr/bin/rsnapshot-diff'
 attribute :cmd_preexec, :kind_of => [String, NilClass], :default => nil
 attribute :cmd_postexec, :kind_of => [String, NilClass], :default => nil
 
