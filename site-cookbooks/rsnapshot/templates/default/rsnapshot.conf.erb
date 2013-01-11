@@ -304,5 +304,5 @@ linux_lvm_mountpath	<%= @server.linux_lvm_mountpath %>
 ###############################
 
 <%- @backups.each do |backup| -%>
-backup	rsnapshot@<%= backup['host'] %><%= backup['directory'] %>	<%= backup['host'] %><% if backup['options'] && !backup['options'].empty? %>	<%= backup['options'] %><% end %>
+backup	rsnapshot@<%= backup['host'] %><%= backup['directory'] %>	<%= backup['host'] %>/<% if backup['options'] && !backup['options'].empty? %>	<%= backup['options'] %><% end %>
 <%- end -%>
