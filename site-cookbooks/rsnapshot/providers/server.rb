@@ -6,7 +6,7 @@ action :install do
   backups = []
   search(:node, 'rsnapshot_backups:*') do |node|
     node['rsnapshot_backups'].each do |directory, backup|
-      backups['host'] = node['fqdn']
+      backup['host'] = node['fqdn']
       backups << backup
     end
   end
