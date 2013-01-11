@@ -41,7 +41,7 @@ no_create_root	<%= @server.no_create_root ? 1 : 0 %>
 #
 # See the README file or the man page for more details.
 #
-<% if @server.cmd_cp.present? %>
+<% if @server.cmd_cp %>
 cmd_cp	<%= @server.cmd_cp %>
 <% else %>
 #cmd_cp	/path
@@ -49,7 +49,7 @@ cmd_cp	<%= @server.cmd_cp %>
 
 # uncomment this to use the rm program instead of the built-in perl routine.
 #
-<% if @server.cmd_rm.present? %>
+<% if @server.cmd_rm %>
 cmd_rm	<%= @server.cmd_rm %>
 <% else %>
 #cmd_rm	/path
@@ -58,7 +58,7 @@ cmd_rm	<%= @server.cmd_rm %>
 # rsync must be enabled for anything to work. This is the only command that
 # must be enabled.
 #
-<% if @server.cmd_rsync.present? %>
+<% if @server.cmd_rsync %>
 cmd_rsync	<%= @server.cmd_rsync %>
 <% else %>
 #cmd_rsync	/path
@@ -66,7 +66,7 @@ cmd_rsync	<%= @server.cmd_rsync %>
 
 # Uncomment this to enable remote ssh backups over rsync.
 #
-<% if @server.cmd_ssh.present? %>
+<% if @server.cmd_ssh %>
 cmd_ssh	<%= @server.cmd_ssh %>
 <% else %>
 #cmd_ssh	/path
@@ -75,7 +75,7 @@ cmd_ssh	<%= @server.cmd_ssh %>
 
 # Comment this out to disable syslog support.
 #
-<% if @server.cmd_logger.present? %>
+<% if @server.cmd_logger %>
 cmd_logger	<%= @server.cmd_logger %>
 <% else %>
 #cmd_logger	/path
@@ -85,7 +85,7 @@ cmd_logger	<%= @server.cmd_logger %>
 # If you have an older version of "du", you may also want to check the
 # "du_args" parameter below.
 #
-<% if @server.cmd_du.present? %>
+<% if @server.cmd_du %>
 cmd_du	<%= @server.cmd_du %>
 <% else %>
 #cmd_du	/path
@@ -93,7 +93,7 @@ cmd_du	<%= @server.cmd_du %>
 
 # Uncomment this to specify the path to rsnapshot-diff.
 #
-<% if @server.cmd_rsnapshot_diff.present? %>
+<% if @server.cmd_rsnapshot_diff %>
 cmd_rsnapshot_diff	<%= @server.cmd_rsnapshot_diff %>
 <% else %>
 #cmd_rsnapshot_diff	/path
@@ -102,7 +102,7 @@ cmd_rsnapshot_diff	<%= @server.cmd_rsnapshot_diff %>
 # Specify the path to a script (and any optional arguments) to run right
 # before rsnapshot syncs files
 #
-<% if @server.cmd_preexec.present? %>
+<% if @server.cmd_preexec %>
 cmd_preexec	<%= @server.cmd_preexec %>
 <% else %>
 #cmd_preexec	/path
@@ -111,7 +111,7 @@ cmd_preexec	<%= @server.cmd_preexec %>
 # Specify the path to a script (and any optional arguments) to run right
 # after rsnapshot syncs files
 #
-<% if @server.cmd_postexec.present? %>
+<% if @server.cmd_postexec %>
 cmd_postexec	<%= @server.cmd_postexec %>
 <% else %>
 #cmd_postexec	/path
@@ -120,22 +120,22 @@ cmd_postexec	<%= @server.cmd_postexec %>
 # Paths to lvcreate, lvremove, mount and umount commands, for use with
 # Linux LVMs.
 #
-<% if @server.linux_lvm_cmd_lvcreate.present? %>
+<% if @server.linux_lvm_cmd_lvcreate %>
 linux_lvm_cmd_lvcreate	<%= @server.linux_lvm_cmd_lvcreate %>
 <% else %>
 #linux_lvm_cmd_lvcreate	/sbin/lvcreate
 <% end %>
-<% if @server.linux_lvm_cmd_lvremove.present? %>
+<% if @server.linux_lvm_cmd_lvremove %>
 linux_lvm_cmd_lvremove	<%= @server.linux_lvm_cmd_lvremove %>
 <% else %>
 #linux_lvm_cmd_lvremove	/sbin/lvremove
 <% end %>
-<% if @server.linux_lvm_cmd_mount.present? %>
+<% if @server.linux_lvm_cmd_mount %>
 linux_lvm_cmd_mount	<%= @server.linux_lvm_cmd_mount %>
 <% else %>
 #linux_lvm_cmd_mount	/bin/mount
 <% end %>
-<% if @server.linux_lvm_cmd_umount.present? %>
+<% if @server.linux_lvm_cmd_umount %>
 linux_lvm_cmd_umount	<%= @server.linux_lvm_cmd_umount %>
 <% else %>
 #linux_lvm_cmd_umount	/bin/umount
@@ -174,7 +174,7 @@ loglevel	<%= @server.loglevel %>
 # If you enable this, data will be written to the file you specify. The
 # amount of data written is controlled by the "loglevel" parameter.
 #
-<% if @server.logfile.present? %>
+<% if @server.logfile %>
 logfile	<%= @server.logfile %>
 <% else %>
 #logfile	/var/log/rsnapshot.log
@@ -257,7 +257,7 @@ use_lazy_deletes	<%= @server.use_lazy_deletes ? 1 : 0 %>
 # "Corrupted MAC on input" errors, for example, set this to a non-zero
 # value to have the rsync operation re-tried
 #
-<% if @server.rsync_numtries.present? %>
+<% if @server.rsync_numtries %>
 rsync_numtries	<%= @server.rsync_numtries %>
 <% else %>
 #rsync_numtries	0
@@ -269,7 +269,7 @@ rsync_numtries	<%= @server.rsync_numtries %>
 #
 # LVM snapshot(s) size (lvcreate --size option).
 #
-<% if @server.linux_lvm_snapshotsize.present? %>
+<% if @server.linux_lvm_snapshotsize %>
 linux_lvm_snapshotsize	<%= @server.linux_lvm_snapshotsize %>
 <% else %>
 #linux_lvm_snapshotsize	100M
@@ -277,7 +277,7 @@ linux_lvm_snapshotsize	<%= @server.linux_lvm_snapshotsize %>
 
 # Name to be used when creating the LVM logical volume snapshot(s).
 #
-<% if @server.linux_lvm_snapshotname.present? %>
+<% if @server.linux_lvm_snapshotname %>
 linux_lvm_snapshotname	<%= @server.linux_lvm_snapshotname %>
 <% else %>
 #linux_lvm_snapshotname	rsnapshot
@@ -285,7 +285,7 @@ linux_lvm_snapshotname	<%= @server.linux_lvm_snapshotname %>
 
 # Path to the LVM Volume Groups.
 #
-<% if @server.linux_lvm_vgpath.present? %>
+<% if @server.linux_lvm_vgpath %>
 linux_lvm_vgpath	<%= @server.linux_lvm_vgpath %>
 <% else %>
 #linux_lvm_vgpath	/dev
@@ -293,7 +293,7 @@ linux_lvm_vgpath	<%= @server.linux_lvm_vgpath %>
 
 # Mount point to use to temporarily mount the snapshot(s).
 #
-<% if @server.linux_lvm_mountpath.present? %>
+<% if @server.linux_lvm_mountpath %>
 linux_lvm_mountpath	<%= @server.linux_lvm_mountpath %>
 <% else %>
 #linux_lvm_mountpath	/path/to/mount/lvm/snapshot/during/backup
