@@ -149,7 +149,7 @@ linux_lvm_cmd_umount	<%= @server.linux_lvm_cmd_umount %>
 #########################################
 
 <%- @server.retain.each do |ret| -%>
-retain	ret.name	ret.count
+retain	<%= ret.name %>	<%= ret.count %>
 <%- end -%>
 
 ############################################
