@@ -43,7 +43,7 @@ action :install do
 
   ruby_block "#{new_resource.name}: read SSH key" do
     block do
-      node.set['rsnapshot']['server_key'] = ::File.new(::File.expand_path('~rsnapshot/.ssh/id_rsa.pub')).read.strip
+      node.set['rsnapshot']['server_key'] = ::File.new(::File.expand_path('~rsnapshot/.ssh/id_rsa.pub')).read
     end
   end
 end
