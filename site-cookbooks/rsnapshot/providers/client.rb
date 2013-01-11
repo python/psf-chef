@@ -27,7 +27,7 @@ action :install do
         owner 'rsnapshot'
         group 'rsnapshot'
         mode '644'
-        variables :user =>rsnapshot, :ssh_keys => [server['rsnapshot']['server_key']]
+        variables :user => 'rsnapshot', :ssh_keys => [server['rsnapshot']['server_key']]
       end
     end
   end
