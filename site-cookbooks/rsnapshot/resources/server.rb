@@ -24,9 +24,14 @@ attribute :linux_lvm_cmd_mount, :kind_of => [String, NilClass], :default => nil
 attribute :linux_lvm_cmd_umount, :kind_of => [String, NilClass], :default => nil
 
 attribute :_retain, :kind_of => Array, :default => []
-def retain(name=nil, &block)
+def retain(name=nil, values=nil, &block)
   if name
     ret = RsnapshotRetain.new(name)
+    if values
+      values.each do |key, value|
+        ret.send(key, value)
+      end
+    end
     ret.instance_eval(&block) if block
     self._retain << ret
   else
