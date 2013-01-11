@@ -35,7 +35,7 @@ action :install do
   end
 
   execute "#{new_resource.name}: generate SSH key" do
-    command 'ssh-keygen -t rsa -b 4096'
+    command 'ssh-keygen -t rsa -b 4096 -f ~rsnapshot/.ssh/id_rsa -N ""'
     user 'rsnapshot'
     not_if { ::File.exists?(::File.expand_path('~rsnapshot/.ssh/id_rsa')) rescue false }
   end
