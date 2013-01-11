@@ -27,6 +27,11 @@ override_attributes({
   :ntp => {
     :servers => ["time.osuosl.org"],
   },
+  :rsnapshot => {
+    :client => {
+      :server_role => "rsnapshot",
+    },
+  },
   :user => {
     :ssh_keygen => false,
   },
