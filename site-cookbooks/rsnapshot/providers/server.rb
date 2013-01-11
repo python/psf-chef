@@ -7,6 +7,7 @@ action :install do
   search(:node, 'rsnapshot_backups:*') do |node|
     node['rsnapshot_backups'].each do |directory, backup|
       backup['host'] = node['fqdn']
+      backup['directory'] << '/' unless backup['directory'].ends_with?('/')
       backups << backup
     end
   end
