@@ -12,12 +12,19 @@ action :install do
     end
   end
 
+  scripts = []
+  run_context.resource_collection.each do |res|
+    if res.is_a? Chef::Resource::RsnapshotScript
+      scripts << res
+    end
+  end
+
   template "#{new_resource.dir}/rsnapshot.conf" do
     source 'rsnapshot.conf.erb'
     owner 'root'
     group 'root'
     mode '400'
-    variables :server => new_resource, :backups => backups
+    variables :server => new_resource, :backups => backups, :scripts => scripts
   end
 
   new_resource.retain.each do |ret|
