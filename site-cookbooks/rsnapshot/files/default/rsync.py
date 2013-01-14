@@ -9,7 +9,7 @@ if not cmd:
     print 'No command given'
     sys.exit(1)
 
-if re.match(r'^rsync --server --sender -vlogDtprRe.iLsf --numeric-ids . [a-zA-Z0-9_/-]+$', cmd):
+if re.match(r'^rsync --server --sender -[a-zA-Z0-9.]+ --numeric-ids . [a-zA-Z0-9_/-]+$', cmd):
     cmd_args = shlex.split(cmd)
     os.execv('/usr/bin/rsync', cmd_args)
 else:
