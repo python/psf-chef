@@ -14,10 +14,15 @@ def exclude(*args)
 end
 
 def full_options
-  options_str = self.options.dup
-  unless self.exclude.empty?
-    options_str << ',' unless options_str.empty?
-    options_str << self.exclude.map{|path| "+rsync_long_args=--exclude=#{path}"}.join(',')
+  options = self.options.split(',').inject({}) do |pair, memo|
+    key, val = pair.split('=', 2)
+    memo[key] = val
+    memo
   end
-  options_str
+  unless self.exclude.empty?
+    rsync_long_args = options['rsync_long_args'] || (options['+rsync_long_args'] ||= '')
+    rsync_long_args << ' ' unless rsync_long_args.empty?
+    rsync_long_args << self.exclude.map{|path| "--exclude=#{path}"}.join(' ')
+  end
+  options.map{|key, val| "#{key}=#{val}"}.join(',')
 end
