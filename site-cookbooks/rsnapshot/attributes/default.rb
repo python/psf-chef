@@ -22,7 +22,7 @@ default['rsnapshot']['server']['lockfile'] = '/var/run/rsnapshot.pid'
 default['rsnapshot']['server']['stop_on_stale_lockfile'] = true
 default['rsnapshot']['server']['rsync_short_args'] = '-a'
 default['rsnapshot']['server']['rsync_long_args'] = '--delete --numeric-ids --relative --delete-excluded'
-default['rsnapshot']['server']['ssh_args'] = nil
+default['rsnapshot']['server']['ssh_args'] = '-i /root/.ssh/id_rsnapshot -o StrictHostKeyChecking=no'
 default['rsnapshot']['server']['du_args'] = '-csh'
 default['rsnapshot']['server']['one_fs'] = false
 default['rsnapshot']['server']['link_dest'] = false

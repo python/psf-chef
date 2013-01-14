@@ -195,18 +195,34 @@ stop_on_stale_lockfile	<%= @server.stop_on_stale_lockfile ? 1 : 0 %>
 
 # Default rsync args. All rsync commands have at least these options set.
 #
+<% if @server.rsync_short_args %>
+rsync_short_args	<%= @server.rsync_short_args %>
+<% else %>
 #rsync_short_args -a
+<% end %>
+<% if @server.rsync_long_args %>
+rsync_long_args	<%= @server.rsync_long_args %>
+<% else %>
 #rsync_long_args  --delete --numeric-ids --relative --delete-excluded
+<% end %>
 
 # ssh has no args passed by default, but you can specify some here.
 #
+<% if @server.ssh_args %>
+ssh_args	<%= @server.ssh_args %>
+<% else %>
 #ssh_args -p 22
+<% end %>
 
 # Default arguments for the "du" program (for disk space reporting).
 # The GNU version of "du" is preferred. See the man page for more details.
 # If your version of "du" doesn't support the -h flag, try -k flag instead.
 #
+<% if @server.du_args %>
+du_args	<%= @server.du_args %>
+<% else %>
 #du_args  -csh
+<% end %>
 
 # If this is enabled, rsync won't span filesystem partitions within a
 # backup point. This essentially passes the -x option to rsync.
@@ -304,5 +320,5 @@ linux_lvm_mountpath	<%= @server.linux_lvm_mountpath %>
 ###############################
 
 <%- @backups.each do |backup| -%>
-backup	rsnapshot@<%= backup['host'] %><%= backup['directory'] %>	<%= backup['host'] %>/<% if backup['options'] && !backup['options'].empty? %>	<%= backup['options'] %><% end %>
+backup	rsnapshot@<%= backup['host'] %>:<%= backup['directory'] %>	<%= backup['host'] %>/<% if backup['options'] && !backup['options'].empty? %>	<%= backup['options'] %><% end %>
 <%- end -%>

@@ -27,23 +27,26 @@ action :install do
       day ret.day
       month ret.month
       weekday ret.weekday
-      command "/usr/bin/rsnapshot #{ret.name}"
+      command "/usr/bin/true || /usr/bin/rsnapshot #{ret.name}"
     end
   end
 
-  rsnapshot_client new_resource.name do
-    server_role nil
+  # Just in case
+  directory '/root/.ssh' do
+    owner 'root'
+    group 'root'
+    mode '755'
   end
 
   execute "#{new_resource.name}: generate SSH key" do
-    command 'ssh-keygen -t rsa -b 4096 -f ~rsnapshot/.ssh/id_rsa -N ""'
-    user 'rsnapshot'
-    not_if { ::File.exists?(::File.expand_path('~rsnapshot/.ssh/id_rsa')) rescue false }
+    command 'ssh-keygen -t rsa -b 4096 -f /root/.ssh/id_rsnapshot -N ""'
+    user 'root'
+    not_if { ::File.exists?('/root/.ssh/id_rsnapshot')}
   end
 
   ruby_block "#{new_resource.name}: read SSH key" do
     block do
-      node.set['rsnapshot']['server_key'] = ::File.new(::File.expand_path('~rsnapshot/.ssh/id_rsa.pub')).read
+      node.set['rsnapshot']['server_key'] = ::File.new('/root/.ssh/id_rsnapshot.pub').read
     end
   end
 end

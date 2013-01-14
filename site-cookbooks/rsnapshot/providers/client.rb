@@ -12,6 +12,13 @@ action :install do
     supports :manage_home => true
   end
 
+  cookbook_file '/usr/local/bin/rsnapshot-rsync.py' do
+    source 'rsync.py'
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
+
   directory '/home/rsnapshot/.ssh' do
     owner 'rsnapshot'
     group 'rsnapshot'
@@ -25,8 +32,20 @@ action :install do
         owner 'rsnapshot'
         group 'rsnapshot'
         mode '644'
-        content %Q{no-pty,no-agent-forwarding,no-X11-forwarding,no-port-forwarding,from="#{server['ipaddress']}" #{server['rsnapshot']['server_key']}}
+        content %Q{no-pty,no-agent-forwarding,no-X11-forwarding,no-port-forwarding,from="#{server['ipaddress']}",command="sudo /usr/local/bin/rsnapshot-rsync.py" #{server['rsnapshot']['server_key']}}
+      end
+    else
+      file '/home/rsnapshot/.ssh/authorized_keys' do
+        action :delete
       end
     end
+  else
+    file '/home/rsnapshot/.ssh/authorized_keys' do
+      action :delete
+    end
+  end
+
+  sudo new_resource.name do
+    template 'sudoers.erb'
   end
 end

@@ -46,7 +46,7 @@ attribute :lockfile, :kind_of => String, :default => '/var/run/rsnapshot.pid'
 attribute :stop_on_stale_lockfile, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :rsync_short_args, :kind_of => String, :default => '-a'
 attribute :rsync_long_args, :kind_of => String, :default => '--delete --numeric-ids --relative --delete-excluded'
-attribute :ssh_args, :kind_of => [String, NilClass], :default => nil
+attribute :ssh_args, :kind_of => [String, NilClass], :default => '-i /root/.ssh/id_rsnapshot -o StrictHostKeyChecking=no'
 attribute :du_args, :kind_of => [String, NilClass], :default => '-csh'
 attribute :one_fs, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :link_dest, :kind_of => [TrueClass, FalseClass], :default => false
