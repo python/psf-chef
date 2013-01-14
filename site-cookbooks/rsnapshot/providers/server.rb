@@ -27,7 +27,7 @@ action :install do
       day ret.day
       month ret.month
       weekday ret.weekday
-      command "/usr/bin/true || /usr/bin/rsnapshot #{ret.name}"
+      command "/usr/bin/rsnapshot #{ret.name}"
     end
   end
 
