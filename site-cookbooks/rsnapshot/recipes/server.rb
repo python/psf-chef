@@ -35,6 +35,6 @@ rsnapshot_server 'rsnapshot' do
   linux_lvm_vgpath node['rsnapshot']['server']['linux_lvm_vgpath']
   linux_lvm_mountpath node['rsnapshot']['server']['linux_lvm_mountpath']
   node['rsnapshot']['server']['retain'].each do |retain_name, retain_data|
-    retain retain_name, retain_data
+    retain retain_name, retain_data if retain_data
   end
 end
