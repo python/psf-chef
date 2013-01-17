@@ -11,6 +11,8 @@ run_list [
   "recipe[ntp]",
   "recipe[motd-tail]",
   "recipe[zsh]",
+  "recipe[rsnapshot::client]",
+  "recipe[rsnapshot::backupall]",
 ]
 override_attributes({
   :authorization => {
