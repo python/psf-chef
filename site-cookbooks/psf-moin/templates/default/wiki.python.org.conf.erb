@@ -22,28 +22,14 @@
     WSGIProcessGroup moin
 
     WSGIScriptAlias /moin /srv/moin/moin.wsgi
-    <Location /moin>
-        # Spammers
-        # deny from xxx.xxx.xxx.xxx
-    </Location>
-
     WSGIScriptAlias /psf /srv/moin/moin.wsgi
-    <Location /psf>
-        # Spammers
-        # deny from xxx.xxx.xxx.xxx
-    </Location>
-
     WSGIScriptAlias /moin-pycon /srv/moin/moin.wsgi
     <Location /moin-pycon>
-        # Spammers
-        # deny from xxx.xxx.xxx.xxx
-    </Location>
-    <LocationMatch /moin-pycon/.*>
         AuthName "PyCon Committee Wiki"
         AuthType Basic
         AuthUserFile /etc/apache2/moin-pycon.pass
         require valid-user
-    </LocationMatch>
+    </Location>
 
     WSGIScriptAlias /jython /srv/moin/moin.wsgi
     <Location /jython>
