@@ -52,33 +52,33 @@ directory '/data/www' do
   mode '755'
 end
 
-template "#{node['apache']['dir']}/sites-available/wiki.python.org.conf" do
-  source 'wiki.python.org.conf.erb'
-  owner 'root'
-  group 'root'
-  mode '644'
-  notifies :reload, 'service[apache2]'
-end
+# template "#{node['apache']['dir']}/sites-available/wiki.python.org.conf" do
+#   source 'wiki.python.org.conf.erb'
+#   owner 'root'
+#   group 'root'
+#   mode '644'
+#   notifies :reload, 'service[apache2]'
+# end
 
-apache_site 'wiki.python.org.conf'
-apache_site 'default' do
-  enable false
-end
+# apache_site 'wiki.python.org.conf'
+# apache_site 'default' do
+#   enable false
+# end
 
-template '/srv/moin/moin.wsgi' do
-  source 'moin.wsgi.erb'
-  owner 'root'
-  group 'root'
-  mode '644'
-  notifies :reload, 'service[apache2]'
-end
+# template '/srv/moin/moin.wsgi' do
+#   source 'moin.wsgi.erb'
+#   owner 'root'
+#   group 'root'
+#   mode '644'
+#   notifies :reload, 'service[apache2]'
+# end
 
-%w{moin jython psf moin-pycon}.each do |wiki|
-  execute "/srv/moin/bin/moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/#{wiki} maint cleancache" do
-    action :nothing
-    user 'moin'
-    group 'moin'
-    subscribes :run, 'python_pip[moin]'
-    notifies :reload, 'service[apache2]'
-  end
-end
+# %w{moin jython psf moin-pycon}.each do |wiki|
+#   execute "/srv/moin/bin/moin --config-dir=/data/moin/instances --wiki-url=http://wiki.python.org/#{wiki} maint cleancache" do
+#     action :nothing
+#     user 'moin'
+#     group 'moin'
+#     subscribes :run, 'python_pip[moin]'
+#     notifies :reload, 'service[apache2]'
+#   end
+# end
