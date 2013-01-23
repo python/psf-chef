@@ -26,6 +26,7 @@ chef_server_url          "https://api.opscode.com/organizations/psf"
 cache_type               "BasicFile"
 cache_options             :path => File.expand_path("~/.chef/checksums")
 cookbook_path            [Librarian::Chef.install_path, File.expand_path("../../site-cookbooks", __FILE__)]
+knife[:distro] =         'psf-osu'
 
 if !File.exists?(validation_key)
   Chef::Log.error "validator key not found, you will be unable to bootstrap new nodes. Please contact infrastructure@python.org for a copy if needed"
