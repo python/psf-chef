@@ -5,7 +5,7 @@ attribute :logfile, :kind_of => String, :default => '/var/log/postgresql/pgbounc
 attribute :pidfile, :kind_of => String, :default => '/var/run/postgresql/pgbouncer.pid'
 # Where to wait for clients
 attribute :listen_addr, :kind_of => String, :default => '127.0.0.1'
-attribute :listen_port, :kind_of => [String, Integer], :default => 6432
+attribute :listen_port, :kind_of => [String, Integer], :default => 5432
 attribute :unix_socket_dir, :kind_of => String, :default => '/var/run/postgresql'
 # Authentication settings
 attribute :auth_type, :equal_to => %w{any trust plain crypt md5}, :default => 'md5'
