@@ -33,7 +33,7 @@ action :install do
     supports :reload => true, :status => true
   end
 
-  haproxy_site 'global' do
+  haproxy_section 'global' do
     haproxy new_resource.name
     source 'global.cfg.erb'
     cookbook 'haproxy'
