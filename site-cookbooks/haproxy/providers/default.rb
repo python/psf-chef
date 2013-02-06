@@ -45,7 +45,7 @@ action :reload do
   # Complicated nonsense becaue Ruby doesn't define sort as stable and I want to sort by sections and then paths
   section_load_order = %w{global defaults listen frontend backend other}
   section_load_re = Regexp.new("^(#{section_load_order.join('|')})")
-  sections = Hash.new{ [] }
+  sections = section_load_order.inject({}){|memo, section| memo[section] = []; memo}
   Dir["#{new_resource.config_directory}/conf.d/*.cfg"].each do |path|
     md = section_load_re.match(::File.basename(path))
     sections[md ? md[1] : 'other'] << path
@@ -54,10 +54,11 @@ action :reload do
     sections[section].sort!.map!{|path| ::File.read(path) }.join("\n")
   end.join("\n")
   file "#{new_resource.config_directory}/haproxy.cfg" do
+    action :nothing
     owner 'root'
     group 'root'
     mode '644'
     content config_content
     notifies :reload, "service[#{new_resource.resource_name}]"
-  end
+  end.run_action(:create)
 end
