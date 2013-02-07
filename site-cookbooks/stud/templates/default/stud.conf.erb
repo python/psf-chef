@@ -1,0 +1,121 @@
+#
+# stud(8), The Scalable TLS Unwrapping Daemon's configuration
+#
+
+# NOTE: all config file parameters can be overriden
+#       from command line!
+
+# Listening address. REQUIRED.
+#
+# type: string
+# syntax: [HOST]:PORT
+frontend = "<%= @stud.frontend %>"
+
+# Upstream server address. REQUIRED.
+#
+# type: string
+# syntax: [HOST]:PORT.
+backend = "<%= @stud.backend %>"
+
+# SSL x509 certificate file. REQUIRED.
+# List multiple certs to use SNI. Certs are used in the order they
+# are listed; the last cert listed will be used if none of the others match
+#
+# type: string
+pem-file = "<%= @stud.pem_file.is_a?(Array) ? @stud.pem_file.join(' ') : @stud.pem_file %>"
+
+# SSL protocol.
+#
+tls = <%= @stud.tls ? 'on' : 'off' %>
+ssl = <%= @stud.ssl ? 'on' : 'off' %>
+
+# List of allowed SSL ciphers.
+#
+# Run openssl ciphers for list of available ciphers.
+# type: string
+ciphers = "<%= @stud.ciphers %>"
+
+# Enforce server cipher list order
+#
+# type: boolean
+prefer-server-ciphers = <%= @stud.prefer_server_ciphers ? 'on' : 'off' %>
+
+# Use specified SSL engine
+#
+# type: string
+ssl-engine = "<%= @stud.ssl_engine %>"
+
+# Number of worker processes
+#
+# type: integer
+workers = <%= @stud.workers %>
+
+# Listen backlog size
+#
+# type: integer
+backlog = <%= @stud.backlog %>
+
+# TCP socket keepalive interval in seconds
+#
+# type: integer
+keepalive = <%= @stud.keepalive %>
+
+# Chroot directory
+#
+# type: string
+chroot = "<%= @stud.chroot %>"
+
+# Set uid after binding a socket
+#
+# type: string
+user = "<%= @stud.user %>"
+
+# Set gid after binding a socket
+#
+# type: string
+group = "<%= @stud.group %>"
+
+# Quiet execution, report only error messages
+#
+# type: boolean
+quiet = <%= @stud.quiet ? 'on' : 'off' %>
+
+# Use syslog for logging
+#
+# type: boolean
+syslog = <%= @stud.syslog ? 'on' : 'off' %>
+
+# Syslog facility to use
+#
+# type: string
+syslog-facility = "<%= @stud.syslog_facility %>"
+
+# Run as daemon
+#
+# type: boolean
+daemon = <%= @stud.daemon ? 'on' : 'off' %>
+
+# Report client address by writing IP before sending data
+#
+# NOTE: This option is mutually exclusive with option write-proxy and proxy-proxy.
+#
+# type: boolean
+write-ip = <%= @stud.write_ip ? 'on' : 'off' %>
+
+# Report client address using SENDPROXY protocol, see
+# http://haproxy.1wt.eu/download/1.5/doc/proxy-protocol.txt
+# for details.
+#
+# NOTE: This option is mutually exclusive with option write-ip and proxy-proxy.
+#
+# type: boolean
+write-proxy = <%= @stud.write_proxy ? 'on' : 'off' %>
+
+# Proxy an existing SENDPROXY protocol header through this request.
+#
+# NOTE: This option is mutually exclusive with option write-ip and write-proxy.
+#
+# type: boolean
+proxy-proxy = <%= @stud.proxy_proxy ? 'on' : 'off' %>
+
+# EOF
