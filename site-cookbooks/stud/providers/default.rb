@@ -6,6 +6,10 @@ action :install do
 
   package_file_name = "stud_#{new_resource.version}_amd64.deb"
 
+  package 'libev4' do
+    action :upgrade
+  end
+
   cookbook_file "#{Chef::Config[:file_cache_path]}/#{package_file_name}" do
     source package_file_name
     cookbook 'stud'
