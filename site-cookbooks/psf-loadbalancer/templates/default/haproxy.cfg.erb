@@ -1,0 +1,52 @@
+defaults
+  log global
+  mode http
+  # logs which servers requests go to, plus current connections and a whole lot of other stuff
+  option httplog
+  option dontlognull
+  balance roundrobin
+  retries 3
+  option redispatch
+  maxconn 2000
+  contimeout 5000
+  clitimeout 50000
+  srvtimeout 50000
+  option httpchk
+
+frontend http
+  bind 0.0.0.0:80
+
+  option http-server-close
+
+  acl host_pypi hdr(host) -i pypi.python.org
+  acl host_testpypi hdr(host) -i testpypi.python.org
+  acl host_wiki hdr(host) -i wiki.python.org
+
+  use_backend pypi if host_pypi
+  use_backend testpypi if host_testpypi
+  use_backend wiki if host_wiki
+
+backend pypi
+  <%- @pypi_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %> check port 80
+  <%- end -%>
+  # provide a maintenance page functionality, only used when all other servers are down
+  server fallback localhost:8080 backup
+
+backend testpypi
+  # We should fix this when testpypi migrates over
+  server dinsdale 82.94.164.168 check port 80
+  # provide a maintenance page functionality, only used when all other servers are down
+  server fallback localhost:8080 backup
+
+backend wiki
+  <%- @wiki_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %> check port 80
+  <%- end -%>
+  # provide a maintenance page functionality, only used when all other servers are down
+  server fallback localhost:8080 backup
+
+listen stats 127.0.0.1:1936
+  mode http
+  stats enable
+  stats uri /
