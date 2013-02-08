@@ -59,6 +59,6 @@ action :reload do
     group 'root'
     mode '644'
     content config_content
-    notifies :reload, "service[#{new_resource.resource_name}]"
+    notifies :reload, "service[#{new_resource.resource_name}]", :immediately
   end.run_action(:create)
 end
