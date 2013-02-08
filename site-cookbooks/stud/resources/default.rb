@@ -2,7 +2,8 @@ default_action :install
 
 attribute :name, :name_attribute => true
 attribute :version, :kind_of => String, :required => true
-attribute :config_template, :kind_of => String, :default => nil # Sentinel default
+attribute :config_template, :kind_of => String
+attribute :service_template, :kind_of => String
 attribute :frontend, :kind_of => String, :default => '[*]:8443'
 attribute :backend, :kind_of => String, :default => '[127.0.0.1]:8000'
 attribute :pem_file, :kind_of => [String, Array], :required => true
