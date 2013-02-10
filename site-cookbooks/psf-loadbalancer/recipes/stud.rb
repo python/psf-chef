@@ -22,5 +22,5 @@ stud 'stud' do
   group 'nogroup'
   chroot '/var/lib/stud'
   syslog true
-  write_proxy true
+  write_proxy false #true
 end
