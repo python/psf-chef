@@ -4,6 +4,7 @@ defaults
   # logs which servers requests go to, plus current connections and a whole lot of other stuff
   option httplog
   option dontlognull
+  option forwardfor
   balance roundrobin
   retries 3
   option redispatch
