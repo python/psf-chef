@@ -14,6 +14,7 @@ defaults
 
 frontend http
   bind 0.0.0.0:80
+  reqadd X-Forwarded-Proto:\ http
 
   acl host_pypi hdr(host) -i pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
@@ -25,6 +26,7 @@ frontend http
 
 frontend https
   bind 127.0.0.1:8000
+  reqadd X-Forwarded-Proto:\ https
 
   acl host_pypi hdr(host) -i pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
