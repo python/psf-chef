@@ -1,13 +1,11 @@
 defaults
   log global
   mode http
-  # logs which servers requests go to, plus current connections and a whole lot of other stuff
   option httplog
-  option dontlognull
+  option http-server-close
   option forwardfor
   balance roundrobin
   retries 3
-  option redispatch
   maxconn 2000
   contimeout 5000
   clitimeout 50000
@@ -16,8 +14,6 @@ defaults
 
 frontend http
   bind 0.0.0.0:80
-
-  option http-server-close
 
   acl host_pypi hdr(host) -i pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
@@ -29,8 +25,6 @@ frontend http
 
 frontend https
   bind 127.0.0.1:8000
-
-  option http-server-close
 
   acl host_pypi hdr(host) -i pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
