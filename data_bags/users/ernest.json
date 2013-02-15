@@ -1,0 +1,8 @@
+{
+  "id": "ernestd",
+  "comment": "Ernest W. Durbin III <ewdurbin@gmail.com>",
+  "sudo": true,
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF7Cy65krMq6D+YLboaFdqb1auNSG+nrh9IkLL2rBdrpwxhdri1mIBeIAreTBXQXErDf8SfQ6N+S08ZIZxtN5nXK1jnbL69LVhveUdBmSfVcz+djOMQWDGoH5tAIC3ktT/JUQNDZgM11XDAqpp2AM9aVMtsAgtfiaNN5R4vdMjq3dPODWBdQYzKUIBELZKjIDIgSgcaKvg1X8ims6qIcT3vQ9GEHxEV6IY9SoKT4cJ6d3dp2jK7lcBsXOs2Z7dn/TWthHt81Sa29vBpXjmPLplOsStNcnuIsJW5JVfBMgUIfLYH5+mvYADtEiH6JYecc7Rtmk4BWr6gtDSE1JkBnZ9 Ernest@ewd3air.local"
+  ]
+}
