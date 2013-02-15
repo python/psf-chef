@@ -20,24 +20,18 @@
 include_recipe 'sudo'
 
 bag   = node['user']['data_bag']
+lockdown = node['user']['lockdown']
 
 admin_group = []
 
 search(bag, "*:*") do |u|
   username = u['username'] || u['id']
 
-  user_account username do
-    %w{comment uid gid home shell password system_user manage_home create_group
-        ssh_keys ssh_keygen}.each do |attr|
-      send(attr, u[attr]) if u[attr]
-    end
-
-    # If you don't match the roles for this node, make sure you don't exist
-    if u['roles'].is_a?(Array) && !u['roles'].any?{|role| node['roles'].include?(role)}
-      action :remove
-    else
-      action u['action'].to_sym if u['action']
-    end
+  # Figure out if we should force-remove this user
+  remove_user = if lockdown
+    false
+  else
+    u['roles'].is_a?(Array) && !u['roles'].any?{|role| node['roles'].include?(role)}
   end
 
   # If :sudo is an array, check roles, otherwise if it is true just apply sudo globally
@@ -57,15 +51,29 @@ search(bag, "*:*") do |u|
     end
   elsif u['sudo']
     admin_group << username
+  elsif lockdown
+    # When under lockdown mode, any user without sudo isn't allowed in at all
+    remove_user = true
   end
 
+  user_account username do
+    %w{comment uid gid home shell password system_user manage_home create_group
+        ssh_keys ssh_keygen}.each do |attr|
+      send(attr, u[attr]) if u[attr]
+    end
+
+    # If you don't match the roles for this node, make sure you don't exist
+    if remove_user
+      action :remove
+    else
+      action u['action'].to_sym if u['action']
+    end
+  end
 end
 
-if !admin_group.empty?
-  group "admin" do
-    action [:create, :manage]
-    members admin_group
-  end
+group "admin" do
+  action [:create, :manage]
+  members admin_group
 end
 
 sudo "admin" do

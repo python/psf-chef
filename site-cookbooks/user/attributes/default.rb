@@ -39,3 +39,4 @@ default['user']['create_user_group']  = "true"
 default['user']['ssh_keygen']         = "true"
 
 default['user']['data_bag'] = "users"
+default['user']['lockdown'] = false
