@@ -113,7 +113,7 @@ def dir_resource(exec_action)
   ["#{@my_home}/.ssh", @my_home].each do |dir|
     r = directory dir do
       owner       new_resource.username
-      group       Etc.getpwnam(new_resource.username).gid
+      group       new_resource.gid if new_resource.gid
       mode        dir =~ %r{/\.ssh$} ? '0700' : '2755'
       recursive   true
       action      :nothing
@@ -131,7 +131,7 @@ def authorized_keys_resource(exec_action)
     cookbook    'user'
     source      'authorized_keys.erb'
     owner       new_resource.username
-    group       Etc.getpwnam(new_resource.username).gid
+    group       new_resource.gid if new_resource.gid
     mode        '0600'
     variables   :user     => new_resource.username,
                 :ssh_keys => ssh_keys

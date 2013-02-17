@@ -23,9 +23,29 @@ action :install do
     mode '755'
   end
 
-  package 'haproxy' do
-    action :upgrade
+  package_file_name = "haproxy_1.5-dev17_amd64.deb"
+
+  cookbook_file "#{Chef::Config[:file_cache_path]}/#{package_file_name}" do
+    source package_file_name
+    cookbook 'haproxy'
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
+
+  dpkg_package 'haproxy' do
+    source "#{Chef::Config[:file_cache_path]}/#{package_file_name}"
     notifies :reload, new_resource
+  end
+
+  template "/etc/init.d/#{new_resource.resource_name}" do
+    source new_resource.service_template || 'init.erb'
+    cookbook new_resource.service_template ? new_resource.cookbook_name.to_s : 'haproxy'
+    owner 'root'
+    group 'root'
+    mode '744'
+    variables :haproxy => new_resource
+    notifies :restart, "service[#{new_resource.resource_name}]"
   end
 
   service new_resource.resource_name do

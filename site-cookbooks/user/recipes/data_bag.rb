@@ -28,16 +28,12 @@ search(bag, "*:*") do |u|
   username = u['username'] || u['id']
 
   # Figure out if we should force-remove this user
-  remove_user = if lockdown
-    false
-  else
-    u['roles'].is_a?(Array) && !u['roles'].any?{|role| node['roles'].include?(role)}
-  end
+  remove_user = u['roles'].is_a?(Array) && !u['roles'].any?{|role| node['roles'].include?(role)}
 
   # If :sudo is an array, check roles, otherwise if it is true just apply sudo globally
-  if u['sudo'].is_a?(Array)
-    admin_group << username if u['sudo'].any?{|role| node['roles'].include?(role)}
-  elsif u['sudo'].is_a?(Hash)
+  if u['sudo'].is_a?(Array) && u['sudo'].any?{|role| node['roles'].include?(role)}
+    admin_group << username
+  elsif u['sudo'].is_a?(Hash) && u['sudo'].any?{|role, cmd| node['roles'].include?(role)}
     cmds = []
     u['sudo'].each_pair do |role, cmd|
       cmds << cmd if node['roles'].include?(role)
@@ -49,7 +45,7 @@ search(bag, "*:*") do |u|
         nopasswd true
       end
     end
-  elsif u['sudo']
+  elsif u['sudo'] == true
     admin_group << username
   elsif lockdown
     # When under lockdown mode, any user without sudo isn't allowed in at all

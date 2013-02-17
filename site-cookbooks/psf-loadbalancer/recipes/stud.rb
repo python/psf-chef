@@ -18,9 +18,11 @@ stud 'stud' do
   frontend '[*]:443'
   tls false
   ssl true
+  ciphers 'ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH'
+  prefer_server_ciphers true
   user 'nobody'
   group 'nogroup'
   chroot '/var/lib/stud'
   syslog true
-  write_proxy false #true
+  write_proxy true
 end
