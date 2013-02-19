@@ -4,3 +4,8 @@ tmp
 .rake_test_cache
 site-cookbooks/**/metadata.json
 .vagrant
+.bundle
+.gems
+Gemfile*
+bin/
+.rbenv-*
