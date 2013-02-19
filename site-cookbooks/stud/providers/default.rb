@@ -2,7 +2,7 @@ action :install do
   # Quickie argument validation
   write_count = [new_resource.write_ip, new_resource.write_proxy, new_resource.proxy_proxy].count{|val| val}
   raise 'At most one of write-ip, write-proxy, and proxy-proxy can be enabled' if write_count > 1
-  raise "Certificate #{new_resource.pem_file} not found" unless ::File.exists?(new_resource.pem_file)
+  raise "Certificate #{new_resource.pem_file} not found" unless new_resource.pem_file.is_a?(Array) ? new_resource.pem_file.all?{|path| ::File.exists?(path)} : ::File.exists?(new_resource.pem_file)
 
   package_file_name = "stud_#{new_resource.version}_amd64.deb"
 

@@ -16,7 +16,7 @@ frontend http
   bind 0.0.0.0:80
   reqadd X-Forwarded-Proto:\ http
 
-  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org
+  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
 
@@ -28,7 +28,7 @@ frontend https
   bind 127.0.0.1:8000 accept-proxy
   reqadd X-Forwarded-Proto:\ https
 
-  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org
+  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
 

@@ -12,6 +12,13 @@ file '/etc/ssl/private/python.org.pem' do
   only_if { ::File.exists?('/etc/ssl/private/python.org.pem') }
 end
 
+file '/etc/ssl/private/pythonhosted.org.pem' do
+  owner 'root'
+  group 'root'
+  mode '600'
+  only_if { ::File.exists?('/etc/ssl/private/pythonhosted.org.pem') }
+end
+
 stud 'stud' do
   version '19a7f1'
   pem_file ['/etc/ssl/private/pythonhosted.org.pem', '/etc/ssl/private/python.org.pem']

@@ -22,7 +22,9 @@ backend = "<%= @stud.backend %>"
 # are listed; the last cert listed will be used if none of the others match
 #
 # type: string
-pem-file = "<%= @stud.pem_file.is_a?(Array) ? @stud.pem_file.join(' ') : @stud.pem_file %>"
+<%- (@stud.pem_file.is_a?(Array) ? @stud.pem_file : [@stud.pem_file]).each do |path| -%>
+pem-file = "<%= path %>"
+<%- end -%>
 
 # SSL protocol.
 #
