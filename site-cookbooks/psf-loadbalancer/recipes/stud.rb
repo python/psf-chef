@@ -14,7 +14,7 @@ end
 
 stud 'stud' do
   version '19a7f1'
-  pem_file '/etc/ssl/private/python.org.pem'
+  pem_file ['/etc/ssl/private/pythonhosted.org.pem', '/etc/ssl/private/python.org.pem']
   frontend '[*]:443'
   tls false
   ssl true
