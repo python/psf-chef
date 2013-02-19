@@ -8,6 +8,7 @@ run_list [
   "recipe[psf-misc::backup]",
   "recipe[psf-misc::ntp]",
   "recipe[psf-misc::ack]",
+  "recipe[psf-misc::sysstat]",
   "recipe[ntp]",
   "recipe[motd-tail]",
   "recipe[zsh]",
