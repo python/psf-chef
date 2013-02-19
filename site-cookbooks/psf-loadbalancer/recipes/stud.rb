@@ -25,4 +25,6 @@ stud 'stud' do
   chroot '/var/lib/stud'
   syslog true
   write_proxy true
+  workers 4
+  backlog 500
 end
