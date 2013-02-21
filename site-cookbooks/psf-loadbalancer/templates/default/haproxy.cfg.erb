@@ -61,6 +61,7 @@ backend wiki
   server fallback localhost:8080 backup
 
 backend pypy-home
+  option httpchk GET / HTTP/1.1\r\nHost:\ pypy.org
   <%- @pypy_home_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
