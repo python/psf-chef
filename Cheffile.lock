@@ -48,7 +48,7 @@ GIT
 GIT
   remote: https://github.com/coderanger/mercurial.git
   ref: lwrp-updates
-  sha: 2a1bfdc83ab261d697bc4d416ac7399945365d04
+  sha: 5127ed0c8bb5beff098ea63b2a3e5c1c5b08b4b2
   specs:
     mercurial (1.0.1)
 
