@@ -45,6 +45,13 @@ GIT
   specs:
     heartbeat (0.7.1)
 
+GIT
+  remote: https://github.com/coderanger/mercurial.git
+  ref: lwrp-updates
+  sha: 2a1bfdc83ab261d697bc4d416ac7399945365d04
+  specs:
+    mercurial (1.0.1)
+
 DEPENDENCIES
   apache2 (>= 0)
   application (>= 0)
@@ -54,6 +61,7 @@ DEPENDENCIES
   chef-client (>= 0)
   heartbeat (>= 0)
   jn_sysctl (>= 0)
+  mercurial (>= 0)
   motd-tail (>= 0)
   ntp (>= 0)
   postfix (>= 0)
