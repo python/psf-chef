@@ -19,10 +19,12 @@ frontend http
   acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
+  acl host_pypy hdr(host) -i pypy.org www.pypy.org
 
   use_backend pypi if host_pypi
   use_backend testpypi if host_testpypi
   use_backend wiki if host_wiki
+  use_backend pypy-home if host_pypy
 
 frontend https
   bind 127.0.0.1:8000 accept-proxy
@@ -31,10 +33,12 @@ frontend https
   acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
+  acl host_pypy hdr(host) -i pypy.org www.pypy.org
 
   use_backend pypi if host_pypi
   use_backend testpypi if host_testpypi
   use_backend wiki if host_wiki
+  use_backend pypy-home if host_pypy
 
 backend pypi
   <%- @pypi_servers.each do |server| -%>
@@ -51,6 +55,13 @@ backend testpypi
 
 backend wiki
   <%- @wiki_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
+  <%- end -%>
+  # provide a maintenance page functionality, only used when all other servers are down
+  server fallback localhost:8080 backup
+
+backend pypy-home
+  <%- @pypy_home_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
