@@ -8,7 +8,7 @@ server {
   <% end %>
   <% @resource.static_files.each do |url, path| %>
   location <%= url %> {
-    alias <%= path %>;
+    root <%= path %>;
   }
   <% end %>
 }
