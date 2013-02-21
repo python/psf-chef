@@ -8,7 +8,7 @@ application "pypy.org" do
 
   nginx_load_balancer do
     template "nginx.conf.erb"
-    server_name [node['fqdn'], 'pypy.org']
+    server_name [node['fqdn'], 'pypy.org', 'www.pypy.org']
     static_files "/" => "/srv/pypy.org/current"
   end
 end
