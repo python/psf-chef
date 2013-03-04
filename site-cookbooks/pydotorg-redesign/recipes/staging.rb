@@ -11,7 +11,7 @@ apt_repository "deadsnakes" do
     components ["main"]
 end
 
-%w{build-essential python3.3 python3.3-dev postgresql-client-9.1 libpq-dev}.each do |pkg|
+%w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1 libpq-dev}.each do |pkg|
     package pkg do
         action :upgrade
     end
@@ -29,7 +29,8 @@ application "redesign.python.org" do
     environment "SECRET_KEY" => secrets["secret_key"],
                 "DATABASE_URL" => database_url
 
-    django do
+    pydotorg_django do
+        python_interpreter "python3.3"
         requirements "requirements.txt"
         collectstatic "collectstatic --noinput"
     end
