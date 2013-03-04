@@ -89,7 +89,10 @@ application "redesign.python.org" do
     end
 
     gunicorn do
+        # Have to manually specify the application and virtualenv config since
+        # we're not using `app_module :django.`
         app_module "pydotorg.wsgi:application"
+        virtualenv "/srv/redesign.python.org/shared/env"
     end
 end
 
