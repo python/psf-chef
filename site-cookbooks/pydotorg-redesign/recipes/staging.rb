@@ -51,6 +51,11 @@ end
     end
 end
 
+# pip really doesn't like being run without a good env encoding, so fix that.
+ENV["LANG"] = "en_US.UTF-8"
+ENV["LC_CTYPE"] = "en_US.UTF-8"
+
+# It's a secret to everyone.
 secrets = data_bag_item("secrets", "pydotorg-redesign")
 db = data_bag_item("secrets", "postgres")["redesign-staging"]
 database_url = "postgres://#{db["user"]}:#{db["password"]}@#{db["hostname"]}/#{db["database"]}"
@@ -66,7 +71,6 @@ application "redesign.python.org" do
     pydotorg_django do
         python_interpreter "python3.3"
         requirements "requirements.txt"
-        collectstatic "collectstatic --noinput"
     end
 
     gunicorn do
