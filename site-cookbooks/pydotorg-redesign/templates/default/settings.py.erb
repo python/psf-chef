@@ -21,7 +21,6 @@ EMAIL_HOST = "mail.python.org"
 # Ubuntu uses a non-standard name for the yuicompressor binary.
 PIPELINE_YUI_BINARY = 'yui-compressor'
 
-# yui-compressor isn't working on CSS on the staging server for some reason;
-# let's try csstidy instead.
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.csstidy.CSSTidyCompressor'
+# yui-compressor isn't working on CSS on the staging server for some reason.
+PIPELINE_CSS_COMPRESSOR = None
 

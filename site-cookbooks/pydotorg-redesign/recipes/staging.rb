@@ -52,7 +52,7 @@ apt_repository "deadsnakes" do
 end
 
 %w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1
-   libpq-dev rubygems yui-compressor csstidy}.each do |pkg|
+   libpq-dev rubygems yui-compressor}.each do |pkg|
     package pkg do
         action :upgrade
     end
