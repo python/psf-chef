@@ -91,6 +91,7 @@ application "redesign.python.org" do
 
     pydotorg_django do
         requirements "requirements.txt"
+        migration_command "/srv/redesign.python.org/shared/env/bin/python manage.py syncdb --settings pydotorg.settings.staging --migrate --noinput"
     end
 
     before_migrate do
