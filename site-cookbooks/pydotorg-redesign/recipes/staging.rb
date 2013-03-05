@@ -10,24 +10,11 @@ include_recipe 'python'
 
 class ::Chef
     class Resource
-        # Override the resource to add a "python_interpreter" option.
         class ApplicationPydotorgDjango < ApplicationPythonDjango
-            attribute :python_interpreter, :default => '/usr/bin/python'
         end
     end
     class Provider
         class ApplicationPydotorgDjango < ApplicationPythonDjango
-            # Now override install_packages to pick up the attribute above. I
-            # didn't copypasta the bit that installs packages from a  packages
-            # attribute since I'm not using that here, it's all in requirements.
-            def install_packages
-                python_virtualenv new_resource.virtualenv do
-                    path new_resource.virtualenv
-                    interpreter new_resource.python_interpreter
-                    action :create
-                end
-            end
-
             # Workaround for http://tickets.opscode.com/browse/CHEF-2784 -
             # Chef sets LC_ALL=C on execute, which causes pip to fail if
             # there's anything encoded in the setup.py. Like above the entire
@@ -35,17 +22,14 @@ class ::Chef
             # flexibility.
             def action_before_migrate
                 if new_resource.requirements
-                  Chef::Log.info("Installing using requirements file: #{new_resource.requirements}")
-                  pip_cmd = ::File.join(new_resource.virtualenv, 'bin', 'pip')
-                  execute "#{pip_cmd} install --source=#{Dir.tmpdir} -r #{new_resource.requirements}" do
-                    cwd new_resource.release_path
-                    environment "LC_ALL" => ENV['LANG']
-                  end
-                else
-                  Chef::Log.debug("No requirements file found")
+                    Chef::Log.info("Installing using requirements file: #{new_resource.requirements}")
+                    pip_cmd = ::File.join(new_resource.virtualenv, 'bin', 'pip')
+                    execute "#{pip_cmd} install --source=#{Dir.tmpdir} -r #{new_resource.requirements}" do
+                        cwd new_resource.release_path
+                        environment "LC_ALL" => ENV['LANG']
+                    end
                 end
             end
-
         end
     end
 end
@@ -61,16 +45,35 @@ apt_repository "deadsnakes" do
     components ["main"]
 end
 
-%w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1 libpq-dev}.each do |pkg|
+%w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1
+   libpq-dev rubygems}.each do |pkg|
     package pkg do
         action :upgrade
     end
 end
 
+gem_package "bundler" do
+    action :upgrade
+end
+
 # pip really doesn't like being run without a good env encoding, so fix that.
 ENV['LANG'] = "en_US.UTF-8"
 
-# It's a secret to everyone.
+# Work around the django target not understanding Python 3.3: as it turns out,
+# the python_virtualenv resource (that the django application uses under the
+# hood) doesn't check very hard that the virtualenv exists at any particular
+# version. So we'll (ab)use that fact and create a Python 3.3 virtualenv; the
+# django application provider will sorta silently pick that up and be happy.
+%w{/srv/redesign.python.org /srv/redesign.python.org/shared}.each do |d|
+    directory d do
+        action :create
+    end
+end
+python_virtualenv "/srv/redesign.python.org/shared/env" do
+    interpreter "python3.3"
+    action :create
+end
+
 secrets = data_bag_item("secrets", "pydotorg-redesign")
 db = data_bag_item("secrets", "postgres")["redesign-staging"]
 database_url = "postgres://#{db["user"]}:#{db["password"]}@#{db["hostname"]}/#{db["database"]}"
@@ -84,13 +87,27 @@ application "redesign.python.org" do
                 "DATABASE_URL" => database_url
 
     pydotorg_django do
-        python_interpreter "python3.3"
         requirements "requirements.txt"
     end
 
+    before_symlink do
+        execute "bundle install --deployment" do
+            cwd new_resource.release_path
+        end
+
+        # We can't use the Django resource's collectstatic because of CHEF-2784
+        # again (see above), so do it here by hand instead.
+        python_cmd = ::File.join(new_resource.path, 'shared', 'env', 'bin', 'python')
+        execute "#{python_cmd} manage.py collectstatic --noinput" do
+            cwd new_resource.release_path
+            environment "LC_ALL" => ENV['LANG']
+        end
+    end
+
     gunicorn do
-        # Have to manually specify the application and virtualenv config since
-        # we're not using `app_module :django.`
+        # We don't want to use app_module :django because we're using the
+        # Django-1.4-style WSGI entry point. So we have to manually specify
+        # the virtualenv again.
         app_module "pydotorg.wsgi:application"
         virtualenv "/srv/redesign.python.org/shared/env"
     end
