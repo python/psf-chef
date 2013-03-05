@@ -128,5 +128,12 @@ application "redesign.python.org" do
         virtualenv "/srv/redesign.python.org/shared/env"
         settings_template "gunicorn.py.erb"
     end
+
+    nginx_load_balancer do
+        application_server_role "redesign-staging"
+        server_name [node['fqdn'], 'preview.python.org']
+        static_files "/static" => 'static-root'
+        application_port 8080
+    end
 end
 
