@@ -18,9 +18,6 @@ ALLOWED_HOSTS = ["preview.python.org", "redesign.python.org", "<%= node["fqdn"] 
 
 EMAIL_HOST = "mail.python.org"
 
-# Ubuntu uses a non-standard name for the yuicompressor binary.
+# Ubuntu uses a non-standard name for the yuicompressor binary :(
 PIPELINE_YUI_BINARY = 'yui-compressor'
-
-# yui-compressor isn't working on CSS on the staging server for some reason.
-PIPELINE_CSS_COMPRESSOR = None
 

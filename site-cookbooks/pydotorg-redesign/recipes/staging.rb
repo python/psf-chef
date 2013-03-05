@@ -52,7 +52,7 @@ apt_repository "deadsnakes" do
 end
 
 %w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1
-   libpq-dev rubygems yui-compressor}.each do |pkg|
+   libpq-dev rubygems}.each do |pkg|
     package pkg do
         action :upgrade
     end
@@ -60,6 +60,16 @@ end
 
 gem_package "bundler" do
     action :upgrade
+end
+
+# yui-compressor 2.4.6 has a nasty bug; install 2.4.7 from Quantal instead.
+remote_file "#{Chef::Config[:file_cache_path]}/yui-compressor_2.4.7-1_all.deb" do
+    source "http://ubuntu.media.mit.edu/ubuntu//pool/main/y/yui-compressor/yui-compressor_2.4.7-1_all.deb"
+end
+
+dpkg_package "yui-compressor" do
+    source "#{Chef::Config[:file_cache_path]}/yui-compressor_2.4.7-1_all.deb"
+    action :install
 end
 
 # pip really doesn't like being run without a good env encoding, so fix that.
