@@ -1,5 +1,6 @@
 site "http://community.opscode.com/api/v1"
 
+cookbook "apt"
 cookbook "chef-client"
 cookbook "sudo"
 cookbook "jn_sysctl"
