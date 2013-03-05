@@ -1,0 +1,11 @@
+import os
+import multiprocessing
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'pydotorg.settings.staging'
+
+backlog = 2048
+bind = "0.0.0.0:80"
+keepalive = 2
+timeout = 30
+worker_class = "sync"
+workers = max(multiprocessing.cpu_count(), 4)

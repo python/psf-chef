@@ -30,6 +30,12 @@ class ::Chef
                     end
                 end
             end
+
+            # Skip generation of the settings file; the recipe does it using
+            # the local_settings pattern which doesn't fit with our app.
+            def action_before_deploy
+                install_packages
+            end
         end
     end
 end
@@ -46,7 +52,7 @@ apt_repository "deadsnakes" do
 end
 
 %w{build-essential git-core python3.3 python3.3-dev postgresql-client-9.1
-   libpq-dev rubygems}.each do |pkg|
+   libpq-dev rubygems yui-compressor csstidy}.each do |pkg|
     package pkg do
         action :upgrade
     end
@@ -76,22 +82,30 @@ end
 
 secrets = data_bag_item("secrets", "pydotorg-redesign")
 db = data_bag_item("secrets", "postgres")["redesign-staging"]
-database_url = "postgres://#{db["user"]}:#{db["password"]}@#{db["hostname"]}/#{db["database"]}"
 
 application "redesign.python.org" do
     path "/srv/redesign.python.org"
     repository "git@github.com:proevo/pythondotorg.git"
     deploy_key secrets["deploy_key"]
     revision "master"
-    environment "SECRET_KEY" => secrets["secret_key"],
-                "DATABASE_URL" => database_url
 
     pydotorg_django do
         requirements "requirements.txt"
     end
 
+    before_migrate do
+        # Create a staging settings file. Doing this instead of the settings
+        # stuff built into the Django resource so that it fits with our app
+        # better.
+        template ::File.join(new_resource.release_path, 'pydotorg', 'settings', 'staging.py') do
+            source 'settings.py.erb'
+            variables "db" => db,
+                      "secret_key" => secrets["secret_key"]
+        end
+    end
+
     before_symlink do
-        execute "bundle install --deployment" do
+        execute "bundle install --binstubs" do
             cwd new_resource.release_path
         end
 
@@ -100,7 +114,8 @@ application "redesign.python.org" do
         python_cmd = ::File.join(new_resource.path, 'shared', 'env', 'bin', 'python')
         execute "#{python_cmd} manage.py collectstatic --noinput" do
             cwd new_resource.release_path
-            environment "LC_ALL" => ENV['LANG']
+            environment "LC_ALL" => ENV['LANG'],
+                        "DJANGO_SETTINGS_MODULE" => "pydotorg.settings.staging"
         end
     end
 
@@ -110,6 +125,7 @@ application "redesign.python.org" do
         # the virtualenv again.
         app_module "pydotorg.wsgi:application"
         virtualenv "/srv/redesign.python.org/shared/env"
+        settings_template "gunicorn.py.erb"
     end
 end
 

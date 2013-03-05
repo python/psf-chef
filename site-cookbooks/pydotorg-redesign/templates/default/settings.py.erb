@@ -1,0 +1,20 @@
+from .base import *
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '<%= @db["hostname"] %>',
+        'NAME': '<%= @db["database"] %>',
+        'USER': '<%= @db["user"] %>',
+        'PASSWORD': '<%= @db["password"] %>',
+    },
+}
+
+SECRET_KEY = '<%= @secret_key %>'
+
+# Ubuntu uses a non-standard name for the yuicompressor binary.
+PIPELINE_YUI_BINARY = 'yui-compressor'
+
+# yui-compressor isn't working on CSS on the staging server for some reason;
+# let's try csstidy instead.
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.csstidy.CSSTidyCompressor'
