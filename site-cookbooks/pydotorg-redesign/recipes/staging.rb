@@ -123,7 +123,7 @@ application "redesign.python.org" do
         # We can't use the Django resource's collectstatic because of CHEF-2784
         # again (see above), so do it here by hand instead.
         python_cmd = ::File.join(new_resource.path, 'shared', 'env', 'bin', 'python')
-        execute "#{python_cmd} manage.py collectstatic --noinput" do
+        execute "#{python_cmd} manage.py collectstatic -v0 --noinput" do
             cwd new_resource.release_path
             environment "LC_ALL" => ENV['LANG'],
                         "DJANGO_SETTINGS_MODULE" => "pydotorg.settings.staging"
