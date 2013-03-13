@@ -4,24 +4,21 @@ directory '/var/lib/stud' do
   mode '700'
 end
 
-# Force the owner and permissions to be safe
-file '/etc/ssl/private/python.org.pem' do
-  owner 'root'
-  group 'root'
-  mode '600'
-  only_if { ::File.exists?('/etc/ssl/private/python.org.pem') }
-end
+domains = %w{pythonhosted.org raspberry.io python.org}
 
-file '/etc/ssl/private/pythonhosted.org.pem' do
-  owner 'root'
-  group 'root'
-  mode '600'
-  only_if { ::File.exists?('/etc/ssl/private/pythonhosted.org.pem') }
+# Force the owner and permissions to be safe
+domains.each do |domain|
+  file "/etc/ssl/private/#{domain}.pem" do
+    owner 'root'
+    group 'root'
+    mode '600'
+    only_if { ::File.exists?("/etc/ssl/private/#{domain}.pem") }
+  end
 end
 
 stud 'stud' do
   version '19a7f1'
-  pem_file ['/etc/ssl/private/pythonhosted.org.pem', '/etc/ssl/private/python.org.pem']
+  pem_file domains.map{|domain| "/etc/ssl/private/#{domain}.pem" }
   frontend '[*]:443'
   tls false
   ssl true
