@@ -20,8 +20,8 @@ frontend http
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
-  acl host_preview hdr(host) -i preview.python.org
-  acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io
+  acl host_preview hdr(host) -i preview.python.org preview.front.python.org
+  acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io raspberry.front.python.org
 
   use_backend pypi if host_pypi
   use_backend testpypi if host_testpypi
@@ -38,8 +38,8 @@ frontend https
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
-  acl host_preview hdr(host) -i preview.python.org
-  acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io
+  acl host_preview hdr(host) -i preview.python.org preview.front.python.org
+  acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io raspberry.front.python.org
 
   use_backend pypi if host_pypi
   use_backend testpypi if host_testpypi
