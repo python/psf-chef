@@ -11,6 +11,7 @@ defaults
   clitimeout 50000
   srvtimeout 50000
   option httpchk
+  monitor-uri /_haproxy_status
 
 frontend http
   bind 0.0.0.0:80
