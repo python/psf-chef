@@ -9,8 +9,11 @@ SITE
     apt (1.9.0)
     build-essential (1.1.0)
     chef-client (1.1.2)
+    chef_handler (1.1.4)
     gunicorn (1.1.0)
       python (>= 0.0.0)
+    java (1.10.0)
+      windows (>= 0.0.0)
     jn_sysctl (1.1.0)
     motd-tail (1.1.0)
     nginx (1.1.2)
@@ -23,11 +26,23 @@ SITE
     python (1.2.0)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
+    runit (1.1.0)
+      build-essential (>= 0.0.0)
     sudo (1.1.0)
     supervisor (0.3.0)
       python (>= 0.0.0)
+    windows (1.8.4)
+      chef_handler (>= 0.0.0)
     yum (2.0.6)
     zsh (1.0.0)
+
+GIT
+  remote: https://github.com/benjaminws/riemann-chef.git
+  ref: a902b096cf1ad83ae730f89050c220dbb1656465
+  sha: a902b096cf1ad83ae730f89050c220dbb1656465
+  specs:
+    riemann (0.1.0)
+      java (>= 0.0.0)
 
 GIT
   remote: https://github.com/coderanger/application_python-1.git
@@ -63,12 +78,15 @@ DEPENDENCIES
   build-essential (>= 0)
   chef-client (>= 0)
   heartbeat (>= 0)
+  java (>= 0)
   jn_sysctl (>= 0)
   mercurial (>= 0)
   motd-tail (>= 0)
   ntp (>= 0)
   openssh (>= 0)
   postfix (>= 0)
+  riemann (>= 0)
+  runit (>= 0)
   sudo (>= 0)
   zsh (>= 0)
 
