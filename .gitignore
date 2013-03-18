@@ -8,4 +8,3 @@ site-cookbooks/**/metadata.json
 .gems
 Gemfile*
 bin/
-.rbenv-*
