@@ -7,3 +7,4 @@ version           "0.0.1"
 
 depends "riemann"
 depends "runit"
+depends "graphite"
