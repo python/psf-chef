@@ -89,6 +89,7 @@ DEPENDENCIES
   application_nginx (>= 0)
   application_python (>= 0)
   apt (>= 0)
+  apt (>= 0)
   build-essential (>= 0)
   chef-client (>= 0)
   graphite (>= 0)
