@@ -1,7 +1,18 @@
 include_recipe 'runit'
 include_recipe 'riemann::server'
-include_recipe 'apt'
 include_recipe 'graphite'
+include_recipe 'monitoring::client'
+
+%w{ruby1.9.3 rubygems}.each do |pkg|
+  package pkg do
+    action :upgrade
+  end
+end
+
+gem_package 'riemann-tools' do
+  action :install
+  gem_binary "/usr/bin/gem1.9.3"
+end
 
 template '/etc/riemann/riemann.config' do
   source 'riemann.config.erb'
@@ -9,12 +20,4 @@ template '/etc/riemann/riemann.config' do
   group 'root'
   mode 0644
   notifies :restart, resources(:service => 'riemann')
-end
-
-apt_repository "collectd" do
-  uri "http://ppa.launchpad.net/vbulax/collectd5/ubuntu"
-  distribution node['lsb']['codename']
-  components ["main"]
-  keyserver "keyserver.ubuntu.com"
-  key "013B9839"
 end
