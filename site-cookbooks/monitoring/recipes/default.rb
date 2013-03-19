@@ -1,7 +1,5 @@
 include_recipe 'runit'
 include_recipe 'riemann::server'
-include_recipe 'riemann::health'
-
 include_recipe 'apt'
 include_recipe 'graphite'
 
