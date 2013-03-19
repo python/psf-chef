@@ -12,6 +12,10 @@
 ; Run a graphite server
 (graphite-server)
 
+(def graph (graphite {:host "127.0.0.1" :port 2002}))
+
+(streams graph)
+
 ; Expire old events from the index every 5 seconds.
 (periodically-expire 5)
 
