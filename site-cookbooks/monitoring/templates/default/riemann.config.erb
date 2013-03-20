@@ -9,7 +9,8 @@
   (udp-server :host host))
 
 ; Run a graphite server
-(graphite-server {:host "0.0.0.0"})
+(let [host "0.0.0.0"]
+  (graphite-server :host host))
 
 (def graph (graphite {:host "127.0.0.1" :port 2002}))
 
