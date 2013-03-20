@@ -52,3 +52,15 @@ firewall_rule "graphite_our_net" do
   direction :in
   action :allow
 end
+
+# Dirty hack to change our resolution
+# Hope Noah knows a better way
+storage_template = "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
+
+begin
+  template = resources("template[#{storage_template}]")
+  template.source "storage-schemas.conf.erb"
+  template.cookbook "monitoring"
+rescue Chef::Exceptions::ResourceNotFound
+  Chef::Log.warn "Can't locate #{storage_template} to modify"
+end
