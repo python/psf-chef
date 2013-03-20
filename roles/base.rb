@@ -9,13 +9,13 @@ run_list [
   "recipe[psf-misc::ntp]",
   "recipe[psf-misc::ack]",
   "recipe[psf-misc::sysstat]",
+  "recipe[psf-misc::ops-scripts]",
   "recipe[ntp]",
   "recipe[motd-tail]",
   "recipe[zsh]",
   "recipe[openssh]",
   "recipe[rsnapshot::client]",
   "recipe[rsnapshot::backupall]",
-  "recipe[ops-scripts]",
 ]
 override_attributes({
   :authorization => {
