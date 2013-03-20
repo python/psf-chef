@@ -15,6 +15,7 @@ run_list [
   "recipe[openssh]",
   "recipe[rsnapshot::client]",
   "recipe[rsnapshot::backupall]",
+  "recipe[ops-scripts]",
 ]
 override_attributes({
   :authorization => {
