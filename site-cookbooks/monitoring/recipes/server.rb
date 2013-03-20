@@ -45,3 +45,10 @@ firewall_rule "riemann_our_net" do
   direction :in
   action :allow
 end
+
+firewall_rule "graphite_our_net" do
+  port 2003
+  source "140.211.10.64/26"
+  direction :in
+  action :allow
+end
