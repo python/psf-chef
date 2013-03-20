@@ -12,6 +12,7 @@ run_list [
   "recipe[ntp]",
   "recipe[motd-tail]",
   "recipe[zsh]",
+  "recipe[openssh]",
   "recipe[rsnapshot::client]",
   "recipe[rsnapshot::backupall]",
 ]
@@ -29,6 +30,12 @@ override_attributes({
   },
   :ntp => {
     :servers => ["time.osuosl.org"],
+  },
+  :openssh => {
+    :server => {
+      :password_authentication => "no",
+      :permit_root_login => "without-password",
+    },
   },
   :rsnapshot => {
     :client => {
