@@ -1,7 +1,7 @@
 virt-sae8wg.psf.osuosl.org 140.211.10.81 - iperf
 virt-7tac5q.psf.osuosl.org 140.211.10.82 - pypy-home
 virt-l99amx.psf.osuosl.org 140.211.10.83 - nagios
-virt-kchn16.psf.osuosl.org 140.211.10.84
+virt-kchn16.psf.osuosl.org 140.211.10.84 - pyramid-community
 virt-nsz0jn.psf.osuosl.org 140.211.10.85
 virt-vm43og.psf.osuosl.org 140.211.10.86
 virt-2ttcf4.psf.osuosl.org 140.211.10.87
