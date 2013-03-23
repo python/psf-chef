@@ -1,5 +1,5 @@
 {
-  "id": "argio",
+  "id": "arigo",
   "comment": "Armin Rigo <armin.rigo@gmail.com>",
   "sudo": ["pypy-home", "pypy-codespeed"],
   "ssh_keys": [
