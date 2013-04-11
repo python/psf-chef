@@ -1,4 +1,4 @@
-name              "monitoring"
+name              "psf-monitoring"
 maintainer        "Benjamin W. Smith"
 maintainer_email  "benjaminwarfield@just-another.net"
 license           "Apache 2.0"

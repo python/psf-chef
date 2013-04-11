@@ -16,7 +16,7 @@ run_list [
   "recipe[openssh]",
   "recipe[rsnapshot::client]",
   "recipe[rsnapshot::backupall]",
-  "recipe[monitoring::client]",
+  "recipe[psf-monitoring::client]",
 ]
 override_attributes({
   :authorization => {

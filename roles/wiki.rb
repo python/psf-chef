@@ -5,5 +5,4 @@ description "Python wiki site"
 run_list [
   'recipe[psf-moin]',
   'role[postfix-relay]',
-  'recipe[monitoring::client]',
 ]
