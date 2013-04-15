@@ -6,6 +6,6 @@ site-cookbooks/**/metadata.json
 .vagrant
 .bundle
 .gems
-Gemfile*
 bin/
-.rbenv-*
+Gemfile.lock
+Vagrantfile
