@@ -3,20 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to psf-infra's documentation!
+Welcome!
 =====================================
 
-Contents:
+Welcome to the Python Infrastructure Team Documentation Index
 
-.. toctree::
-   :maxdepth: 2
-
-
-
-Indices and tables
+Let's get started
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
-
+* :doc:`nodes`
