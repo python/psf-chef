@@ -6,6 +6,7 @@ site-cookbooks/**/metadata.json
 .vagrant
 .bundle
 .gems
+.out
 bin/
 Gemfile.lock
 Vagrantfile
