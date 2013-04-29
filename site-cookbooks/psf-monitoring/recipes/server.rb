@@ -56,6 +56,20 @@ firewall_rule 'graphite_our_net' do
   action :allow
 end
 
+firewall_rule 'riemann_speed' do
+  port 5555
+  source '140.211.15.123/32'
+  direction :in
+  action :allow
+end
+
+firewall_rule 'graphite_speed' do
+  port 2003
+  source '140.211.15.123/32'
+  direction :in
+  action :allow
+end
+
 cookbook_file '/etc/apache2/graphite_users.htpasswd' do
   source 'graphite_users.htpasswd'
   user 'www-data'
