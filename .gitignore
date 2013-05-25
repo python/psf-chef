@@ -10,3 +10,4 @@ site-cookbooks/**/metadata.json
 bin/
 Gemfile.lock
 Vagrantfile
+data_bags/secrets/
