@@ -1,5 +1,9 @@
 db = data_bag_item("secrets", "postgres")["pycon2014"]
 
+package "git" do
+  action :install
+end
+
 application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/pinax/symposion.git"
@@ -8,8 +12,8 @@ application "staging-pycon.python.org" do
   django do
     requirements "requirements.txt"
     packages ["psycopg2", "gunicorn"]
-    settings_template "settings.py.erb"
-    local_settings_file "symposion_project/settings.py"
+    settings_template "local_settings.py.erb"
+    local_settings_file "symposion_project/local_settings.py"
     collectstatic "collectstatic --noinput"
     database do
       engine "postgresql_psycopg2"
