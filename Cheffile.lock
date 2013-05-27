@@ -6,6 +6,11 @@ SITE
     application_nginx (1.0.2)
       application (>= 0.0.0)
       nginx (>= 0.0.0)
+    application_python (1.2.4)
+      application (>= 0.0.0)
+      gunicorn (>= 0.0.0)
+      python (>= 0.0.0)
+      supervisor (>= 0.0.0)
     apt (1.9.0)
     ark (0.1.0)
     build-essential (1.1.0)
@@ -35,7 +40,7 @@ SITE
     runit (1.1.0)
       build-essential (>= 0.0.0)
     sudo (1.1.0)
-    supervisor (0.3.0)
+    supervisor (0.4.2)
       python (>= 0.0.0)
     windows (1.8.4)
       chef_handler (>= 0.0.0)
@@ -60,17 +65,6 @@ GIT
   specs:
     riemann (0.1.0)
       java (>= 0.0.0)
-
-GIT
-  remote: https://github.com/coderanger/application_python-1.git
-  ref: patch-1
-  sha: a98385da81ccce2c5b6c56461b812bedde5bac69
-  specs:
-    application_python (1.0.4)
-      application (>= 0.0.0)
-      gunicorn (>= 0.0.0)
-      python (>= 0.0.0)
-      supervisor (>= 0.0.0)
 
 GIT
   remote: https://github.com/coderanger/heartbeat.git
