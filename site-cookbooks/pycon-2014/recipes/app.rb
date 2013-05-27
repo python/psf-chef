@@ -28,7 +28,7 @@ application "staging-pycon.python.org" do
   nginx_load_balancer do
     application_server_role "pycon-2014"
     server_name [node['fqdn'], 'staging-pycon.python.org']
-    static_files "/static" => "example/sitestatic/"
+    static_files "/site_media/static" => "symposion_project/site_media/static"
     application_port 8080
   end
 end
