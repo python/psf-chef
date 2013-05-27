@@ -1,12 +1,9 @@
 db = data_bag_item("secrets", "postgres")["pycon2014"]
 
-package "git" do
-  action :install
-end
-
 application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/pinax/symposion.git"
+  packages ["libpq-dev", "git-core", "mercurial", "subversion"]
   migrate true
 
   django do
@@ -29,7 +26,7 @@ application "staging-pycon.python.org" do
   end
 
   nginx_load_balancer do
-    application_server_role "pycon2014"
+    application_server_role "pycon-2014"
     server_name [node['fqdn'], 'staging-pycon.python.org']
     static_files "/static" => "example/sitestatic/"
     application_port 8080
