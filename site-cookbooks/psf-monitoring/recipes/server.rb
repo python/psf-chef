@@ -70,22 +70,9 @@ firewall_rule 'graphite_speed' do
   action :allow
 end
 
-cookbook_file '/etc/apache2/graphite_users.htpasswd' do
-  source 'graphite_users.htpasswd'
-  user 'www-data'
-  mode '0600'
-  notifies :reload, 'service[apache2]'
-end
-
 storage_template = "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
 
 rewind :template => storage_template do
   source 'storage-schemas.conf.erb'
   cookbook_name 'psf-monitoring'
-end
-
-rewind :template => '/etc/apache2/sites-available/graphite' do
-  source 'graphite-vhost.conf.erb'
-  cookbook_name 'psf-monitoring'
-  notifies :reload, 'service[apache2]'
 end
