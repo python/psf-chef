@@ -1,4 +1,3 @@
-cookbooks
 tmp
 .chef/psf-validator.pem
 .rake_test_cache
