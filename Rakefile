@@ -74,3 +74,15 @@ end
 task :update do
   Rake::Task[:librarian].invoke
 end
+
+desc "Generate all docs"
+task :docs => ["docs:generate_node_report"]
+
+namespace :docs do
+  desc "generate node info for docs"
+  task :generate_node_report do
+    outfile = "./doc/nodes.rst"
+    system("bundle exec knife reporter rst -o #{outfile}")
+    puts "Wrote node documentation to #{outfile}"
+  end
+end
