@@ -60,6 +60,53 @@ The second config file, `.chef/knife.rb` is a repository specific configuration 
 
 http://help.opscode.com/faqs/chefbasics/knife
 
+Setting up a development environment
+====================================
+
+Some things you'll need:
+
+  * this repo, cloned locally
+  * ruby 1.9
+  * the chef validator key
+  * a valid chef client key
+
+Some things to consider:
+
+  * rbenv: https://github.com/sstephenson/rbenv (via rbenv installer https://github.com/fesplugas/rbenv-installer)
+
+Some common steps:
+
+    $ gem install bundler
+
+    # get our ruby dependencies
+    # Create local binstubs and install the gems right here.
+    $ bundle install --binstubs --path .gems
+
+    # get our chef cookbook dependencies
+    $ bundle exec berks install
+
+Managing Cookbooks
+==================
+
+We use berkshelf to manage our cookbooks and dependencies. Berkshelf is
+straight forward.
+
+To get started with it, look here: http://berkshelf.com/
+
+From the command line, it looks like this:
+
+    # list all of our cookbooks
+    $ bundle exec berks list
+
+    # install all our 3rd party dependencies
+    $ bundle exec berks install
+
+    # upload a cookbook managed by berksheld
+    $ bundle exec berks upload <cookbook>
+
+    # create a new cookbook
+    $ bundle exec berks cookbook <cookbook_name>
+
 Next Steps
 ==========
 
