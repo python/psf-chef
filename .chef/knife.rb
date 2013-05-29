@@ -1,10 +1,3 @@
-# begin
-#   require 'librarian/chef/integration/knife'
-# rescue LoadError
-#   Chef::Log.fatal "Please gem install librarian"
-#   exit 1
-# end
-
 # Some sane defaults 
 log_level                :info
 log_location             STDOUT

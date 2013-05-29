@@ -10,3 +10,4 @@ bin/
 Gemfile.lock
 Vagrantfile
 data_bags/secrets/
+.chef_user
