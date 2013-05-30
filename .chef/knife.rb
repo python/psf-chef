@@ -1,10 +1,3 @@
-# begin
-#   require 'librarian/chef/integration/knife'
-# rescue LoadError
-#   Chef::Log.fatal "Please gem install librarian"
-#   exit 1
-# end
-
 # Some sane defaults 
 log_level                :info
 log_location             STDOUT
@@ -25,7 +18,7 @@ validation_key           File.join(current_dir, "psf-validator.pem")
 chef_server_url          "https://api.opscode.com/organizations/psf"
 cache_type               "BasicFile"
 cache_options             :path => File.expand_path("~/.chef/checksums")
-cookbook_path            [File.expand_path("~/.berkshelf/cookbooks"), File.expand_path("../../site-cookbooks", __FILE__)]
+cookbook_path            [File.expand_path("~/.berkshelf/cookbooks"), File.expand_path("../../cookbooks", __FILE__)]
 knife[:distro] =         'psf-osu'
 
 if !File.exists?(validation_key)

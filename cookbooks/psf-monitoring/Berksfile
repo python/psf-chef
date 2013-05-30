@@ -1,0 +1,8 @@
+site :opscode
+
+cookbook "collectd", :git => "https://github.com/miah/chef-collectd.git", :ref => "tags/1.0.8"
+cookbook "riemann", :git => "https://github.com/benjaminws/riemann-chef.git", :ref => "a6882ef7bad0d842f42f2fa97acbefd7d0d29c38"
+cookbook "runit"
+cookbook "graphite", :git => "git://github.com/hw-cookbooks/graphite.git", :ref => "39b0e35d437a7a8d4a8ce09e2617fdda4c917801"
+cookbook "apt"
+cookbook "firewall"
