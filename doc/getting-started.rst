@@ -65,16 +65,26 @@ To get started with it, look here: http://berkshelf.com/
 
 From the command line, it looks like this:
 
+List all of our cookbooks
+
 ::
 
-    # list all of our cookbooks
     $ bundle exec berks list
 
-    # install all our 3rd party dependencies
+Install all our 3rd party dependencies
+
+::
+
     $ bundle exec berks install
 
-    # upload a cookbook managed by berksheld
+Upload a cookbook managed by berkshelf
+
+::
+
     $ bundle exec berks upload <cookbook>
 
-    # create a new cookbook
+Create a new cookbook
+
+::
+
     $ bundle exec berks cookbook <cookbook_name>

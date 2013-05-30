@@ -66,3 +66,6 @@ you want to publish it manually, you can do this.
 ::
 
   $ bundle exec rake docs:publish
+
+This will tell readthedocs.org to clone the tip of this repo on github
+and build it.
