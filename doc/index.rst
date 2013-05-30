@@ -13,4 +13,6 @@ Let's get started
 
 * :ref:`genindex`
 * :ref:`search`
+* :doc:`getting-started`
 * :doc:`nodes`
+* :doc:`generating-these-docs`

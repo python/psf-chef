@@ -70,13 +70,23 @@ task :update do
 end
 
 desc "Generate all docs"
-task :docs => ["docs:generate_node_report"]
+task :docs => ["docs:nodes", "docs:html"]
 
 namespace :docs do
   desc "generate node info for docs"
-  task :generate_node_report do
+  task :nodes do
     outfile = "./doc/nodes.rst"
     system("bundle exec knife reporter nodes rst -o #{outfile}")
     puts "Wrote node documentation to #{outfile}"
+  end
+
+  desc "generate html documents"
+  task :html do
+    system("cd ./doc && make html")
+  end
+
+  desc "publish to readthedocs.org"
+  task :publish do
+    system("cd ./doc && make rtd")
   end
 end
