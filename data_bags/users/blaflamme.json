@@ -1,8 +1,0 @@
-{
-  "id": "blaflamme",
-  "comment": "Blaise Laflamme <blaise@laflamme.org>",
-  "sudo": ["pyramid-community"],
-  "ssh_keys": [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArFTxEbdY2TofDXDDR/P9P6QreBRdCHD+suQ/pqBjFKOOuKj/pGHg439rrT8uPngk3ccyeQA2KjPzGaRJStEIYsIsDmC3qctodiHMTxFuxLrjnSBA/zzlUClspxEErx6+Unw4PEj8uRsvkuBg3GRAeDxkPjGwQXCxJszJR+gpweJLNH3Wf9LWNp/iLMSOZY0zaSiyVGFytWJl1xFn2TMiPMqrTwfuUBjFqLEN4U9VF3dOH0tpN4haHxNYco7FIKgDNYO1EwnO0I8CbiwRGu04b7/ZBV4b6mCfbj26WCPbKQqhEz4Hh+HGtHfVURNrkkYQHJeAh63kusLpsEmAT9bz7w== blaise@laflamme.org"
-  ]
-}

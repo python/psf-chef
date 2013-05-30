@@ -1,8 +1,0 @@
-{
-  "id": "jnoller",
-  "comment": "Jesse Noller",
-  "sudo": ["rpi"],
-  "ssh_keys": [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDNacce5gEL8FZI4m+aWRyKx4p0L+stVoRFWV7OeAh/s5yx3pVsAkxKJUTmCE8JDKs3VqTMADTclwk9/PkK6N5TtcVz+FPkikLTqoHjZ20s6jwtOwQBmjTCvb2v8ARsftldXmlJTCVOWS8gcBOMxtLa+rl1fERcomqcz1bPGoUnZ+WbkM6DBNoJZygfzQ7cLdsE92/F/27ggH9BqxO2HyLCkQBQLZyQwpyxcEWpI/WSe2zMvAHL04O2bdjiY7Q37FgO7/jP/1AU6UtDCRv5KB0QT1PXhNRURWEwdm/xiJ7Ts0vPK861rRVoHKgTU06zjh0wopT2F3RMyd48IoLVFV7 jesse@ack.home"
-  ]
-}

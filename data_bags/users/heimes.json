@@ -1,8 +1,0 @@
-{
-  "id": "heimes",
-  "comment": "Christian Heimes",
-  "sudo": ["coverity"],
-  "ssh_keys": [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEApf/RQeOz4G7KGAFu4V+1JdUgD0u3meRiAol5Q4+BqFrgXqwgOKMJ7CXANY/Wl6clUoy6YWeKpZ+bjGjUceICvJAvRmF9dTlorFZTB3JHAHa99KYta7Utmv4qkmvaZc3dCBrKowcVjrJN0ZLvtccxwryXLRKNqZwIDUNLSb9J/e8g62Qdai6WaK+rr5pRsn3uk7pfPmsgIXPuFE3qaCo5Qe3u/48poasSX2E2sbSViNBSQLV8RbUXPlNoTeyLD38pBRquhzHjdH5XOAnBjY0iRsP5JF26aTcK/oH+oIy6hpwjcr9GRznB4qMda5XIg1a1j0D4/FrtAGnjU5COPB9amw== heimes@hamiller"
-  ]
-}

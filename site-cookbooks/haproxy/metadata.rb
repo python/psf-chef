@@ -1,6 +1,0 @@
-name              "haproxy"
-maintainer        "Noah Kantrowitz"
-maintainer_email  "noah@coderanger.net"
-license           "Apache 2.0"
-description       "Install and configure HAProxy"
-version           "0.0.1"

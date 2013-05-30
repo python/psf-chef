@@ -58,7 +58,7 @@ Or maybe you want to generate only the html
    $ bundle exec rake docs:html
 
 Manually publish this documentation
---------------------------
+------------------------------------
 
 Typically our documentation should be automatically generated. Just in case
 you want to publish it manually, you can do this.

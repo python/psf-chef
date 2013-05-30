@@ -1,8 +1,0 @@
-{
-  "id": "rbauer",
-  "comment": "Reimar Bauer",
-  "sudo": ["wiki"],
-  "ssh_keys": [
-     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN6dtR0q/fsBl+U3QkPdQ2ISt/1Axe8/0vFbdG1EsRz+pRK/jeuC+xIZPYsKhKtY4rIt+34lnxUdpf1sAPHKu5biVGuV9JX/Wcl8CCQBUEEx5XGZAVb/A1nlv10xnu9VbsK40jbkPKoLm5RoJQgUzTO3kBCiHelM76ls8qhQIBus6QHjLzT4xoFnUMqG6ukMYfX62jKCvoTK8gUrv/phkomvb2jUKEA/49RJxN6Dm1uyppvpKJ3fSwffg+RrD1EpyAeJI1IckOo1310eqpaQMFG9LRxk3Fy2QohyD+IRVB2gDVSssmdCQ1gyF6DUjYcSCDk5loFy+urGcox8jfwXzt Reimar Bauer"
-  ]
-}

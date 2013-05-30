@@ -1,8 +1,0 @@
-{
-  "id": "twaldmann",
-  "comment": "Thomas Waldmann",
-  "sudo": ["wiki"],
-  "ssh_keys": [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAw8SBifjGDAMOgqQH5CGH2zqubePOYH7KgytBlW9K+qOMGjxTlIXmfqdotvegw8ebrmx9W2YoybJoXC9+qrl4vcczjyhXu/g/4PU2WWEvY3bSZEFCxuG0kPyPzOKMTth7yYNIb0k4VEVx46QlTKkfIJdzr8oQ8nar02sA3G8pkWygyvhKhqkZCCdrd+8nnJLSfCLY92qtAArcX0hlqhEf1fnvUkmqvqfDbwnqDoNs4wgcuXSsMSE4TV8IWH2CAhd3Fmkpzh8tBcdI6iXH/ThnsBO1XTKy+w8dOnFtS+GRGyc+gwYgNTiI71ZnlGAuI5mvmNFBWauUXkvdh8JjAqeqEw== tw@black.tw_rsa_2008"
-  ]
-}

@@ -1,8 +1,0 @@
-{
-  "id": "benjamin",
-  "comment": "Benjamin Peterson <benjamin@python.org>",
-  "sudo": ["hg"],
-  "ssh_keys": [
-    "ssh-dss AAAAB3NzaC1kc3MAAACBANpPWYXUKzXK0wu3YQmUUv/Zh1mrohKiOW9y9k2BBGdkqCAgGF4fT10TuDCJOeb6NAGepVrVaqGgwIiitTQSI2Ak1vBLbkgmoZki0RxnE0HnUnbPBsfOqRFCix69UZfiVru1ou+Abh/HSFlp9WzIXhO/PcSpnQqok2KDP5Lz6xLnAAAAFQDK8g9xhUyxzDi10nODkamckO/x9QAAAIEA0aemLSnMDGPpRSpJohub5x4+mHcFV4+VysgMghOd+IuyoasaKBc4ZB34mMxyfTsL2o08J4WwgvMM7wNlTXn/kFczi+1qJeO4KgA51ZfTnCK2yCMcMA02Yln0CJIIbqt4Tb1WewOTamC7yUIxnvzBScEfE83lgFIwK69Q7IBCm74AAACBALiPwc2RyGh9jbJo5GiGvRKhxHAJotklzesEr88JOaFeJAipVo9lMVuIKFAb3aY/yQPTXtoWaXizk1gW9TYZmJXpFs5aVU2Ar8q8gp6PyU6R0sT+M3dL9HWtAYclVXeq9hX7wW5jgFEuq2QJ7dex8e8tbR7FRGk11nrXuX7he4qk Benjamin Peterson"
-  ]
-}
