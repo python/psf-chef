@@ -35,6 +35,9 @@ Checkout the docs branch
 Generate a local copy of the docs
 ----------------------------------
 
+This will generate html from our documentation, and place it in
+`./doc/_build/html`
+
 ::
 
     $ bundle exec rake docs
@@ -42,13 +45,13 @@ Generate a local copy of the docs
 Generate a single module of the documentation
 ----------------------------------------------
 
-Say you want to just generate the node documentation
+Say you want to generate only the node documentation
 
 ::
 
     $ bundle exec rake docs:nodes
 
-Or maybe you want to just generate the html
+Or maybe you want to generate only the html
 
 ::
 
