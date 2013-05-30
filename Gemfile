@@ -1,6 +1,7 @@
 # An sample Gemfile
 source "https://rubygems.org"
 
+gem "rake"
 gem "chef"
 gem "berkshelf"
 gem "foodcritic"

@@ -53,7 +53,7 @@ task :bundle_cookbook, :cookbook do |t, args|
   FileUtils.mkdir(temp_dir)
   FileUtils.mkdir(temp_cookbook_dir)
 
-  child_folders = [ "cookbooks/#{args.cookbook}", "site-cookbooks/#{args.cookbook}" ]
+  child_folders = [ "cookbooks/#{args.cookbook}", "~/.berkshelf/cookbooks/#{args.cookbook}" ]
   child_folders.each do |folder|
     file_path = File.join(TOPDIR, folder, ".")
     FileUtils.cp_r(file_path, temp_cookbook_dir) if File.directory?(file_path)
@@ -62,12 +62,6 @@ task :bundle_cookbook, :cookbook do |t, args|
   system("tar", "-C", temp_dir, "-cvzf", File.join(tarball_dir, tarball_name), "./#{args.cookbook}")
 
   FileUtils.rm_rf temp_dir
-end
-
-desc "Run librarian"
-task :librarian do
-  puts "** Syncing with Cheffile"
-  system("librarian-chef install")
 end
 
 # Extend the existing task to also call librarian
@@ -82,7 +76,7 @@ namespace :docs do
   desc "generate node info for docs"
   task :generate_node_report do
     outfile = "./doc/nodes.rst"
-    system("bundle exec knife reporter rst -o #{outfile}")
+    system("bundle exec knife reporter nodes rst -o #{outfile}")
     puts "Wrote node documentation to #{outfile}"
   end
 end
