@@ -49,6 +49,19 @@ frontend https
   use_backend preview if host_preview
   use_backend raspberry if host_raspberry
 
+listen pypi-logging
+  bind 0.0.0.0:51450
+  mode tcp
+  option tcplog
+
+  <%- @pypi_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %>:51450
+  <%- end -%>
+
+  acl fastly src 199.27.72.0/21 83.223.121.248/29 103.244.50.0/24 103.245.222.0/23 103.245.224.0/24 202.21.128.53 203.57.145.55
+  tcp-request connection accept if fastly
+  tcp-request connection reject
+
 backend pypi
   <%- @pypi_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
