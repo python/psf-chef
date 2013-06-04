@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+
+DATABASES = {
+    'default': {
+        'NAME': '<%= @database[:settings][:database] %>',
+        'ENGINE': 'django.db.backends.<%= @database[:settings][:engine] %>',
+        'USER': '<%= @database[:settings][:username] %>',
+        'PASSWORD': '<%= @database[:settings][:password] %>',
+        'HOST': '<%= @database[:settings][:hostname] %>',
+        'PORT': '<%= @database[:settings][:port]  %>',
+    },
+}
+
+INSTALLED_APPS = [
+    # Django
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.sites",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",
+
+    # theme
+    "pinax_theme_bootstrap",
+    "django_forms_bootstrap",
+
+    # external
+    "debug_toolbar",
+    "mailer",
+    "timezones",
+    "metron",
+    "markitup",
+    "taggit",
+    "reversion",
+    "easy_thumbnails",
+    "sitetree",
+    "account",
+
+    # symposion
+    "symposion",
+    "symposion.sponsorship",
+    "symposion.conference",
+    "symposion.cms",
+    "symposion.boxes",
+    "symposion.proposals",
+    "symposion.speakers",
+    "symposion.teams",
+    "symposion.reviews",
+    "symposion.schedule",
+
+    # project
+    "symposion_project.proposals",
+
+    # added by Ernest W. Durbin III for running on psf infrastructure
+    "gunicorn"
+]
