@@ -6,3 +6,4 @@ description       "Installs and configures PyPI"
 version           "0.0.1"
 
 depends           "pgbouncer"
+depends           "rsyslog"
