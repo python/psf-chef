@@ -23,6 +23,7 @@ cookbook "memcached"
 cookbook "graphite", :git => "git://github.com/hw-cookbooks/graphite.git", :ref => "39b0e35d437a7a8d4a8ce09e2617fdda4c917801"
 cookbook "collectd", :git => "https://github.com/miah/chef-collectd.git", :ref => "tags/1.0.8"
 cookbook "firewall"
+cookbook "rsyslog"
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"
