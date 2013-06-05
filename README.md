@@ -95,16 +95,25 @@ To get started with it, look here: http://berkshelf.com/
 
 From the command line, it looks like this:
 
-    # list all of our cookbooks
+List all of our cookbooks
+
     $ bundle exec berks list
 
-    # install all our 3rd party dependencies
-    $ bundle exec berks install
+Install all our 3rd party dependencies. Note that if you do not run berks
+update, a Lockfile will not be generated, and uploads will fail.
 
-    # upload a cookbook managed by berksheld
+    $ bundle exec berks install && bundle exec berks update
+
+Upload a cookbook managed by berkshelf
+
     $ bundle exec berks upload <cookbook>
 
-    # create a new cookbook
+Upload all cookbooks
+
+    $ bundle exec berks upload
+
+Create a new cookbook
+
     $ bundle exec berks cookbook <cookbook_name>
 
 Next Steps
