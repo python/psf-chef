@@ -116,6 +116,29 @@ Create a new cookbook
 
     $ bundle exec berks cookbook <cookbook_name>
 
+Testing chef server interactions
+================================
+
+We have conveniently included the "chef-zero" gem in our bundle. It will act as a local
+chef server, allowing you to test things like uploads and other chef server
+interactions. We have also included a berkshelf config that will use the
+chef-zero server, as well as a fake key to test with.
+
+I'd suggest using tmux or screen for this...
+
+Here's how to use it:
+
+In one terminal, fire up chef-zero:
+
+    $ bundle exec chef-zero
+
+In another, run some berks stuff:
+
+    $ bundle exec berks upload -c .berkshelf-test-config.js
+
+You can optionally add a --debug flag to the above command to see tons of
+extra output.
+
 Next Steps
 ==========
 
