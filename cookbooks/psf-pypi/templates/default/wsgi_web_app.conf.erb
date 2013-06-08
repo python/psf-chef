@@ -6,6 +6,10 @@
 
   WSGIScriptAlias <%= @params[:wsgi_root] %> <%= @params[:wsgi_script] %>
 
+  <% @params[:environment].each do |envvar, value| %>
+  SetEnv <%= envvar %> <%= value %>
+  <% end %>
+
   <Directory <%= @params[:docroot] %>>
     Options <%= [@params[:directory_options] || "FollowSymLinks" ].flatten.join " " %>
     AllowOverride <%= [@params[:allow_override] || "None" ].flatten.join " " %>

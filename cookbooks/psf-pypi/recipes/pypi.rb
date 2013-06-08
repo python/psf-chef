@@ -23,12 +23,6 @@ directory "/srv/pypi" do
   group node["pypi"]["group"]
 end
 
-# python_virtualenv "/srv/pypi/env" do
-#   group "www-data"
-#   options "--system-site-packages"
-#   action :create
-# end
-
 execute "install requirements" do
   command "pip install -r requirements.txt"
   cwd "/srv/pypi/src"
@@ -119,17 +113,20 @@ directory "/srv/pypi/wsgi" do
   group node["apache"]["group"]
 end
 
-template "/srv/pypi/wsgi/pypi.wsgi" do
-  source "pypi.wsgi.erb"
-  variables ({
-    :pypi_src => "/srv/pypi/src",
-    :pypi_wsgi => "/srv/pypi/src/pypi.wsgi",
-    :pypi_config => "/srv/pypi/config.ini",
-  })
 
-  user "www-data"
+link "/srv/pypi/wsgi/pypi.wsgi" do
+  to "/srv/pypi/src/pypi.wsgi"
+
+  owner "www-data"
+  group "www-data"
+end
+
+file "/srv/pypi/wsgi/pypi.pth" do
+  owner "www-data"
   group "www-data"
   mode "750"
+
+  content "/srv/pypi/src"
 end
 
 web_app "pypi" do
@@ -143,4 +140,8 @@ web_app "pypi" do
   wsgi_root "/"
   wsgi_directory "/srv/pypi/wsgi"
   wsgi_script "/srv/pypi/wsgi/pypi.wsgi"
+
+  environment ({
+    :PYPI_CONFIG => "/srv/pypi/config.ini",
+  })
 end

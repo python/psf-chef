@@ -1,9 +1,0 @@
-#!/usr/bin/env python
-import site
-import os
-
-site.addsitedir("<%= @pypi_src %>")
-
-os.environ["PYPI_CONFIG"] = "<%= @pypi_config %>"
-
-exec(open("<%= @pypi_wsgi %>"), globals(), locals())
