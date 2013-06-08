@@ -26,6 +26,7 @@ cookbook "graphite", :git => "git://github.com/hw-cookbooks/graphite.git", :ref 
 cookbook "collectd", :git => "https://github.com/miah/chef-collectd.git", :ref => "tags/1.0.8"
 cookbook "firewall", '= 0.10.2'
 cookbook "rsyslog"
+cookbook "postgresql"
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"

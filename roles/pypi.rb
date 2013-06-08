@@ -4,8 +4,21 @@ run_list [
     'recipe[rsyslog::server]',
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
+    # 'recipe[psf-pypi::pypi]',
 ]
 override_attributes({
+  :pypi => {
+    :admins => [
+        "richardjones@optushome.com.au",
+        "martin@v.loewis.de",
+        "jannis@leidel.info",
+    ],
+    :web => {
+      :database => {
+        :hostname => "localhost",
+      },
+    },
+  },
   :rsyslog => {
     :port => 51450,
     :user => "root",
