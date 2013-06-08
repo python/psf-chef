@@ -3,7 +3,11 @@ default["pypi"]["user"] = "pypi"
 default["pypi"]["group"] = "root"
 
 # PyPI Web Application Configuration
-default["pypi"]["admins"] = []
+default["pypi"]["admins"] = [
+    "richardjones@optushome.com.au",
+    "martin@v.loewis.de",
+    "jannis@leidel.info",
+]
 
 default["pypi"]["database"]
 

@@ -8,11 +8,6 @@ run_list [
 ]
 override_attributes({
   :pypi => {
-    :admins => [
-        "richardjones@optushome.com.au",
-        "martin@v.loewis.de",
-        "jannis@leidel.info",
-    ],
     :web => {
       :database => {
         :hostname => "localhost",
