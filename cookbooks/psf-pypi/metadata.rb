@@ -7,3 +7,7 @@ version           "0.0.1"
 
 depends           "pgbouncer"
 depends           "rsyslog"
+depends           "postgresql"
+depends           "mercurial"
+depends           "python"
+depends           "apache2"
