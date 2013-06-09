@@ -18,7 +18,7 @@ application "speed.pypy.org" do
     database do
       engine "postgresql_psycopg2"
       database db["database"]
-      # Connects view pgbouncer.
+      # Connects via pgbouncer.
       hostname "localhost"
       username db["user"]
       password db["password"]
