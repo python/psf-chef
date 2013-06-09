@@ -13,11 +13,13 @@ defaults
   option httpchk
   monitor-uri /_haproxy_status
 
-frontend http
-  bind 0.0.0.0:80
-  reqadd X-Forwarded-Proto:\ http
+<%- {'http'=>'0.0.0.0:80', 'https'=>'127.0.0.1:8000 accept-proxy'}.each do |proto, bind| -%>
+frontend <%= proto %>
+  bind <%= bind %>
+  reqadd X-Forwarded-Proto:\ <%= proto %>
+  reqidel ^X-Forwarded-\w+:.*
 
-  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
+  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org b.pypi.python.org d.pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
@@ -30,24 +32,7 @@ frontend http
   use_backend pypy-home if host_pypy
   use_backend preview if host_preview
   use_backend raspberry if host_raspberry
-
-frontend https
-  bind 127.0.0.1:8000 accept-proxy
-  reqadd X-Forwarded-Proto:\ https
-
-  acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org
-  acl host_testpypi hdr(host) -i testpypi.python.org
-  acl host_wiki hdr(host) -i wiki.python.org
-  acl host_pypy hdr(host) -i pypy.org www.pypy.org
-  acl host_preview hdr(host) -i preview.python.org preview.front.python.org
-  acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io raspberry.front.python.org
-
-  use_backend pypi if host_pypi
-  use_backend testpypi if host_testpypi
-  use_backend wiki if host_wiki
-  use_backend pypy-home if host_pypy
-  use_backend preview if host_preview
-  use_backend raspberry if host_raspberry
+<%- end -%>
 
 listen pypi-logging
   bind 0.0.0.0:51450
