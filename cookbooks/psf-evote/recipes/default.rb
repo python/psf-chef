@@ -2,7 +2,7 @@
 # Cookbook Name:: psf-evote
 # Recipe:: default
 #
-# Copyright (C) 2013 YOUR_NAME
+# Copyright (C) 2013 Noah Kantrowitz
 #
 
 include_recipe 'git'
