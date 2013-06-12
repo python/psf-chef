@@ -9,7 +9,7 @@ cookbook "ntp", '= 1.1.8'
 cookbook "motd-tail", '= 1.1.0'
 cookbook "build-essential", '= 1.4.0'
 cookbook "zsh", '= 1.0.0'
-cookbook "application", '2.0.0'
+cookbook "application", '2.0.4'
 cookbook "application_python", :git => "https://github.com/coderanger/application_python.git", :ref => "exposedjango"
 cookbook "python", '= 1.2.0'
 cookbook "application_nginx", '= 1.0.2'
