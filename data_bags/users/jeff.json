@@ -1,0 +1,8 @@
+{
+  "id": "jeff",
+  "comment": "Jeff Triplett",
+  "sudo": ["redesign-staging"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAlqqTbxE1+YK4VB+1mPrGaXBUK7I7xP0/jZYYIqXy0luk7gCOfywUFn7POWxllLIKPfw/5sIZtjDacA6Ng6lFlsQvG2ofVZJiRdmfydUFAtmFiHDa/3ibvOAXdFw6xcxirvY6aUEEmMP0sCQffiVvwUpPE+HNZgV/n/3u39aEdNtRZ6j6UV6zw0Ld0YNcoSuQvyVWC9oZxaUGcu2n0DK1jRyD03I2rmR4jQBj+tBPx+npo+127ER8qLVc4G7zPlwKor0pywo1UugrKwEJK++kcshT6dfdtE4jvEpVhCDlywFHN6XXLbJjRM0Q8l5eWjeqIdCl0tG9wYElC3j8uvrjGQ== jefftriplett@rsa-Jeff-Tripletts-iMac.local"
+  ]
+}
