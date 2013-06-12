@@ -11,6 +11,7 @@ include_recipe 'python'
 class ::Chef
     class Resource
         class ApplicationPydotorgDjango < ApplicationPythonDjango
+            self.resource_name = 'application_pydotorg_django'
         end
     end
     class Provider
