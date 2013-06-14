@@ -13,13 +13,11 @@ exists() {
 install_sh="http://opscode.com/chef/install.sh"
 version_string="-v <%= chef_version %>"
 
-cat >> /etc/network/interfaces <<'EOP'
-    dns-nameservers 140.211.166.130 140.211.166.131
-    dns-domain psf.osuosl.org
-    dns-search python.org osuosl.bak
+cat > /etc/resolv.conf <<'EOP'
+nameserver 140.211.166.130
+nameserver 140.211.166.131
+search psf.osuosl.org python.org osuosl.bak
 EOP
-
-ifdown eth0 && ifup eth0
 
 if ! exists /usr/bin/chef-client; then
   if exists wget; then
