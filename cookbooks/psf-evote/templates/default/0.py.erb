@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+DEVELOPMENT  = <%= @development ? 'True' : 'False' %>
+DBURI        = '<%= @dburi %>'
+EMAIL_SENDER = '<%= @email_sender %>'
+EMAIL_SERVER = 'localhost'
+EMAIL_LOGIN  = None
+GMAIL_LOGIN  = None
+AS_SERVICE = <%= @as_service ? 'True' : 'False' %>
+DEBUG_MODE = <%= @debug_mode ? 'True' : 'False' %>
+SCHEME = '<%= @scheme %>'
+
+response.title = '<%= @title %>'
+response.subtitle = '<%= @subtitle %>'
+
+## read more at http://dev.w3.org/html5/markup/meta.name.html
+response.meta.author = '<%= @author %>'
+response.meta.description = '<%= @subtitle %>'
+response.meta.keywords = ''
+response.meta.generator = ''
+
+## your http://google.com/analytics id
+response.google_analytics_id = None

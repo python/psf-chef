@@ -1,0 +1,9 @@
+node.default['psf-evote']['development'] = false
+node.default['psf-evote']['dburi'] = 'sqlite://storage.sqlite'
+node.default['psf-evote']['email_sender'] = 'elections@python.org'
+node.default['psf-evote']['as_service'] = false
+node.default['psf-evote']['debug_mode'] = false
+node.default['psf-evote']['scheme'] = 'https'
+node.default['psf-evote']['title'] = 'PSF E-Vote'
+node.default['psf-evote']['subtitle'] = 'Online voting for the Python Software Foundation'
+node.default['psf-evote']['author'] = 'elections@python.org'

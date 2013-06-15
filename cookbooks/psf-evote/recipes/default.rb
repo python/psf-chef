@@ -33,10 +33,25 @@ git '/srv/evote/web2py' do
   user 'evote'
 end
 
-git '/srv/evote/web2py/applications/evote' do
+%w{welcome examples admin}.each do |app|
+  directory "/srv/evote/web2py/applications/#{app}" do
+    action :delete
+    recursive true
+  end
+end
+
+git '/srv/evote/web2py/applications/init' do
   repository 'https://github.com/mdipierro/evote.git'
   reference 'master'
   user 'evote'
+end
+
+template '/srv/evote/web2py/applications/init/models/0.py' do
+  source '0.py.erb'
+  owner 'evote'
+  group 'evote'
+  mode '644'
+  variables node['psf-evote']
 end
 
 python_pip 'rsa'
@@ -46,4 +61,5 @@ supervisor_service 'evote' do
   autostart true
   user 'evote'
   directory '/srv/evote/web2py'
+  subscribes :restart, 'template[/srv/evote/web2py/applications/init/models/0.py]'
 end
