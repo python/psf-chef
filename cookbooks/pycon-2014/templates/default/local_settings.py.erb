@@ -14,11 +14,6 @@ DATABASES = {
     },
 }
 
-INSTALLED_APPS += [
-    # added by Ernest W. Durbin III for running on psf infrastructure
-    "gunicorn"
-]
-
 ALLOWED_HOSTS = [
     'staging-pycon.python.org',
      "<%= node["fqdn"] %>"
