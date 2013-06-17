@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+# Note: This is imported by the main settings file, so only changes to
+# what's there need to be included here.
+
 DATABASES = {
     'default': {
         'NAME': '<%= @database[:settings][:database] %>',
@@ -10,7 +13,6 @@ DATABASES = {
         'PORT': '<%= @database[:settings][:port]  %>',
     },
 }
-
 
 ALLOWED_HOSTS = [
     '.python.org',
@@ -26,5 +28,4 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# FIXME: set COMPRESS_ENABLED=True for production, it's just off right now so we have one less thing to worry about to get the site up.
 COMPRESS_ENABLED = True
