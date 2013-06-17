@@ -27,6 +27,8 @@ cookbook "collectd", :git => "https://github.com/miah/chef-collectd.git", :ref =
 cookbook "firewall", '= 0.10.2'
 cookbook "rsyslog"
 cookbook "postgresql"
+cookbook "nodejs", '= 1.1.2'
+cookbook "npm", '= 0.1.1'
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"
