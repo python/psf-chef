@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+# Note: This is imported by the main settings file, so only changes to
+# what's there need to be included here.
+
 DATABASES = {
     'default': {
         'NAME': '<%= @database[:settings][:database] %>',
@@ -11,48 +14,23 @@ DATABASES = {
     },
 }
 
-INSTALLED_APPS = [
-    # Django
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.sites",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "django.contrib.humanize",
-
-    # theme
-    "pinax_theme_bootstrap",
-    "django_forms_bootstrap",
-
-    # external
-    "debug_toolbar",
-    "mailer",
-    "timezones",
-    "metron",
-    "markitup",
-    "taggit",
-    "reversion",
-    "easy_thumbnails",
-    "sitetree",
-    "account",
-
-    # symposion
-    "symposion",
-    "symposion.sponsorship",
-    "symposion.conference",
-    "symposion.cms",
-    "symposion.boxes",
-    "symposion.proposals",
-    "symposion.speakers",
-    "symposion.teams",
-    "symposion.reviews",
-    "symposion.schedule",
-
-    # project
-    "symposion_project.proposals",
-
+INSTALLED_APPS += [
     # added by Ernest W. Durbin III for running on psf infrastructure
     "gunicorn"
 ]
+
+ALLOWED_HOSTS = [
+    'staging-pycon.python.org',
+     "<%= node["fqdn"] %>"
+]
+
+EMAIL_HOST = "mail.python.org"
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+MANAGERS = ADMINS
+
+# FIXME: set COMPRESS_ENABLED=True for production, it's just off right now so we have one less thing to worry about to get the site up.
+COMPRESS_ENABLED = False
