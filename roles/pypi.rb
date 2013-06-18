@@ -9,6 +9,7 @@ run_list [
 override_attributes({
   :pypi => {
     :web => {
+      :hsts_seconds => 31536000,
       :database => {
         :hostname => "localhost",
       },

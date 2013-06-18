@@ -45,6 +45,8 @@ default["pypi"]["web"]["domains"] = [
     "a.pypi.python.org",
 ]
 
+default["pypi"]["web"]["hsts_seconds"] = nil
+
 
 default["pypi"]["web"]["dirs"]["data"] = "/data"
 default["pypi"]["web"]["dirs"]["files"] = "packages"

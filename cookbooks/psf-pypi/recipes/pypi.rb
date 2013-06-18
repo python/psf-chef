@@ -200,6 +200,7 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
   variables ({
     :domains => node["pypi"]["web"]["domains"],
     :static_root => static_dir.start_with?("/") ? static_dir : File.join(data_dir, static_dir),
+    :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
   })
 
   notifies :reload, "service[nginx]", :delayed

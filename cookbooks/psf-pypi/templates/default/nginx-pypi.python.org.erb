@@ -2,10 +2,11 @@ server {
   listen 80;
   server_name <%= @domains.join(" ") %>;
 
-  root <%= @static_root %>;
+  <% if @hsts_seconds %>
+  add_header Strict-Transport-Security "max-age=<%= @hsts_seconds %>";
+  <% end %>
 
   # TODO: Cache Static Assests
-  # TODO: HSTS Static Assests
   # TODO: Host Packages
 
   location ~* ^/(pypi|daytime|mirrors|id|oauth|security|simple|serversig).* {
