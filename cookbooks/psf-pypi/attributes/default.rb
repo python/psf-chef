@@ -14,6 +14,21 @@ default["pypi"]["gunicorn"]["timeout"] = 15
 # Setup Nginx
 override["nginx"]["default_site_enabled"] = false
 
+override["nginx"]["gzip"] = "on"
+override["nginx"]["gzip_vary"] = "on"
+override["nginx"]["gzip_types"] = [
+  "application/javascript",
+  "application/json",
+  "application/x-javascript",
+  "application/xml",
+  "application/xml+rss",
+  "image/x-icon",
+  "text/css",
+  "text/javascript",
+  "text/plain",
+  "text/xml",
+]
+
 # PyPI Web Application Configuration
 default["pypi"]["admins"] = [
     "richardjones@optushome.com.au",
