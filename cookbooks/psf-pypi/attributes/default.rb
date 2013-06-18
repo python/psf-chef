@@ -1,6 +1,18 @@
 # Global PyPI Configuration
 default["pypi"]["user"] = "pypi"
-default["pypi"]["group"] = "root"
+default["pypi"]["group"] = "pypi"
+default["pypi"]["home"] = "/srv/pypi"
+
+# Code locations and references
+default["pypi"]["code"]["repository"] = "https://bitbucket.org/pypa/pypi"
+default["pypi"]["code"]["reference"] = "tip"
+
+# Setup Gunicorn
+default["pypi"]["gunicorn"]["processes"] = 9
+default["pypi"]["gunicorn"]["timeout"] = 15
+
+# Setup Nginx
+override["nginx"]["default_site_enabled"] = false
 
 # PyPI Web Application Configuration
 default["pypi"]["admins"] = [
@@ -13,10 +25,17 @@ default["pypi"]["database"]
 
 default["pypi"]["web"]["debug"] = false
 
+default["pypi"]["web"]["domains"] = [
+    "pypi.python.org",
+    "a.pypi.python.org",
+]
+
+
 default["pypi"]["web"]["dirs"]["data"] = "/data"
 default["pypi"]["web"]["dirs"]["files"] = "packages"
 default["pypi"]["web"]["dirs"]["docs"] = "packagedocs"
 default["pypi"]["web"]["dirs"]["key"] = "pypi"
+default["pypi"]["web"]["dirs"]["static"] = "static"
 
 default["pypi"]["web"]["pubsubhubbub"] = "http://pubsubhubbub.appspot.com/"
 

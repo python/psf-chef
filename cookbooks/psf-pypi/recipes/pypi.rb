@@ -4,48 +4,82 @@ secrets = data_bag_item("secrets", "pypi")
 include_recipe "postgresql::client"
 include_recipe "python"
 include_recipe "mercurial"
-include_recipe "apache2"
-include_recipe "apache2::mod_wsgi"
+include_recipe "supervisor"
+include_recipe "nginx"
 
-package "libssl-dev" do end
-package "swig" do end
 package "python-m2crypto" do end
 
-user node["pypi"]["user"] do
-  comment "Python Package Index"
-  home "/srv/pypi/"
+# Create our user and group
+group node["pypi"]["group"] do
   system true
 end
 
-directory "/srv/pypi" do
-  mode "755"
-  user "root"
+user node["pypi"]["user"] do
+  comment "Python Package Index"
+  home node["pypi"]["home"]
+  gid node["pypi"]["group"]
+  system true
+end
+
+# Create the required directories
+dirs = [
+  "#{node["pypi"]["home"]}",
+]
+
+dirs.each do |dir|
+  directory dir do
+    mode "750"
+    user node["pypi"]["user"]
+    group node["pypi"]["group"]
+  end
+end
+
+# Create our VirtualEnv
+python_virtualenv "#{node["pypi"]["home"]}/env" do
+  owner node["pypi"]["user"]
   group node["pypi"]["group"]
+  action :create
 end
 
-execute "install requirements" do
-  command "pip install -r requirements.txt"
-  cwd "/srv/pypi/src"
-  action :nothing
+# Fixes trying to install M2Crypto via PIP on Ubuntu
+link "#{node["pypi"]["home"]}/env/lib/python2.7/site-packages/M2Crypto" do
+  to "/usr/lib/python2.7/dist-packages/M2Crypto"
+  owner node["pypi"]["user"]
+end
+link "#{node["pypi"]["home"]}/env/lib/python2.7/site-packages/M2Crypto-0.21.1.egg-info" do
+  to "/usr/lib/python2.7/dist-packages/M2Crypto-0.21.1.egg-info"
+  owner node["pypi"]["user"]
 end
 
-mercurial "/srv/pypi/src" do
-  repository "https://bitbucket.org/pypa/pypi"
-  reference "tip"
+# Grab the PyPI code from the repository
+mercurial "#{node["pypi"]["home"]}/src" do
+  repository node["pypi"]["code"]["repository"]
+  reference node["pypi"]["code"]["reference"]
+
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
+
   action :sync
+  notifies :install, "python_pip[-r #{node["pypi"]["home"]}/src/requirements.txt]", :immediately
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
 
-  user "root"
+python_pip "-r #{node["pypi"]["home"]}/src/requirements.txt" do
+  virtualenv "#{node["pypi"]["home"]}/env"
+
+  user node["pypi"]["user"]
   group node["pypi"]["group"]
 
-  notifies :run, "execute[install requirements]"
+  action :nothing
 end
 
 data_dir = node["pypi"]["web"]["dirs"]["data"]
 files_dir = node["pypi"]["web"]["dirs"]["files"]
 docs_dir = node["pypi"]["web"]["dirs"]["docs"]
 key_dir = node["pypi"]["web"]["dirs"]["key"]
+static_dir = node["pypi"]["web"]["dirs"]["static"]
 
-template "/srv/pypi/config.ini" do
+template "#{node["pypi"]["home"]}/config.ini" do
   source "pypi-config.ini.erb"
   variables ({
     :debug => node["pypi"]["web"]["debug"] ? "yes" : "no",
@@ -98,50 +132,79 @@ template "/srv/pypi/config.ini" do
       :service_id => secrets["fastly"]["service_id"],
     },
   })
-  user "root"
+  user node["pypi"]["pypi"]
   group node["pypi"]["group"]
   mode "640"
+
+  notifies :restart, "supervisor_service[pypi]", :delayed
 end
 
-file "/srv/pypi/src/pypi.wsgi" do
-  mode "755"
-end
+# We need to make a wsgi.py that "redirects" to pypi.wsgi
+template "#{node["pypi"]["home"]}/wsgi.py" do
+  source "pypi-wsgi.py.erb"
 
-directory "/srv/pypi/wsgi" do
-  mode "750"
-  user node["apache"]["user"]
-  group node["apache"]["group"]
-end
-
-
-link "/srv/pypi/wsgi/pypi.wsgi" do
-  to "/srv/pypi/src/pypi.wsgi"
-
-  owner "www-data"
-  group "www-data"
-end
-
-file "/srv/pypi/wsgi/pypi.pth" do
-  owner "www-data"
-  group "www-data"
+  user node["pypi"]["pypi"]
+  group node["pypi"]["group"]
   mode "750"
 
-  content "/srv/pypi/src"
-end
-
-web_app "pypi" do
-  template "wsgi_web_app.conf.erb"
-
-  server_name "pypi.python.org"
-  server_aliases [node['hostname'], node['fqdn']]
-
-  docroot "/srv/www/pypi.python.org"
-
-  wsgi_root "/"
-  wsgi_directory "/srv/pypi/wsgi"
-  wsgi_script "/srv/pypi/wsgi/pypi.wsgi"
-
-  environment ({
-    :PYPI_CONFIG => "/srv/pypi/config.ini",
+  variables ({
+    :src_dir => "#{node["pypi"]["home"]}/src/",
+    :wsgi_file => "#{node["pypi"]["home"]}/src/pypi.wsgi",
   })
+
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
+
+# Install Gunicorn to serve PyPI
+python_pip "gunicorn" do
+  virtualenv "#{node["pypi"]["home"]}/env"
+
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
+
+  action :install
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
+
+# Configure gunicorn
+gunicorn_config "#{node["pypi"]["home"]}/gunicorn.conf.py" do
+  # PyPI *MUST* be run with sync, bad things happen otherwise
+  worker_class "sync"
+
+  worker_processes node["pypi"]["gunicorn"]["processes"]
+  worker_timeout node["pypi"]["gunicorn"]["timeout"]
+
+  owner node["pypi"]["user"]
+  group node["pypi"]["group"]
+
+  action :create
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
+
+# Launch Gunciorn with Supervisor
+supervisor_service "pypi" do
+  command "#{node["pypi"]["home"]}/env/bin/gunicorn wsgi -c #{node["pypi"]["home"]}/gunicorn.conf.py"
+
+  autostart true
+  autorestart :unexpected
+  user node["pypi"]["user"]
+  environment :PYPI_CONFIG => "#{node["pypi"]["home"]}/config.ini"
+  directory node["pypi"]["home"]
+end
+
+# Create an nginx config to serve PyPI
+template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
+  source "nginx-pypi.python.org.erb"
+  mode "640"
+
+  variables ({
+    :domains => node["pypi"]["web"]["domains"],
+    :static_root => static_dir.start_with?("/") ? static_dir : File.join(data_dir, static_dir),
+  })
+
+  notifies :reload, "service[nginx]", :delayed
+end
+
+# Enable the nginx site
+nginx_site "pypi.python.org" do
 end
