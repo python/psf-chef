@@ -52,7 +52,7 @@ default["pypi"]["web"]["dirs"]["data"] = "/data"
 default["pypi"]["web"]["dirs"]["files"] = "packages"
 default["pypi"]["web"]["dirs"]["docs"] = "packagedocs"
 default["pypi"]["web"]["dirs"]["key"] = "pypi"
-default["pypi"]["web"]["dirs"]["static"] = "static"
+default["pypi"]["web"]["dirs"]["static"] = File.join(default["pypi"]["home"], "static")
 
 default["pypi"]["web"]["pubsubhubbub"] = "http://pubsubhubbub.appspot.com/"
 

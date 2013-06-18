@@ -1,6 +1,12 @@
 database = data_bag_item("secrets", "postgres")["pypi"]
 secrets = data_bag_item("secrets", "pypi")
 
+data_dir = node["pypi"]["web"]["dirs"]["data"]
+files_dir = File.expand_path(node["pypi"]["web"]["dirs"]["files"], data_dir)
+docs_dir = File.expand_path(node["pypi"]["web"]["dirs"]["docs"], data_dir)
+key_dir = File.expand_path(node["pypi"]["web"]["dirs"]["key"], data_dir)
+static_dir = File.expand_path(node["pypi"]["web"]["dirs"]["static"], data_dir)
+
 include_recipe "postgresql::client"
 include_recipe "python"
 include_recipe "mercurial"
@@ -24,11 +30,15 @@ end
 # Create the required directories
 dirs = [
   "#{node["pypi"]["home"]}",
+  data_dir,
+  files_dir,
+  docs_dir,
+  static_dir,
 ]
 
 dirs.each do |dir|
   directory dir do
-    mode "750"
+    mode "755"
     user node["pypi"]["user"]
     group node["pypi"]["group"]
   end
@@ -61,6 +71,7 @@ mercurial "#{node["pypi"]["home"]}/src" do
 
   action :sync
   notifies :install, "python_pip[-r #{node["pypi"]["home"]}/src/requirements.txt]", :immediately
+  notifies :run, "execute[deploy statics]", :immediately
   notifies :restart, "supervisor_service[pypi]", :delayed
 end
 
@@ -73,11 +84,13 @@ python_pip "-r #{node["pypi"]["home"]}/src/requirements.txt" do
   action :nothing
 end
 
-data_dir = node["pypi"]["web"]["dirs"]["data"]
-files_dir = node["pypi"]["web"]["dirs"]["files"]
-docs_dir = node["pypi"]["web"]["dirs"]["docs"]
-key_dir = node["pypi"]["web"]["dirs"]["key"]
-static_dir = node["pypi"]["web"]["dirs"]["static"]
+execute "deploy statics" do
+  command "cp -r #{node["pypi"]["home"]}/src/pydotorg/* #{static_dir}"
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
+
+  action :nothing
+end
 
 template "#{node["pypi"]["home"]}/config.ini" do
   source "pypi-config.ini.erb"
@@ -92,9 +105,9 @@ template "#{node["pypi"]["home"]}/config.ini" do
     },
     :dirs => {
       :data => data_dir,
-      :files => files_dir.start_with?("/") ? files_dir : File.join(data_dir, files_dir),
-      :docs => docs_dir.start_with?("/") ? docs_dir : File.join(data_dir, docs_dir),
-      :key => key_dir.start_with?("/") ? key_dir : File.join(data_dir, key_dir),
+      :files => files_dir,
+      :docs => docs_dir,
+      :key => key_dir,
     },
     :pubsubhubbub => node["pypi"]["web"]["pubsubhubbub"],
     :mail => {
@@ -199,7 +212,7 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
 
   variables ({
     :domains => node["pypi"]["web"]["domains"],
-    :static_root => static_dir.start_with?("/") ? static_dir : File.join(data_dir, static_dir),
+    :static_root => static_dir,
     :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
   })
 
