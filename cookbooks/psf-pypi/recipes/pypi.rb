@@ -30,7 +30,6 @@ end
 # Create the required directories
 dirs = [
   "#{node["pypi"]["home"]}",
-  data_dir,
   files_dir,
   docs_dir,
   static_dir,
@@ -41,7 +40,15 @@ dirs.each do |dir|
     mode "755"
     user node["pypi"]["user"]
     group node["pypi"]["group"]
+    recursive true
   end
+end
+
+# Create the keys directory, special cased because of special permissions
+directory key_dir do
+  mode "750"
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
 end
 
 # Create our VirtualEnv
