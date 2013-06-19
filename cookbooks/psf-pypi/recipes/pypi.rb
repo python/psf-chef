@@ -5,6 +5,7 @@ data_dir = node["pypi"]["web"]["dirs"]["data"]
 files_dir = File.expand_path(node["pypi"]["web"]["dirs"]["files"], data_dir)
 docs_dir = File.expand_path(node["pypi"]["web"]["dirs"]["docs"], data_dir)
 key_dir = File.expand_path(node["pypi"]["web"]["dirs"]["key"], data_dir)
+cache_dir = File.expand_path(node["pypi"]["web"]["dirs"]["cache"], data_dir)
 static_dir = File.expand_path(node["pypi"]["web"]["dirs"]["static"], data_dir)
 
 include_recipe "postgresql::client"
@@ -32,6 +33,7 @@ dirs = [
   "#{node["pypi"]["home"]}",
   files_dir,
   docs_dir,
+  cache_dir,
   static_dir,
 ]
 
@@ -136,8 +138,8 @@ template "#{node["pypi"]["home"]}/config.ini" do
     :cheesecake_password => secrets["cheesecake_password"],
     :reset_secret => secrets["reset_secret"],
     :rss => {
-      :pypi => node["pypi"]["web"]["rss"]["pypi"],
-      :packages => node["pypi"]["web"]["rss"]["packages"],
+      :pypi => File.join(cache_dir, "pypi_rss.xml"),
+      :packages => File.join(cache_dir, "pypi_packages_rss.xml"),
     },
     :passlib => {
       :schemes => node["pypi"]["passlib"]["schemes"],

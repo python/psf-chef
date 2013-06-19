@@ -52,6 +52,7 @@ default["pypi"]["web"]["dirs"]["data"] = "/data/pypi"
 default["pypi"]["web"]["dirs"]["files"] = "packages"
 default["pypi"]["web"]["dirs"]["docs"] = "docs"
 default["pypi"]["web"]["dirs"]["key"] = "keys"
+default["pypi"]["web"]["dirs"]["cache"] = "cache"
 default["pypi"]["web"]["dirs"]["static"] = File.join(default["pypi"]["home"], "static")
 
 default["pypi"]["web"]["pubsubhubbub"] = "http://pubsubhubbub.appspot.com/"
@@ -69,9 +70,6 @@ default["pypi"]["web"]["scripts"]["simple"] = "/simple"
 default["pypi"]["web"]["scripts"]["simple_sign"] = "/serversig"
 
 default["pypi"]["web"]["sshkeys_update"] = "/data/pypi/sshkeys_update"
-
-default["pypi"]["web"]["rss"]["pypi"] = "/data/www/pypi/pypi_rss.xml"
-default["pypi"]["web"]["rss"]["packages"] = "/data/www/pypi/pypi_packages_rss.xml"
 
 default["pypi"]["passlib"]["schemes"] = ["bcrypt", "unix_disabled"]
 default["pypi"]["passlib"]["deprecated"] = ["auto"]
