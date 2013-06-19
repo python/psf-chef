@@ -34,7 +34,6 @@ dirs = [
   files_dir,
   docs_dir,
   cache_dir,
-  static_dir,
 ]
 
 dirs.each do |dir|
@@ -80,7 +79,6 @@ mercurial "#{node["pypi"]["home"]}/src" do
 
   action :sync
   notifies :install, "python_pip[-r #{node["pypi"]["home"]}/src/requirements.txt]", :immediately
-  notifies :run, "execute[deploy statics]", :immediately
   notifies :restart, "supervisor_service[pypi]", :delayed
 end
 
@@ -93,12 +91,9 @@ python_pip "-r #{node["pypi"]["home"]}/src/requirements.txt" do
   action :nothing
 end
 
-execute "deploy statics" do
-  command "cp -r #{node["pypi"]["home"]}/src/pydotorg/* #{static_dir}"
-  user node["pypi"]["user"]
-  group node["pypi"]["group"]
-
-  action :nothing
+link static_dir do
+  to "#{node["pypi"]["home"]}/src/static"
+  owner node["pypi"]["user"]
 end
 
 template "#{node["pypi"]["home"]}/config.ini" do
