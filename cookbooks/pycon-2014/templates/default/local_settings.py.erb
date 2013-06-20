@@ -24,7 +24,13 @@ EMAIL_HOST = "mail.python.org"
 
 ADMINS = (
     ('Ernest W. Durbin III', 'ewdurbin@gmail.com'),
+    ('Caktus Pycon Team', 'pycon@caktusgroup.com'),
 )
+# From address:
+SERVER_EMAIL = 'pycon@caktusgroup.com'
+# The main settings send email to the console, go back to the default
+# that uses SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MANAGERS = ADMINS
 
