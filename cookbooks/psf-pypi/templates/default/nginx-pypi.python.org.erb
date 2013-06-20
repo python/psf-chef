@@ -3,7 +3,13 @@
 
 server {
   listen 80;
-  server_name <%= @domains.join(" ") %>;
+  server_name <%= @domains.drop(1).join(" ") %>;
+  return 301 $scheme://<%= @domains.first %>$request_uri;
+}
+
+server {
+  listen 80;
+  server_name <%= @domains.first %>;
 
   <% if @hsts_seconds %>
   add_header Strict-Transport-Security "max-age=<%= @hsts_seconds %>";

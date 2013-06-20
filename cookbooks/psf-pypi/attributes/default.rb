@@ -41,7 +41,7 @@ default["pypi"]["database"]
 default["pypi"]["web"]["debug"] = false
 
 default["pypi"]["web"]["domains"] = [
-    "pypi.python.org",
+    "pypi.python.org",  # The first domain in the list is the "preferred" one
     "a.pypi.python.org",
 ]
 
