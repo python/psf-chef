@@ -148,6 +148,7 @@ template "#{node["pypi"]["home"]}/config.ini" do
       :api_key => secrets["fastly"]["api_key"],
       :service_id => secrets["fastly"]["service_id"],
     },
+    :raw_package_prefix => node["pypi"]["web"]["package_internal_url"],
   })
   user node["pypi"]["pypi"]
   group node["pypi"]["group"]
@@ -217,7 +218,9 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
   variables ({
     :domains => node["pypi"]["web"]["domains"],
     :static_root => static_dir,
+    :package_root => files_dir,
     :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
+    :package_internal_url => node["pypi"]["web"]["package_internal_url"],
   })
 
   notifies :reload, "service[nginx]", :delayed

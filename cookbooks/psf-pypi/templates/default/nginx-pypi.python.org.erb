@@ -18,13 +18,25 @@ server {
   <% end %>
 
   # TODO: Cache Static Assests
-  # TODO: Host Packages
 
   location /static/ {
     alias <%= @static_root %>/;
   }
 
-  location ~* ^/(pypi|daytime|mirrors|id|oauth|security|simple|serversig).* {
+  location <%= @package_internal_url %> {
+    alias     <%= @package_root %>;
+    autoindex on;
+
+    add_header X-PYPI-LAST-SERIAL $upstream_http_x_pypi_last_serial;
+
+    <% if @hsts_seconds %>
+    add_header Strict-Transport-Security "max-age=<%= @hsts_seconds %>";
+    <% end %>
+
+    internal;
+  }
+
+  location ~* ^/(pypi|daytime|mirrors|id|oauth|security|simple|serversig|packages).* {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $http_host;
     proxy_redirect   off;
