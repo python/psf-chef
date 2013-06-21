@@ -228,5 +228,4 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
 end
 
 # Enable the nginx site
-nginx_site "pypi.python.org" do
-end
+nginx_site "pypi.python.org" do end
