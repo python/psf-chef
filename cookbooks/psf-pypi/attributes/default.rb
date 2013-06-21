@@ -47,6 +47,7 @@ default["pypi"]["web"]["domains"] = [
 
 default["pypi"]["web"]["hsts_seconds"] = nil
 default["pypi"]["web"]["package_internal_url"] = "/internal/packages"
+default["pypi"]["web"]["max_body_size"] = "32M"
 
 
 default["pypi"]["web"]["dirs"]["data"] = "/data/pypi"

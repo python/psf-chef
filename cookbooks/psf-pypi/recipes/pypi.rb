@@ -221,6 +221,7 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
     :package_root => files_dir,
     :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
     :package_internal_url => node["pypi"]["web"]["package_internal_url"],
+    :max_body_size => node["pypi"]["web"]["max_body_size"],
   })
 
   notifies :reload, "service[nginx]", :delayed
