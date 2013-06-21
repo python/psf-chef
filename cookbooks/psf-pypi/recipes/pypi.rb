@@ -5,6 +5,7 @@ data_dir = node["pypi"]["web"]["dirs"]["data"]
 files_dir = File.expand_path(node["pypi"]["web"]["dirs"]["files"], data_dir)
 docs_dir = File.expand_path(node["pypi"]["web"]["dirs"]["docs"], data_dir)
 key_dir = File.expand_path(node["pypi"]["web"]["dirs"]["key"], data_dir)
+stats_dir = File.expand_path(node["pypi"]["web"]["dirs"]["stats"], data_dir)
 cache_dir = File.expand_path(node["pypi"]["web"]["dirs"]["cache"], data_dir)
 static_dir = File.expand_path(node["pypi"]["web"]["dirs"]["static"], data_dir)
 
@@ -33,6 +34,7 @@ dirs = [
   "#{node["pypi"]["home"]}",
   files_dir,
   docs_dir,
+  stats_dir,
   cache_dir,
 ]
 
@@ -218,6 +220,7 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
   variables ({
     :domains => node["pypi"]["web"]["domains"],
     :static_root => static_dir,
+    :stats_root => stats_dir,
     :package_root => files_dir,
     :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
     :package_internal_url => node["pypi"]["web"]["package_internal_url"],

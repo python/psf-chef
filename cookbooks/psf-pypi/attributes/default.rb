@@ -54,6 +54,7 @@ default["pypi"]["web"]["dirs"]["data"] = "/data/pypi"
 default["pypi"]["web"]["dirs"]["files"] = "packages"
 default["pypi"]["web"]["dirs"]["docs"] = "docs"
 default["pypi"]["web"]["dirs"]["key"] = "keys"
+default["pypi"]["web"]["dirs"]["stats"] = "stats"
 default["pypi"]["web"]["dirs"]["cache"] = "cache"
 default["pypi"]["web"]["dirs"]["static"] = File.join(default["pypi"]["home"], "static")
 

@@ -25,6 +25,11 @@ server {
     alias <%= @static_root %>/;
   }
 
+  location /stats {
+    alias     <%= @stats_root %>;
+    autoindex on;
+  }
+
   location <%= @package_internal_url %> {
     alias     <%= @package_root %>;
     autoindex on;
