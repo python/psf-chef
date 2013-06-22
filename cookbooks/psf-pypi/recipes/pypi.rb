@@ -31,7 +31,7 @@ end
 
 # Create the required directories
 dirs = [
-  "#{node["pypi"]["home"]}",
+  node["pypi"]["home"],
   files_dir,
   docs_dir,
   key_dir,
