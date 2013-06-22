@@ -21,6 +21,11 @@ server {
 
   # TODO: Cache Static Assests
 
+  # Redirect the / to /pypi
+  location = / {
+    return 301 $scheme://<%= @domains.first %>/pypi;
+  }
+
   location /static/ {
     alias <%= @static_root %>/;
   }
