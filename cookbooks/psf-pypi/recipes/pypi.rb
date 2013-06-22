@@ -152,7 +152,7 @@ template "#{node["pypi"]["home"]}/config.ini" do
     },
     :raw_package_prefix => node["pypi"]["web"]["package_internal_url"],
   })
-  user node["pypi"]["pypi"]
+  user node["pypi"]["user"]
   group node["pypi"]["group"]
   mode "640"
 
@@ -163,7 +163,7 @@ end
 template "#{node["pypi"]["home"]}/wsgi.py" do
   source "pypi-wsgi.py.erb"
 
-  user node["pypi"]["pypi"]
+  user node["pypi"]["user"]
   group node["pypi"]["group"]
   mode "750"
 
