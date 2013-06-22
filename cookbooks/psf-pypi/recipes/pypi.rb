@@ -34,6 +34,7 @@ dirs = [
   "#{node["pypi"]["home"]}",
   files_dir,
   docs_dir,
+  key_dir,
   stats_dir,
   cache_dir,
 ]
@@ -45,13 +46,6 @@ dirs.each do |dir|
     group node["pypi"]["group"]
     recursive true
   end
-end
-
-# Create the keys directory, special cased because of special permissions
-directory key_dir do
-  mode "750"
-  user node["pypi"]["user"]
-  group node["pypi"]["group"]
 end
 
 # Create our VirtualEnv
@@ -159,6 +153,27 @@ template "#{node["pypi"]["home"]}/config.ini" do
   notifies :restart, "supervisor_service[pypi]", :delayed
 end
 
+# Install the Private and Public Key
+file "#{key_dir}/privkey" do
+  content secrets["keys"]["private"]
+
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
+  mode "600"
+
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
+
+file "#{key_dir}/pubkey" do
+  content secrets["keys"]["public"]
+
+  user node["pypi"]["user"]
+  group node["pypi"]["group"]
+  mode "644"
+
+  notifies :restart, "supervisor_service[pypi]", :delayed
+end
+
 # We need to make a wsgi.py that "redirects" to pypi.wsgi
 template "#{node["pypi"]["home"]}/wsgi.py" do
   source "pypi-wsgi.py.erb"
@@ -222,6 +237,7 @@ template "#{node["nginx"]["dir"]}/sites-available/pypi.python.org" do
     :static_root => static_dir,
     :stats_root => stats_dir,
     :package_root => files_dir,
+    :serverkey => File.join(key_dir, "pubkey"),
     :hsts_seconds => node["pypi"]["web"]["hsts_seconds"],
     :package_internal_url => node["pypi"]["web"]["package_internal_url"],
     :max_body_size => node["pypi"]["web"]["max_body_size"],
