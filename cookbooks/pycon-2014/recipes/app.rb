@@ -46,6 +46,6 @@ application "staging-pycon.python.org" do
   cron "staging-pycon account expunge" do
     hour "0"
     minute "0"
-    command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
+    command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
   end
 end
