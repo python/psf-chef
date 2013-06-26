@@ -46,7 +46,7 @@ LOGGING['filters'].update(
     {
         'static_fields': {
             '()': 'pycon.logfilters.StaticFieldFilter',
-            'fields': {'deployment': 'projectname', 'environment': 'staging'},
+            'fields': {'deployment': 'pycon', 'environment': 'staging'},
             },
         'django_exc': {
             '()': 'pycon.logfilters.RequestFilter',
