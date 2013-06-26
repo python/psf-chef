@@ -20,4 +20,4 @@ attribute :server_check_query, :kind_of => [String, NilClass], :default => 'SELE
 attribute :server_check_delay, :kind_of => [String, Integer], :default => 10
 # Connection limits
 attribute :max_client_conn, :kind_of => [String, Integer], :default => 100
-attribute :default_pool_size, :kind_of => [String, Integer], :default => 20
+attribute :default_pool_size, :kind_of => [String, Integer], :default => 40
