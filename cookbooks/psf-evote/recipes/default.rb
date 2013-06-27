@@ -46,12 +46,19 @@ git '/srv/evote/web2py/applications/init' do
   user 'evote'
 end
 
+dburi = if Chef::Config[:solo]
+  'sqlite://storage.sqlite' # For local testing
+else
+  db = data_bag_item('secrets', 'postgres')['evote']
+  "postgres://#{db['user']}:#{db['password']}@#{db['hostname']}/#{db['database']}"
+end
+
 template '/srv/evote/web2py/applications/init/models/0.py' do
   source '0.py.erb'
   owner 'evote'
   group 'evote'
   mode '644'
-  variables node['psf-evote']
+  variables node['psf-evote'].update(:dburi => dburi)
 end
 
 python_pip 'rsa'
