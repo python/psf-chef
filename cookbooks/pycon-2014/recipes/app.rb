@@ -43,9 +43,10 @@ application "staging-pycon.python.org" do
     application_port 8080
   end
   
-  cron "staging-pycon account expunge" do
-    hour "0"
-    minute "0"
-    command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
-  end
+end
+
+cron "staging-pycon account expunge" do
+  hour "0"
+  minute "0"
+  command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
 end
