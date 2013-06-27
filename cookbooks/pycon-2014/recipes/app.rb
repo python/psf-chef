@@ -7,6 +7,12 @@ execute "install_lessc" do
   command "npm install -g less@1.3.3"
 end
 
+directory "/srv/staging-pycon.python.org/shared/media" do
+  owner "root"
+  group "root"
+  action :create
+end
+
 application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
@@ -41,7 +47,7 @@ application "staging-pycon.python.org" do
   nginx_load_balancer do
     application_server_role "pycon-2014"
     server_name [node['fqdn'], 'staging-pycon.python.org']
-    static_files "/2014/site_media/static" => "site_media/static"
+    static_files "/2014/site_media/static" => "site_media/static", "/2014/site_media/media" => "/srv/staging-pycon.python.org/shared/media"
     application_port 8080
   end
   
