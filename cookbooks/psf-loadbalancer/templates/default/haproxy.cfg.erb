@@ -32,7 +32,7 @@ frontend <%= proto %>
   use_backend pypy-home if host_pypy
   use_backend preview if host_preview
   use_backend raspberry if host_raspberry
-  use_backend evote if host_raspberry
+  use_backend evote if host_evote
 <%- end -%>
 
 listen pypi-logging
