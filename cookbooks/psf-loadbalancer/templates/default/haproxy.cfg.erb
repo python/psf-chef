@@ -17,7 +17,6 @@ defaults
 frontend <%= proto %>
   bind <%= bind %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
-  reqidel ^X-Forwarded-\w+:.*
 
   acl host_pypi hdr(host) -i pypi.python.org cheeseshop.python.org packages.python.org pythonhosted.org b.pypi.python.org d.pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
@@ -63,6 +62,7 @@ backend testpypi
   server fallback localhost:8080 backup
 
 backend wiki
+  reqidel ^X-Forwarded-\w+:.*
   <%- @wiki_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
