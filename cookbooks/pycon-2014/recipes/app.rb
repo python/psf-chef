@@ -1,4 +1,5 @@
 db = data_bag_item("secrets", "postgres")["pycon2014"]
+secrets = data_bag_item("secrets", "pycon-2014")
 
 include_recipe "nodejs::install_from_binary"
 
@@ -11,7 +12,7 @@ application "staging-pycon.python.org" do
   repository "git://github.com/caktus/pycon.git"
   revision "staging"
   packages ["libpq-dev", "git-core"]
-  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate"
+  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
 
   before_symlink do
@@ -23,6 +24,7 @@ application "staging-pycon.python.org" do
     settings_template "local_settings.py.erb"
     local_settings_file "local_settings.py"
     collectstatic "collectstatic --noinput"
+    settings :secret_key => secrets["secret_key"], :graylog_host => secrets["graylog_host"]
     database do
       engine "postgresql_psycopg2"
       database db["database"]

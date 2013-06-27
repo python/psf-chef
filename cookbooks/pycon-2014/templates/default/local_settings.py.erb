@@ -20,6 +20,9 @@ ALLOWED_HOSTS = [
      "<%= node["fqdn"] %>"
 ]
 
+SECRET_KEY = '<%= @secret_key %>'
+GRAYLOG_HOST = '<%= @graylog_host %>'
+
 EMAIL_HOST = "mail.python.org"
 
 ADMINS = (
@@ -36,8 +39,54 @@ MANAGERS = ADMINS
 
 COMPRESS_ENABLED = True
 
-# Absolute path to the directory that holds media - this is files uploaded
-# by users, such as attachments.
-# Example: "/home/media/media.lawrence.com/"
-# (must be writable by the web server)
 MEDIA_ROOT = "/srv/staging-pycon.python.org/shared/media/"
+
+from django.utils.log import DEFAULT_LOGGING
+LOGGING = DEFAULT_LOGGING
+
+LOGGING['filters'].update(
+    {
+        'static_fields': {
+            '()': 'pycon.logfilters.StaticFieldFilter',
+            'fields': {'deployment': 'pycon', 'environment': 'staging'},
+            },
+        'django_exc': {
+            '()': 'pycon.logfilters.RequestFilter',
+            },
+     }
+)
+LOGGING['handlers'].update(
+    {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': False,
+            'filters': ['require_debug_false'],
+        },
+        'sam_gelf': {
+            'class': 'graypy.GELFHandler',
+            'host': GRAYLOG_HOST,
+            'port': 12201,
+            'filters': ['static_fields', 'django_exc'],
+        }
+    }
+)
+LOGGING['loggers'].update(
+    {
+        'django.request': {
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'ERROR',
+            'propagate': True,
+            },
+        'pycon': {
+            # mail_admins will only accept ERROR and higher
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'WARNING',
+            },
+        'symposion': {
+            # mail_admins will only accept ERROR and higher
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'WARNING',
+            }
+    }
+)
