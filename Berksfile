@@ -33,6 +33,7 @@ cookbook "nodejs", '= 1.1.2'
 cookbook "haproxy", :path => "./cookbooks/haproxy"
 cookbook "pgbouncer", :path => "./cookbooks/pgbouncer"
 cookbook "psf-advocacy", :path => "./cookbooks/psf-advocacy"
+cookbook "psf-evote", :path => "./cookbooks/psf-evote"
 cookbook "psf-loadbalancer", :path => "./cookbooks/psf-loadbalancer"
 cookbook "psf-misc", :path => "./cookbooks/psf-misc"
 cookbook "psf-moin", :path => "./cookbooks/psf-moin"
