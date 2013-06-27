@@ -58,7 +58,7 @@ template '/srv/evote/web2py/applications/init/models/0.py' do
   owner 'evote'
   group 'evote'
   mode '644'
-  variables node['psf-evote'].update(:dburi => dburi)
+  variables node['psf-evote'].merge(:dburi => dburi)
 end
 
 python_pip 'rsa'
