@@ -12,5 +12,6 @@ haproxy_section 'python' do
     :pypy_home_servers => search(:node, 'roles:pypy-home AND tags:active'),
     :preview_servers => search(:node, 'roles:redesign-staging'),
     :raspberry_servers => search(:node, 'roles:rpi'),
+    :evote_servers => search(:node, 'roles:evote'),
   })
 end
