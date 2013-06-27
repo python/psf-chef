@@ -7,6 +7,12 @@ execute "install_lessc" do
   command "npm install -g less@1.3.3"
 end
 
+directory "/srv/staging-pycon.python.org/shared/media" do
+  owner "root"
+  group "root"
+  action :create
+end
+
 application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
