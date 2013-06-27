@@ -44,5 +44,5 @@ default["pypi"]["fastly"]["api_domain"] = "https://api.fastly.com/"
 
 # Logging Configuration
 default["pypi"]["cdn"]["logging"]["app_name"] = "pypi-cdn"
-default["pypi"]["cdn"]["logging"]["log_filename"] = "/var/log/pypi/cdn/access.log"
+default["pypi"]["cdn"]["logging"]["process_script"] = "/data/pypi/tools/rsyslog-cdn.py"
 
