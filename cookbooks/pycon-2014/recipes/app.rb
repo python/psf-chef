@@ -11,7 +11,7 @@ application "staging-pycon.python.org" do
   repository "git://github.com/caktus/pycon.git"
   revision "staging"
   packages ["libpq-dev", "git-core"]
-  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate"
+  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
 
   before_symlink do
