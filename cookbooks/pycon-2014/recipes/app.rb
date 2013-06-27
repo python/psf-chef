@@ -42,4 +42,11 @@ application "staging-pycon.python.org" do
     static_files "/2014/site_media/static" => "site_media/static"
     application_port 8080
   end
+  
+end
+
+cron "staging-pycon account expunge" do
+  hour "0"
+  minute "0"
+  command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
 end
