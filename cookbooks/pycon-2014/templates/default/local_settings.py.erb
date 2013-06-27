@@ -35,3 +35,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MANAGERS = ADMINS
 
 COMPRESS_ENABLED = True
+
+# Absolute path to the directory that holds media - this is files uploaded
+# by users, such as attachments.
+# Example: "/home/media/media.lawrence.com/"
+# (must be writable by the web server)
+MEDIA_ROOT = "/srv/staging-pycon.python.org/shared/media/"
