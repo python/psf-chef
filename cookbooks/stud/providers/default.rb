@@ -20,6 +20,7 @@ action :install do
 
   dpkg_package 'stud' do
     source "#{Chef::Config[:file_cache_path]}/#{package_file_name}"
+    version new_resource.version
   end
 
   template "/etc/init/#{new_resource.resource_name}.conf" do

@@ -4,7 +4,7 @@ directory '/var/lib/stud' do
   mode '700'
 end
 
-domains = %w{pythonhosted.org raspberry.io python.org}
+domains = %w{pycon.org pythonhosted.org raspberry.io python.org}
 
 # Force the owner and permissions to be safe
 domains.each do |domain|
@@ -17,7 +17,7 @@ domains.each do |domain|
 end
 
 stud 'stud' do
-  version '19a7f1'
+  version '0.3-2-ef1745'
   pem_file domains.map{|domain| "/etc/ssl/private/#{domain}.pem" }
   frontend '[*]:443'
   tls false
