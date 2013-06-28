@@ -60,7 +60,7 @@ application "staging-pycon.python.org" do
     template 'nginx.conf.erb' # Remove this once /2014/ is the default
     hosts ['localhost'] if Chef::Config[:solo] # For testing in Vagrant
     application_server_role "pycon-2014"
-    server_name [node['fqdn'], 'staging-pycon.python.org']
+    server_name [node['fqdn'], 'staging-pycon.python.org', 'us.pycon.org']
     static_files({
       "/2014/site_media/static" => "site_media/static",
       "/2014/site_media/media" => "/srv/staging-pycon.python.org/shared/media",
