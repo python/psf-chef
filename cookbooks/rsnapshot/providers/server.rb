@@ -7,6 +7,7 @@ action :install do
   search(:node, 'rsnapshot_backups:*') do |backup_node|
     backup_node['rsnapshot_backups'].each do |directory, backup|
       next if backup_node.name == node.name # For now just skip self
+      backup = backup.to_hash
       backup['host'] = backup_node['fqdn']
       backup['directory'] << '/' unless backup['directory'].end_with?('/')
       backups << backup
