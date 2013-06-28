@@ -1,0 +1,7 @@
+site :opscode
+
+metadata
+cookbook 'application_nginx', :git => 'https://github.com/coderanger/application_nginx.git' # Pending http://tickets.opscode.com/browse/COOK-3254
+cookbook 'apt'
+cookbook 'postgresql'
+cookbook 'database'
