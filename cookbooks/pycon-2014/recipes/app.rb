@@ -1,5 +1,6 @@
 db = data_bag_item("secrets", "postgres")["pycon2014"]
 secrets = data_bag_item("secrets", "pycon-2014")
+is_production = tagged?('production')
 
 include_recipe "nodejs::install_from_binary"
 include_recipe "git"
@@ -16,7 +17,7 @@ end
 application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
-  revision "staging"
+  revision is_production ? "production" : "staging"
   packages ["libpq-dev", "git-core"]
   migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
@@ -56,6 +57,7 @@ application "staging-pycon.python.org" do
   end
 
   nginx_load_balancer do
+    template 'nginx.conf.erb' # Remove this once /2014/ is the default
     hosts ['localhost'] if Chef::Config[:solo] # For testing in Vagrant
     application_server_role "pycon-2014"
     server_name [node['fqdn'], 'staging-pycon.python.org']
