@@ -18,7 +18,7 @@ application "staging-pycon.python.org" do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
   revision is_production ? "production" : "staging"
-  packages ["libpq-dev", "git-core"]
+  packages ["libpq-dev", "git-core", "libjpeg8-dev"]
   migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
 
