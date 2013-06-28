@@ -12,7 +12,8 @@ cookbook "zsh", '= 1.0.0'
 cookbook "application", '2.0.4'
 cookbook "application_python", :git => "https://github.com/coderanger/application_python.git", :ref => "exposedjango"
 cookbook "python", '= 1.2.0'
-cookbook "application_nginx", '= 1.0.2'
+#cookbook "application_nginx", '= 1.0.2'
+cookbook 'application_nginx', :git => 'https://github.com/coderanger/application_nginx.git' # Pending http://tickets.opscode.com/browse/COOK-3254
 cookbook "nginx", '= 1.1.2'
 cookbook "apache2", '= 1.4.0'
 cookbook "postfix", '= 2.1.2'
