@@ -1,7 +1,7 @@
 {
   "id": "dpoirier",
   "comment": "Dan Poirier <dpoirier@caktusgroup.com>",
-  "sudo": ["pycon-2014"],
+  "sudo": ["pycon-2014", "pycon-2014-staging"],
   "ssh_keys": [
     "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAmFIbg8mdvn7MQajwpBWXdK+utvP7+d0f391Z+v2r79Pam3/9j8VFBH8mioAmp9b2iFL6DZeDOYWOIM5R3U/bIVvJ8/2kZpE+rItJRyuqYQp3ZbOkBTxmv1avRfX4LSaM4uvurtSHK+VFbRXRlSKr7gURM7d7pUXTsuqAuGiJeBRc492RhKsaRf21/7+X8LyUuIWmaGn/CRgn6SBtq1xTilCAlkiRFBbUR++qkHWonfImAeHN6EiIx9fwtvfjtJA8kW49t75io9HoIovA24psyfZZuMFYkiPzDtPDXSm0fhwx0IbAZc2W1iWqYLbrBZM7A3QGyF61JeafxuC+Jzm3Ow== dpoirier@caktusgroup.com"
   ]
