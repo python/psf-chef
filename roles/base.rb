@@ -37,7 +37,7 @@ override_attributes({
     :server => {
       :password_authentication => "no",
       :permit_root_login => "without-password",
-      :subsystem => "sftp   /usr/libexec/sftp-server",
+      :subsystem => "sftp /usr/lib/openssh/sftp-server",
     },
   },
   :rsnapshot => {
