@@ -25,5 +25,5 @@ server {
   location /2014 {
     proxy_pass http://<%= @resource.application.name %>;
   }
-  rewrite ^/$ /2013/ redirect;
+  rewrite ^/$ /2014/ redirect;
 }
