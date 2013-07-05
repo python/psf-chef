@@ -1,6 +1,33 @@
 # Global PyPI Configuration
 default["pypi"]["user"] = "pypi"
-default["pypi"]["group"] = "root"
+default["pypi"]["group"] = "pypi"
+default["pypi"]["home"] = "/srv/pypi"
+
+# Code locations and references
+default["pypi"]["code"]["repository"] = "https://bitbucket.org/pypa/pypi"
+default["pypi"]["code"]["reference"] = "tip"
+
+# Setup Gunicorn
+default["pypi"]["gunicorn"]["processes"] = 9
+default["pypi"]["gunicorn"]["timeout"] = 15
+
+# Setup Nginx
+override["nginx"]["default_site_enabled"] = false
+
+override["nginx"]["gzip"] = "on"
+override["nginx"]["gzip_vary"] = "on"
+override["nginx"]["gzip_types"] = [
+  "application/javascript",
+  "application/json",
+  "application/x-javascript",
+  "application/xml",
+  "application/xml+rss",
+  "image/x-icon",
+  "text/css",
+  "text/javascript",
+  "text/plain",
+  "text/xml",
+]
 
 # PyPI Web Application Configuration
 default["pypi"]["admins"] = [
@@ -13,10 +40,23 @@ default["pypi"]["database"]
 
 default["pypi"]["web"]["debug"] = false
 
-default["pypi"]["web"]["dirs"]["data"] = "/data"
+default["pypi"]["web"]["domains"] = [
+    "pypi.python.org",  # The first domain in the list is the "preferred" one
+    "a.pypi.python.org",
+]
+
+default["pypi"]["web"]["hsts_seconds"] = nil
+default["pypi"]["web"]["package_internal_url"] = "/internal/packages"
+default["pypi"]["web"]["max_body_size"] = "32M"
+
+
+default["pypi"]["web"]["dirs"]["data"] = "/data/pypi"
 default["pypi"]["web"]["dirs"]["files"] = "packages"
-default["pypi"]["web"]["dirs"]["docs"] = "packagedocs"
-default["pypi"]["web"]["dirs"]["key"] = "pypi"
+default["pypi"]["web"]["dirs"]["docs"] = "docs"
+default["pypi"]["web"]["dirs"]["key"] = "keys"
+default["pypi"]["web"]["dirs"]["stats"] = "stats"
+default["pypi"]["web"]["dirs"]["cache"] = "cache"
+default["pypi"]["web"]["dirs"]["static"] = File.join(default["pypi"]["home"], "static")
 
 default["pypi"]["web"]["pubsubhubbub"] = "http://pubsubhubbub.appspot.com/"
 
@@ -33,9 +73,6 @@ default["pypi"]["web"]["scripts"]["simple"] = "/simple"
 default["pypi"]["web"]["scripts"]["simple_sign"] = "/serversig"
 
 default["pypi"]["web"]["sshkeys_update"] = "/data/pypi/sshkeys_update"
-
-default["pypi"]["web"]["rss"]["pypi"] = "/data/www/pypi/pypi_rss.xml"
-default["pypi"]["web"]["rss"]["packages"] = "/data/www/pypi/pypi_packages_rss.xml"
 
 default["pypi"]["passlib"]["schemes"] = ["bcrypt", "unix_disabled"]
 default["pypi"]["passlib"]["deprecated"] = ["auto"]
