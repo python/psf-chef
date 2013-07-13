@@ -1,6 +1,10 @@
-db = data_bag_item("secrets", "postgres")["pycon2014"]
 secrets = data_bag_item("secrets", "pycon-2014")
 is_production = tagged?('production')
+if is_production
+  db = data_bag_item("secrets", "postgres")["pycon2014"]
+else
+  db = data_bag_item("secrets", "postgres")["pycon2014-staging"]
+end
 
 include_recipe "nodejs::install_from_binary"
 include_recipe "git"
