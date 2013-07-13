@@ -27,8 +27,3 @@ server {
   }
   rewrite ^/$ /2014/ redirect;
 }
-
-server {
-  listen <%= @resource.port %> default_server;
-  return 444;
-}
