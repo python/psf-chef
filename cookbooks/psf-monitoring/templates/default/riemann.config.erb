@@ -2,6 +2,8 @@
 
 (logging/init :file "/var/log/riemann/riemann.log")
 
+(def email (mailer {:from "alerts@python.org"}))
+
 ; Listen on the local interface over TCP (5555), UDP (5555), and websockets
 ; (5556)
 (let [host "0.0.0.0"]
@@ -14,12 +16,15 @@
 
 (def graph (graphite {:host "127.0.0.1" :port 2002}))
 
-(streams graph)
+(def get-mad-at-ben (rollup 5 3600 (email "benjaminwarfield@gmail.com")))
+
+(streams graph
+  (where (state "error") get-mad-at-ben)
+  (where (state "critical") get-mad-at-ben))
 
 ; Expire old events from the index every 5 seconds.
 (periodically-expire 5)
 
-(def get-mad-at-ben (rollup 5 3600 (email "benjaminwarfield@gmail.com")))
 
 ; Keep events in the index for 5 minutes by default.
 ; Modified to 1 min to keep the memory down, at least until we need to start taking advantage of it
@@ -32,7 +37,7 @@
     index
 
     (where (state "error") get-mad-at-ben)
-    (tagged "exception" get-mad-at-ben)
+    (where (state "critical") get-mad-at-ben)
 
     ; Calculate an overall rate of events.
     (with {:metric 1 :host nil :state "ok" :service "events/sec"}
