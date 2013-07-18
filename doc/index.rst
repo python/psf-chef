@@ -15,4 +15,5 @@ Let's get started
 * :ref:`search`
 * :doc:`getting-started`
 * :doc:`nodes`
+* :doc:`roles`
 * :doc:`generating-these-docs`

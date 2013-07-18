@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 gem "rake"
-gem "chef"
+gem "chef", '~> 11.4.4'
 gem "berkshelf"
 gem "foodcritic"
 gem "chef-rewind"
