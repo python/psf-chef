@@ -46,7 +46,7 @@ application "staging-pycon.python.org" do
     settings_template "local_settings.py.erb"
     local_settings_file "local_settings.py"
     collectstatic "collectstatic --noinput"
-    settings :secret_key => secrets["secret_key"], :graylog_host => secrets["graylog_host"], :is_production => is_production ? 1 : 0
+    settings :secret_key => secrets["secret_key"], :graylog_host => secrets["graylog_host"], :is_production => is_production
     database do
       engine "postgresql_psycopg2"
       database db["database"]
