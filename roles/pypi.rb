@@ -5,8 +5,15 @@ run_list [
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
     'recipe[psf-pypi::pypi]',
+    'recipe[warehouse]',
 ]
 override_attributes({
+  :supervisor => {
+    :version => "3.0b2",
+  },
+  :warehouse => {
+    :domains => ["next.pypi.python.org"],
+  },
   :pypi => {
     :web => {
       :database => {
