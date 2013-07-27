@@ -1,0 +1,31 @@
+from warehouse.conf import Settings
+
+
+class Common(Settings):
+
+    SECRET_KEY = "<%= @secret_key %>"
+
+    DATABASES = {
+        "default": {
+            "NAME": "<%= @database[:settings][:database] %>",
+            "ENGINE": "django.db.backends.<%= @database[:settings][:engine] %>",
+            "USER": "<%= @database[:settings][:username] %>",
+            "PASSWORD": "<%= @database[:settings][:password] %>",
+            "HOST": "<%= @database[:host] %>",
+            "PORT": "<%= @database[:settings][:port] %>",
+        },
+    }
+
+
+class Development(Common):
+
+    DEBUG = True
+    TEMPLATE_DEBUG = True
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+class Production(Common):
+
+    DEBUG = False
+    TEMPLATE_DEBUG = False
