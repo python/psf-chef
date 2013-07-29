@@ -99,6 +99,7 @@ application "redesign.python.org" do
     repository "git@github.com:proevo/pythondotorg.git"
     deploy_key secrets["deploy_key"]
     revision "master"
+    packages ['libxml2-dev', 'libxslt-dev']
 
     pydotorg_django do
         requirements "requirements.txt"
