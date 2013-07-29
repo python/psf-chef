@@ -26,6 +26,7 @@ frontend <%= proto %>
   acl host_raspberry hdr(host) -i raspberry.io www.raspberry.io raspberry.front.python.org
   acl host_evote hdr(host) -i vote.python.org
   acl host_uspycon hdr(host) -i us.pycon.org
+  acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
 
   use_backend pypi if host_pypi
   use_backend testpypi if host_testpypi
@@ -35,6 +36,7 @@ frontend <%= proto %>
   use_backend raspberry if host_raspberry
   use_backend evote if host_evote
   use_backend uspycon if host_uspycon
+  use_backend uspycon-staging if host_uspycon_staging
 <%- end -%>
 
 listen pypi-logging
@@ -102,6 +104,13 @@ backend evote
 
 backend uspycon
   <%- @uspycon_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
+  <%- end -%>
+  # provide a maintenance page functionality, only used when all other servers are down
+  server fallback localhost:8080 backup
+
+backend uspycon-staging
+  <%- @uspycon_staging_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
