@@ -8,6 +8,7 @@ end
 
 include_recipe "nodejs::install_from_binary"
 include_recipe "git"
+include_recipe "firewall"
 
 execute "install_lessc" do
   command "npm install -g less@1.3.3"
@@ -81,4 +82,21 @@ cron "staging-pycon account expunge" do
   hour "0"
   minute "0"
   command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
+end
+
+firewall 'ufw' do
+  action :enable
+end
+
+firewall_rule 'ssh' do
+  port 22
+  protocol :tcp
+  action :allow
+end
+
+firewall_rule 'http_our_net' do
+  port 80
+  source '140.211.10.64/26'
+  direction :in
+  action :allow
 end
