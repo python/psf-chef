@@ -3,6 +3,8 @@ from warehouse.conf import Settings
 
 class Common(Settings):
 
+    ALLOWED_HOSTS = ["<%= @allowed_hosts.join('", "') %>"]
+
     SECRET_KEY = "<%= @secret_key %>"
 
     DATABASES = {

@@ -1,0 +1,32 @@
+upstream <%= @resource.application.name %> {
+  <% unless @application_socket.empty? -%>
+    <% @application_socket.each do |socket_name| -%>
+  server unix:<%= socket_name %>;
+    <% end -%>
+  <% end -%>
+  <% @hosts.each do |node| %>
+  server <%= node.is_a?(String) ? node : node.attribute?('cloud') ? node['cloud']['local_ipv4'] : node['ipaddress'] %>:<%= @resource.application_port %>;
+  <% end %>
+}
+
+server {
+  listen <%= @resource.port %>;
+  server_name <%= @resource.server_name.is_a?(Array) ? @resource.server_name.join(' ') : @resource.server_name %>;
+
+  <% if @resource.ssl %>
+  ssl on;
+  ssl_certificate <%= @resource.ssl_certificate %>;
+  ssl_certificate_key <%= @resource.ssl_certificate_key %>;
+  <% end %>
+
+  <% @resource.static_files.each do |url, path| %>
+  location <%= url %> {
+    alias <%= path %>;
+  }
+  <% end %>
+
+  location / {
+    proxy_pass       http://<%= @resource.application.name %>;
+    proxy_set_header Host $http_host;
+  }
+}

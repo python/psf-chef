@@ -79,6 +79,7 @@ application "warehouse" do
     debug node["warehouse"]["debug"]
 
     settings ({
+      :allowed_hosts => node["warehouse"]["domains"],
       :secret_key => secrets["warehouse"]["secret_key"],
     })
 
@@ -102,10 +103,12 @@ application "warehouse" do
   end
 
   nginx_load_balancer do
+    template "app_server.conf.rb"
+
     hosts ["localhost"] if Chef::Config[:solo] # For testing in Vagrant
     application_server_role "pypi"
 
-    server_name node["warehouse"]["domains"] + [node["fqdn"]]
+    server_name node["warehouse"]["domains"]
 
     application_port node["warehouse"]["conf"]["app"]["port"]
   end
