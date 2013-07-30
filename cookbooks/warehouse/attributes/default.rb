@@ -10,7 +10,7 @@ default["warehouse"]["source"]["revision"] = "master"
 default["warehouse"]["path"] = "/srv/warehouse"
 
 # Warehouse Runtime Configuration
-default["warehouse"]["conf"]["debug"] = true
+default["warehouse"]["conf"]["debug"] = false
 default["warehouse"]["conf"]["app"]["port"] = 8000
 default["warehouse"]["conf"]["app"]["wsgi"] = "warehouse.wsgi"
 
