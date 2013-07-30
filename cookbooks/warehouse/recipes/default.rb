@@ -56,6 +56,11 @@ python_virtualenv "#{node["warehouse"]["path"]}/shared/env" do
 end
 
 # Deploy Warehouse
+environment = {
+  "DJANGO_SETTINGS_MODULE" => "settings",
+  "DJANGO_CONFIGURATION" => node["warehouse"]["conf"]["debug"] ? "Development" : "Production",
+}
+
 application "warehouse" do
   path node["warehouse"]["path"]
 
@@ -93,10 +98,7 @@ application "warehouse" do
 
     port node["warehouse"]["conf"]["app"]["port"]
 
-    environment ({
-      "DJANGO_SETTINGS_MODULE" => "settings",
-      "DJANGO_CONFIGURATION" => node["warehouse"]["conf"]["debug"] ? "Development" : "Production",
-    })
+    environment environment
   end
 
   nginx_load_balancer do
