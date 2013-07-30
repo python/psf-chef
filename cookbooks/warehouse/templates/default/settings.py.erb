@@ -18,6 +18,10 @@ class Common(Settings):
         },
     }
 
+    STATIC_ROOT = "<%= @static_root %>"
+
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.CachedStaticFilesStorage"
+
 
 class Development(Common):
 
