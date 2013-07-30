@@ -70,6 +70,10 @@ application "warehouse" do
   repository node["warehouse"]["source"]["repository"]
   revision node["warehouse"]["source"]["revision"]
 
+  symlinks ({
+    "static" => "static",
+  })
+
   migrate false
 
   django do
@@ -81,6 +85,7 @@ application "warehouse" do
     settings ({
       :allowed_hosts => node["warehouse"]["domains"],
       :secret_key => secrets["warehouse"]["secret_key"],
+      :static_root => File.join(node["warehouse"]["path"], "shared", "static"),
     })
 
     database do
@@ -111,5 +116,19 @@ application "warehouse" do
     server_name node["warehouse"]["domains"]
 
     application_port node["warehouse"]["conf"]["app"]["port"]
+
+    static_files ({
+      "/static" => "static",
+    })
+  end
+
+  before_symlink do
+    warehouse_cmd = ::File.join(new_resource.path, "shared", "env", "bin", "warehouse")
+    execute "#{warehouse_cmd} collectstatic --noinput" do
+      user new_resource.owner
+      group new_resource.group
+      environment environment.merge({"PYTHONPATH" => new_resource.release_path})
+      cwd new_resource.release_path
+    end
   end
 end
