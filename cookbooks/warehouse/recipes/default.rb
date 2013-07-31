@@ -46,12 +46,18 @@ secrets = data_bag_item("secrets", "pypi")
 # django application provider will sorta silently pick that up and be happy.
 [node["warehouse"]["path"], "#{node["warehouse"]["path"]}/shared"].each do |d|
   directory d do
+    owner node["warehouse"]["user"]
+    group node["warehouse"]["group"]
+
     action :create
   end
 end
 
 python_virtualenv "#{node["warehouse"]["path"]}/shared/env" do
   interpreter "python3.3"
+  owner node["warehouse"]["user"]
+  group node["warehouse"]["group"]
+
   action :create
 end
 
