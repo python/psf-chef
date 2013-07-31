@@ -44,7 +44,7 @@ secrets = data_bag_item("secrets", "pypi")
 # hood) doesn't check very hard that the virtualenv exists at any particular
 # version. So we'll (ab)use that fact and create a Python 3.3 virtualenv; the
 # django application provider will sorta silently pick that up and be happy.
-["#{node["warehouse"]["path"]}", "#{node["warehouse"]["path"]}/shared"].each do |d|
+[node["warehouse"]["path"], "#{node["warehouse"]["path"]}/shared"].each do |d|
   directory d do
     action :create
   end
