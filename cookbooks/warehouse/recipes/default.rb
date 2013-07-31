@@ -108,7 +108,7 @@ application "warehouse" do
   end
 
   nginx_load_balancer do
-    template "app_server.conf.rb"
+    template "nginx.conf.rb"
 
     hosts ["localhost"] if Chef::Config[:solo] # For testing in Vagrant
     application_server_role "pypi"
