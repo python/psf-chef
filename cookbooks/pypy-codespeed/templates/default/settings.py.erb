@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # Django settings for a speedcenter project.
 import os
+import os.path
 import sys
 
-sys.path.insert(0, '<%= @django.application_provider.release_path %>')
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 
 DEBUG = <%= @debug ? 'True' : 'False' %>
 TEMPLATE_DEBUG = DEBUG
