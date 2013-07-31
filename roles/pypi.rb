@@ -4,7 +4,7 @@ run_list [
     'recipe[rsyslog::server]',
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
-    # 'recipe[psf-pypi::pypi]',
+    'recipe[psf-pypi::pypi]',
 ]
 override_attributes({
   :pypi => {

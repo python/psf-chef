@@ -1,0 +1,4 @@
+server {
+  server_name <%= @existing_domain %>;
+  rewrite ^ $scheme://<%= @new_domain %>$request_uri permanent;
+}
