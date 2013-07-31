@@ -8,9 +8,6 @@ run_list [
     'recipe[warehouse]',
 ]
 override_attributes({
-  :supervisor => {
-    :version => "3.0b2",
-  },
   :warehouse => {
     :domains => ["next.pypi.python.org"],
   },
