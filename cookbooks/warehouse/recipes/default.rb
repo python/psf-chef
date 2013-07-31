@@ -100,7 +100,7 @@ application "warehouse" do
 
   gunicorn do
     app_module node["warehouse"]["conf"]["app"]["wsgi"]
-    virtualenv File.join(node["warehouse"]["path"], "shared/env")
+    virtualenv File.join(node["warehouse"]["path"], "shared", "env")
 
     port node["warehouse"]["conf"]["app"]["port"]
 
