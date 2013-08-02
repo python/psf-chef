@@ -8,9 +8,9 @@ action :install do
     backup_node['rsnapshot_backups'].each do |directory, backup|
       next if backup_node.name == node.name # For now just skip self
       backup = backup.to_hash
-      backup['host'] = backup_node['fqdn']
+      backup['host'] = backup_node['fqdn'] || backup_node['ipaddress']
       backup['directory'] << '/' unless backup['directory'].end_with?('/')
-      backups << backup
+      backups << backup if backup['host']
     end
   end
 
