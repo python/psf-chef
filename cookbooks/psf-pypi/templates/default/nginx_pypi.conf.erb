@@ -67,5 +67,5 @@ server {
 server {
   listen 80;
   server_name <%= @domains.last(@domains.length - 1).join(" ") %>;
-  rewrite ^ $scheme://<%= @new_domain %>$request_uri permanent;
+  rewrite ^ $scheme://<%= @domains.first %>$request_uri permanent;
 }
