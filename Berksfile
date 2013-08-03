@@ -10,7 +10,8 @@ cookbook "motd-tail", '= 1.1.0'
 cookbook "build-essential", '= 1.4.0'
 cookbook "zsh", '= 1.0.0'
 cookbook "application", '= 3.0.0'
-cookbook "application_python", "= 2.0.0"
+#cookbook "application_python", "= 2.0.0"
+cookbook "application_python", :git => 'https://github.com/dstufft/application_python.git', :ref => "use-exists-action"
 cookbook "python", '= 1.2.0'
 #cookbook "application_nginx", '= 2.0.0'
 cookbook 'application_nginx', :git => 'https://github.com/dstufft/application_nginx.git', :ref => "chef-solo" # Pending http://tickets.opscode.com/browse/COOK-3254
@@ -48,3 +49,4 @@ cookbook "pypy-home", :path => "./cookbooks/pypy-home"
 cookbook "rsnapshot", :path => "./cookbooks/rsnapshot"
 cookbook "stud", :path => "./cookbooks/stud"
 cookbook "user", :path => "./cookbooks/user"
+cookbook "warehouse", :path => "./cookbooks/warehouse"
