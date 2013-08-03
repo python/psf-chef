@@ -5,8 +5,12 @@ run_list [
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
     'recipe[psf-pypi::pypi]',
+    'recipe[warehouse]',
 ]
 override_attributes({
+  :warehouse => {
+    :domains => ["preview.pypi.python.org"],
+  },
   :pypi => {
     :web => {
       :database => {
