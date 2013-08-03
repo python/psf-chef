@@ -18,6 +18,10 @@ override_attributes({
       },
     },
   },
+  :nginx => {
+    # We disable gzip because of BREACH
+    :gzip => "off",
+  },
   :rsyslog => {
     :port => 51450,
     :user => "root",
