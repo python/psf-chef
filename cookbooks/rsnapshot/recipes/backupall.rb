@@ -6,6 +6,7 @@ rsnapshot_backup '/' do
   exclude '/sys/*'
   exclude '/tmp/*'
   exclude '/var/cache/apt/archives/*'
+  exlucde '/var/lib/schroot/*'
   exclude '/var/lock/*'
   exclude '/var/run/*'
   exclude '/var/tmp/*'
