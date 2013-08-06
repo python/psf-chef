@@ -59,6 +59,7 @@ application "staging-pycon.python.org" do
 
   gunicorn do
     app_module :django
+    environment :SECRET_KEY => secrets["secret_key"], :GRAYLOG_HOST => secrets["graylog_host"], :IS_PRODUCTION => is_production, :DB_NAME => db["database"], :DB_HOST => db["hostname"], :DB_USER => db["user"], :DB_PASSWORD => db["password"]
   end
 
   nginx_load_balancer do
