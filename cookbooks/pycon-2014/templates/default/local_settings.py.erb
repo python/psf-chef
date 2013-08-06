@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# Start by importing all the settings that can be kept in pycon source
-# control. Then override with the things that we can only know during
-# deployment.
-
-if <%= @is_production %>:
-  from pycon.settings.production import *
-else
-  from pycon.settings.staging import *
+# Note: This is imported by the main settings file, so only changes to
+# what's there need to be included here.
 
 DATABASES = {
     'default': {
@@ -27,6 +21,7 @@ ALLOWED_HOSTS = [
 ]
 
 SECRET_KEY = '<%= @secret_key %>'
+GRAYLOG_HOST = '<%= @graylog_host %>'
 
 EMAIL_HOST = "mail.python.org"
 
@@ -34,10 +29,64 @@ ADMINS = (
     ('Ernest W. Durbin III', 'ewdurbin@gmail.com'),
     ('Caktus Pycon Team', 'pycon@caktusgroup.com'),
 )
+# From address:
+SERVER_EMAIL = 'pycon@caktusgroup.com'
+# The main settings send email to the console, go back to the default
+# that uses SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MANAGERS = ADMINS
 
+COMPRESS_ENABLED = True
+
 MEDIA_ROOT = "/srv/staging-pycon.python.org/shared/media/"
 
-# Fill in the hostname for our graylog logging
-LOGGING['handlers']['sam_gelf']['host'] = '<%= @graylog_host %>'
+from django.utils.log import DEFAULT_LOGGING
+LOGGING = DEFAULT_LOGGING
+
+LOGGING['filters'].update(
+    {
+        'static_fields': {
+            '()': 'pycon.logfilters.StaticFieldFilter',
+            'fields': {'deployment': 'pycon', 'environment': 'staging'},
+            },
+        'django_exc': {
+            '()': 'pycon.logfilters.RequestFilter',
+            },
+     }
+)
+LOGGING['handlers'].update(
+    {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': False,
+            'filters': ['require_debug_false'],
+        },
+        'sam_gelf': {
+            'class': 'graypy.GELFHandler',
+            'host': GRAYLOG_HOST,
+            'port': 12201,
+            'filters': ['static_fields', 'django_exc'],
+        }
+    }
+)
+LOGGING['loggers'].update(
+    {
+        'django.request': {
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'ERROR',
+            'propagate': True,
+            },
+        'pycon': {
+            # mail_admins will only accept ERROR and higher
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'WARNING',
+            },
+        'symposion': {
+            # mail_admins will only accept ERROR and higher
+            'handlers': ['mail_admins', 'sam_gelf'],
+            'level': 'WARNING',
+            }
+    }
+)
