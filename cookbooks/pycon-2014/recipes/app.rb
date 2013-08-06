@@ -59,7 +59,7 @@ application "staging-pycon.python.org" do
 
   gunicorn do
     app_module :django
-    environment :SECRET_KEY => secrets["secret_key"], :GRAYLOG_HOST => secrets["graylog_host"], :IS_PRODUCTION => is_production, :DB_NAME => db["database"], :DB_HOST => db["hostname"], :DB_USER => db["user"], :DB_PASSWORD => db["password"]
+    environment :SECRET_KEY => secrets["secret_key"], :GRAYLOG_HOST => secrets["graylog_host"], :IS_PRODUCTION => is_production, :DB_NAME => db["database"], :DB_HOST => db["hostname"], :DB_PORT => "", :DB_USER => db["user"], :DB_PASSWORD => db["password"], :EMAIL_HOST => "mail.python.org", :MEDIA_ROOT => "/srv/staging-pycon.python.org/shared/media/"
   end
 
   nginx_load_balancer do
