@@ -47,7 +47,7 @@ application "staging-pycon.python.org" do
     settings_template "local_settings.py.erb"
     local_settings_file "local_settings.py"
     collectstatic "collectstatic --noinput"
-    settings :secret_key => secrets["secret_key"], :graylog_host => secrets["graylog_host"]
+    settings :secret_key => secrets["secret_key"], :graylog_host => secrets["graylog_host"], :is_production => is_production
     database do
       engine "postgresql_psycopg2"
       database db["database"]
@@ -59,6 +59,7 @@ application "staging-pycon.python.org" do
 
   gunicorn do
     app_module :django
+    environment :SECRET_KEY => secrets["secret_key"], :GRAYLOG_HOST => secrets["graylog_host"], :IS_PRODUCTION => is_production, :DB_NAME => db["database"], :DB_HOST => db["hostname"], :DB_PORT => "", :DB_USER => db["user"], :DB_PASSWORD => db["password"], :EMAIL_HOST => "mail.python.org", :MEDIA_ROOT => "/srv/staging-pycon.python.org/shared/media/"
   end
 
   nginx_load_balancer do
