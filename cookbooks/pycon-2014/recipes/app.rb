@@ -2,8 +2,10 @@ secrets = data_bag_item("secrets", "pycon-2014")
 is_production = tagged?('production')
 if is_production
   db = data_bag_item("secrets", "postgres")["pycon2014"]
+  app_name = "us.pycon.org"
 else
   db = data_bag_item("secrets", "postgres")["pycon2014-staging"]
+  app_name = "staging-pycon.python.org"
 end
 
 include_recipe "nodejs::install_from_binary"
@@ -19,7 +21,7 @@ git "/srv/pycon-archive" do
   revision "master"
 end
 
-application "staging-pycon.python.org" do
+application app_name do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
   revision is_production ? "production" : "staging"
