@@ -10,6 +10,21 @@ include_recipe "nodejs::install_from_binary"
 include_recipe "git"
 include_recipe "firewall"
 
+# Common env for Django processes
+my_env = {
+    "SECRET_KEY" => secrets["secret_key"],
+    "GRAYLOG_HOST" => secrets["graylog_host"],
+    "IS_PRODUCTION" => "#{is_production}",
+    "DB_NAME" => db["database"],
+    "DB_HOST" => db["hostname"],
+    "DB_PORT" => "",
+    "DB_USER" => db["user"],
+    "DB_PASSWORD" => db["password"],
+    "EMAIL_HOST" => "mail.python.org",
+    "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/",
+}
+ENV.update(my_env)
+
 execute "install_lessc" do
   command "npm install -g less@1.3.3"
 end
@@ -26,7 +41,6 @@ application "staging-pycon.python.org" do
   packages ["libpq-dev", "git-core", "libjpeg8-dev"]
   migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
-  environment "SECRET_KEY" => secrets["secret_key"], "GRAYLOG_HOST" => secrets["graylog_host"], "IS_PRODUCTION" => "#{is_production}", "DB_NAME" => db["database"], "DB_HOST" => db["hostname"], "DB_PORT" => "", "DB_USER" => db["user"], "DB_PASSWORD" => db["password"], "EMAIL_HOST" => "mail.python.org", "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/"
 
   before_deploy do
     directory "/srv/staging-pycon.python.org/shared/media" do
@@ -60,6 +74,7 @@ application "staging-pycon.python.org" do
 
   gunicorn do
     app_module :django
+    environment my_env
   end
 
   nginx_load_balancer do
