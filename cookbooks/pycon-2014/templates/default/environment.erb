@@ -1,0 +1,3 @@
+<% @app_env.each_pair do |environment_variable, value| %>
+export <%= environment_variable %>="<%= value %>"
+<% end %>

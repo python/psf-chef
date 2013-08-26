@@ -12,6 +12,21 @@ include_recipe "nodejs::install_from_binary"
 include_recipe "git"
 include_recipe "firewall"
 
+# Common env for Django processes
+app_env = {
+    "SECRET_KEY" => secrets["secret_key"],
+    "GRAYLOG_HOST" => secrets["graylog_host"],
+    "IS_PRODUCTION" => "#{is_production}",
+    "DB_NAME" => db["database"],
+    "DB_HOST" => db["hostname"],
+    "DB_PORT" => "",
+    "DB_USER" => db["user"],
+    "DB_PASSWORD" => db["password"],
+    "EMAIL_HOST" => "mail.python.org",
+    "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/",
+}
+ENV.update(app_env)
+
 execute "install_lessc" do
   command "npm install -g less@1.3.3"
 end
@@ -61,7 +76,7 @@ application app_name do
 
   gunicorn do
     app_module :django
-    environment "SECRET_KEY" => secrets["secret_key"], "GRAYLOG_HOST" => secrets["graylog_host"], "IS_PRODUCTION" => "#{is_production}", "DB_NAME" => db["database"], "DB_HOST" => db["hostname"], "DB_PORT" => "", "DB_USER" => db["user"], "DB_PASSWORD" => db["password"], "EMAIL_HOST" => "mail.python.org", "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/"
+    environment app_env
   end
 
   nginx_load_balancer do
@@ -79,6 +94,13 @@ application app_name do
     application_port 8080
   end
 
+end
+
+template "/srv/staging-pycon.python.org/shared/.env" do
+  path "/srv/staging-pycon.python.org/shared/.env"
+  source "environment.erb"
+  mode "0440"
+  variables :app_env => app_env
 end
 
 cron "staging-pycon account expunge" do
