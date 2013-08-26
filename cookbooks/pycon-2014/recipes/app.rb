@@ -99,7 +99,7 @@ end
 template "/srv/staging-pycon.python.org/shared/.env" do
   path "/srv/staging-pycon.python.org/shared/.env"
   source "environment.erb"
-  mode "0644"
+  mode "0440"
   variables :app_env => app_env
 end
 
