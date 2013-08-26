@@ -96,6 +96,13 @@ application app_name do
 
 end
 
+template "/srv/staging-pycon.python.org/shared/.env" do
+  path "/srv/staging-pycon.python.org/shared/.env"
+  source "environment.erb"
+  mode "0644"
+  variables :my_env => my_env
+end
+
 cron "staging-pycon account expunge" do
   hour "0"
   minute "0"
