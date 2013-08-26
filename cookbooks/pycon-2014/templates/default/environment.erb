@@ -1,3 +1,3 @@
-<% @my_env.each_pair do |envvar, envvalue| %>
-<%= "export #{envvar}=\"#{envvalue}\"" %>
+<% @app_env.each_pair do |environment_variable, value| %>
+<%= "export #{environment_variable}=\"#{value}\"" %>
 <% end %>
