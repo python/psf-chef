@@ -36,6 +36,10 @@ git "/srv/pycon-archive" do
   revision "master"
 end
 
+package "postgresql-client" do
+  action :install
+end
+
 application app_name do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
