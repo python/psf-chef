@@ -12,7 +12,7 @@ template "#{node['nginx']['dir']}/sites-available/pypi.conf" do
   variables ({
     :domains => [
         "pypi.python.org", "cheeseshop.python.org", "a.pypi.python.org",
-        "b.pypi.python.org", "d.pypi.python.org",
+        "b.pypi.python.org", "d.pypi.python.org", "g.pypi.python.org",
     ],
     :root_dir => "/data/www/pypi",
     :packages_dir => "/data/packages",
