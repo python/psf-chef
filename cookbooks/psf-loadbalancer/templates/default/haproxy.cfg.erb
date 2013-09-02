@@ -66,7 +66,7 @@ backend testpypi
   server fallback localhost:8080 backup
 
 backend wiki
-  reqidel ^X-Forwarded-\w+:.*
+  reqidel ^X-Forwarded-For:.*
   <%- @wiki_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
