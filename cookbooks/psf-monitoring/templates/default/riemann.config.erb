@@ -19,6 +19,12 @@
 (def get-mad-at-ben (rollup 5 3600 (email "benjaminwarfield@gmail.com")))
 
 (streams graph
+  (project [(service #".swap.free.value")
+            (service #".swap.used.value")]
+    (fn [[free used]]
+      (where (< 75.0 (* 100 (/ (:metric used)
+                               (:metric free)))) get-mad-at-ben)))
+
   (where (state "error") get-mad-at-ben)
   (where (state "critical") get-mad-at-ben))
 
