@@ -70,3 +70,9 @@ supervisor_service 'evote' do
   directory '/srv/evote/web2py'
   subscribes :restart, 'template[/srv/evote/web2py/applications/init/models/0.py]'
 end
+
+cron 'expire_evote_sessions' do
+  minute 0
+  command 'cd /srv/evote/web2py && python web2py.py -S init -M -R scripts/sessions2trash.py -A -o'
+  user 'evote'
+end
