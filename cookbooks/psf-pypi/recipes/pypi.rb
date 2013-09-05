@@ -1,6 +1,10 @@
 # Make sure Nginx is installed
 include_recipe "nginx"
 
+directory '/var/run/pypi' do
+  owner 'www-data'
+end
+
 # Install the pypi.python.org site
 template "#{node['nginx']['dir']}/sites-available/pypi.conf" do
   source "nginx_pypi.conf.erb"
