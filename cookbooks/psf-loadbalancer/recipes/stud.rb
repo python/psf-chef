@@ -22,7 +22,7 @@ stud 'stud' do
   frontend '[*]:443'
   tls false
   ssl true
-  ciphers 'ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH'
+  ciphers 'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AES:RSA+3DES:!ADH:!AECDH:!MD5'
   prefer_server_ciphers true
   user 'nobody'
   group 'nogroup'
