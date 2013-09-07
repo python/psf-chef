@@ -1,5 +1,7 @@
 # Apport conflicts with mercurial's demandimport, reported by __ap__
 
-package 'apport' do
-  action :remove
+%w{apport python-apport}.each do |pkg|
+  package pkg do
+    action :remove
+  end
 end
