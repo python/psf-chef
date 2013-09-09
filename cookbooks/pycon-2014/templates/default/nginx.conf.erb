@@ -11,6 +11,11 @@ upstream <%= @resource.application.name %> {
 
 server {
   listen <%= @resource.port %>;
+
+  if ($http_x_forwarded_proto = "http") {
+    return 301 https://$http_host$request_uri;
+  }
+
   server_name <%= @resource.server_name.is_a?(Array) ? @resource.server_name.join(' ') : @resource.server_name %>;
   <% if @resource.ssl %>
   ssl on;
