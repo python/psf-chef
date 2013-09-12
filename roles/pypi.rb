@@ -2,10 +2,11 @@ name "pypi"
 description "Python package index server"
 run_list [
     'recipe[rsyslog::server]',
+    'recipe[warehouse]',
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
-    'recipe[psf-pypi::pypi]',
-    'recipe[warehouse]',
+    #'recipe[psf-pypi::pypi]',
+    'recipe[psf-pypi::warehouse]',
 ]
 override_attributes({
   :warehouse => {
