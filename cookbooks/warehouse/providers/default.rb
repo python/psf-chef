@@ -1,4 +1,7 @@
+use_inline_resources
+
 action :install do
+
   # Default the virtualenv to a path based off of the main path
   virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "env") : new_resource.virtualenv
 
