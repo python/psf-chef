@@ -2,7 +2,7 @@
 # Local modifications will be overwritten
 
 server {
-  listen 80 default_server;
+  listen 80<% if @default_server %> default_server<% end %>;
   server_name <%= @domains.first %>;
   root <%= @root_dir %>;
 

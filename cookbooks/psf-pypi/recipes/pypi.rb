@@ -24,6 +24,7 @@ template "#{node['nginx']['dir']}/sites-available/pypi.conf" do
     :hsts_seconds => 31536000,
     :uwsgi_sock => "unix:/var/run/pypi/pypi.sock",
     :upload_size => "100M",
+    :default_server => true,
   })
 
   notifies :reload, resources(:service => 'nginx')
