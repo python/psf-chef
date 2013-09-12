@@ -60,8 +60,9 @@ backend pypi
   server fallback localhost:8080 backup
 
 backend testpypi
-  # We should fix this when testpypi migrates over
-  server dinsdale 82.94.164.168:80 check port 80
+  <%- @testpypi_servers.each do |server| -%>
+  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
+  <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 

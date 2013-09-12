@@ -8,6 +8,7 @@ haproxy_section 'python' do
   source 'haproxy.cfg.erb'
   variables({
     :pypi_servers => search(:node, 'roles:pypi AND tags:active'),
+    :testpypi_servers => search(:node, 'roles:pypi AND tags:active'),
     :wiki_servers => search(:node, 'roles:wiki AND tags:active'),
     :pypy_home_servers => search(:node, 'roles:pypy-home AND tags:active'),
     :preview_servers => search(:node, 'roles:redesign-staging'),
