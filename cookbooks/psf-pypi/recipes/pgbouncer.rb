@@ -15,3 +15,13 @@ end
 pgbouncer_user database['pypi']['user'] do
   password database['pypi']['password']
 end
+
+pgbouncer_database database['testpypi']['database'] do
+  host database['testpypi']['hostname']
+  user database['testpypi']['user']
+  password database['testpypi']['password']
+end
+
+pgbouncer_user database['testpypi']['user'] do
+  password database['testpypi']['password']
+end
