@@ -7,6 +7,7 @@ action :install do
 
   # Setup the environment that we'll use for commands and such
   environ = {
+    "PYTHONPATH" => new_resource.path,
     "DJANGO_SETTINGS_MODULE" => "settings",
     "DJANGO_CONFIGURATION" => new_resource.debug ? "Development" : "Production",
   }
@@ -60,6 +61,7 @@ action :install do
     action :upgrade
 
     notifies :restart, "supervisor_service[#{new_resource.name}]"
+    notifies :run, "execute[collectstatic]", :immediately
   end
 
   gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
@@ -96,5 +98,15 @@ action :install do
     environment environ
     user new_resource.user
     action :enable
+  end
+
+  execute "collectstatic" do
+    command "#{::File.join(virtualenv, "bin", "warehouse")} collectstatic --noinput"
+    cwd new_resource.path
+    environment environ
+    user new_resource.user
+    group new_resource.group
+
+    action :nothing
   end
 end
