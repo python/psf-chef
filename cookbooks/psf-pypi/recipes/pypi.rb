@@ -73,6 +73,30 @@ nginx_site "pythonhosted.conf" do
   enable true
 end
 
+# Install the testpypi.python.org site
+template "#{node['nginx']['dir']}/sites-available/testpypi.conf" do
+  source "nginx_pypi.conf.erb"
+
+  owner "root"
+  group "root"
+  mode "644"
+
+  variables ({
+    :domains => ["testpypi.python.org"],
+    :root_dir => "/data/www/testpypi",
+    :packages_dir => "/data/testpackages",
+    :static_dir => "/data/testpypi/static",
+    :hsts_seconds => 31536000,
+    :uwsgi_sock => "unix:/var/run/testpypi/pypi.sock",
+    :upload_size => "100M",
+  })
+
+  notifies :reload, resources(:service => 'nginx')
+end
+
+nginx_site "testpypi.conf" do
+  enable true
+end
 
 # Disable the default site
 nginx_site "default" do
