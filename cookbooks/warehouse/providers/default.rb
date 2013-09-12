@@ -49,6 +49,8 @@ action :install do
     python_pip pkg do
       virtualenv virtualenv
       action :upgrade
+
+      notifies :restart, "supervisor_service[#{new_resource.name}]"
     end
   end
 
@@ -56,12 +58,16 @@ action :install do
     version new_resource.version
     virtualenv virtualenv
     action :upgrade
+
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
   gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
     owner new_resource.user
     group new_resource.group
     action :create
+
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
   template ::File.join(new_resource.path, "settings.py") do
@@ -79,6 +85,8 @@ action :install do
       :static_root => ::File.join(new_resource.path, "static"),
       :database => new_resource.database,
     })
+
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
   supervisor_service new_resource.name do
