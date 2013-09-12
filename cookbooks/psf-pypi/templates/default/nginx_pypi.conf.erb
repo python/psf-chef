@@ -64,8 +64,10 @@ server {
   client_max_body_size <%= @upload_size %>;
 }
 
+<% if @domains.length > 1 %>
 server {
   listen 80;
   server_name <%= @domains.last(@domains.length - 1).join(" ") %>;
   rewrite ^ $scheme://<%= @domains.first %>$request_uri permanent;
 }
+<% end %>
