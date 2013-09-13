@@ -5,7 +5,7 @@ run_list [
     'recipe[warehouse]',
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
-    #'recipe[psf-pypi::pypi]',
+    'recipe[psf-pypi::pypi]',
     'recipe[psf-pypi::warehouse]',
 ]
 override_attributes({
