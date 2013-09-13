@@ -67,8 +67,10 @@ action :install do
   gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
     owner new_resource.user
     group new_resource.group
-    action :create
 
+    listen "unix:#{::File.join(new_resource.path, "warehouse.sock")}"
+
+    action :create
     notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
@@ -107,6 +109,37 @@ action :install do
     user new_resource.user
     group new_resource.group
 
+    action :nothing
+  end
+
+  template "#{node['nginx']['dir']}/sites-available/#{new_resource.name}.warehouse.conf" do
+    owner "root"
+    group "root"
+    mode "0755"
+    backup false
+
+    cookbook "warehouse"
+    source "nginx.conf.erb"
+
+    variables ({
+      :resource => new_resource,
+      :sock => ::File.join(new_resource.path, "warehouse.sock"),
+      :name => "#{new_resource.name}-warehouse",
+      :static_files => {
+        "/static" => ::File.join(new_resource.path, "static"),
+      }
+    })
+
+    notifies :reload, "service[nginx]"
+  end
+
+  nginx_site "#{new_resource.name}.warehouse.conf" do
+    enable true
+  end
+
+  # Taken from the nginx cookbook so that we can restart Nginx
+  service "nginx" do
+    supports :status => true, :restart => true, :reload => true
     action :nothing
   end
 end

@@ -6,3 +6,6 @@ include_recipe "python::virtualenv"
 
 # Make sure supervisor is available to us
 include_recipe "supervisor"
+
+# Make sure Nginx is installed
+include_recipe "nginx"
