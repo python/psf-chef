@@ -22,6 +22,14 @@ class Common(Settings):
 
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.CachedStaticFilesStorage"
 
+    <% unless @installed_apps.nil? %>
+    INSTALLED_APPS = Settings.INSTALLED_APPS + [
+        <% @installed_apps.each do |app| %>
+        "<%= app %>",
+        <% end %>
+    ]
+    <% end %>
+
 
 class Development(Common):
 

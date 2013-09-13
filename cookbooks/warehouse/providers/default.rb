@@ -11,7 +11,7 @@ action :install do
     "DJANGO_SETTINGS_MODULE" => "settings",
     "DJANGO_CONFIGURATION" => new_resource.debug ? "Development" : "Production",
   }
-  environ.merge new_resource.environment
+  environ.merge! new_resource.environment
 
   group new_resource.group do
     system true
@@ -32,11 +32,16 @@ action :install do
     action :create
   end
 
-  directory ::File.join(new_resource.path, "config") do
+  template ::File.join(new_resource.path, "envvars") do
     owner new_resource.user
     group new_resource.group
-    mode "0755"
-    action :create
+    mode "0750"
+    backup false
+
+    cookbook "warehouse"
+    source "envvars.erb"
+
+    variables :environment => environ
   end
 
   python_virtualenv virtualenv do
@@ -46,13 +51,24 @@ action :install do
     action :create
   end
 
-  ["gunicorn"].each do |pkg|
+  new_resource.packages.each do |pkg, version|
     python_pip pkg do
       virtualenv virtualenv
-      action :upgrade
 
+      unless version == :latest
+        version version
+      end
+
+      action :upgrade
       notifies :restart, "supervisor_service[#{new_resource.name}]"
     end
+  end
+
+  python_pip "gunicorn" do
+    virtualenv virtualenv
+
+    action :upgrade
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
   python_pip "warehouse" do
@@ -88,6 +104,7 @@ action :install do
       :secret_key => new_resource.secret_key,
       :static_root => ::File.join(new_resource.path, "static"),
       :database => new_resource.database,
+      :installed_apps => new_resource.installed_apps,
     })
 
     notifies :restart, "supervisor_service[#{new_resource.name}]"

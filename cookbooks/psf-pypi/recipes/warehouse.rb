@@ -11,6 +11,18 @@ end
 warehouse "pypi" do
   path "/srv/warehouse"
 
+  packages ({
+    "raven" => :latest,
+  })
+
+  installed_apps [
+    "raven.contrib.django.raven_compat",
+  ]
+
+  environment ({
+    "SENTRY_DSN" => secrets["sentry"]["dsn"],
+  })
+
   domains node["warehouse"]["domains"]
   secret_key secrets["warehouse"]["secret_key"]
   database ({
