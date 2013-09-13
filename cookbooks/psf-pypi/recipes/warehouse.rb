@@ -11,7 +11,6 @@ end
 warehouse "pypi" do
   path "/srv/warehouse"
 
-  debug true
   domains node["warehouse"]["domains"]
   secret_key secrets["warehouse"]["secret_key"]
   database ({
