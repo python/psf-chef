@@ -17,6 +17,7 @@
 (def graph (graphite {:host "127.0.0.1" :port 2002}))
 
 (def get-mad-at-ben (rollup 5 3600 (email "benjaminwarfield@gmail.com")))
+(def pager (pagerduty <%= pagerduty %>))
 
 (streams graph
   (project [(service #".swap.free.value")
@@ -43,8 +44,9 @@
     ; Index all events immediately.
     index
 
-    (where (state "error") get-mad-at-ben)
-    (where (state "critical") get-mad-at-ben)
+    (where (state "error") (:trigger pager))
+    (where (state "critical") (:trigger pager))
+    (where (state "ok") (:resolve pager))
 
     ; Calculate an overall rate of events.
     (with {:metric 1 :host nil :state "ok" :service "events/sec"}
