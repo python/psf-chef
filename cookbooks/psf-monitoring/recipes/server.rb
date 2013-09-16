@@ -27,7 +27,7 @@ template '/etc/riemann/riemann.config' do
   mode '0644'
   notifies :restart, 'service[riemann]'
   variables({
-    'pagerduty' => api_keys['pagerduty']
+    'pagerduty' => api_keys['pagerduty']['pagerduty']
   })
 end
 
