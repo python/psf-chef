@@ -22,11 +22,12 @@
   (project [(service #".swap.free.value")
             (service #".swap.used.value")]
     (fn [[free used]]
-      (where (< 75.0 (* 100 (/ (:metric used)
-                               (:metric free)))) get-mad-at-ben)))
+      (where (> 25.0 (* 100 (/ (:metric used)
+                               (:metric free)))) (:trigger pager))))
 
-  (where (state "error") get-mad-at-ben)
-  (where (state "critical") get-mad-at-ben))
+  (where (state "error") (:trigger pager))
+  (where (state "critical") (:trigger pager))
+  (where (state "ok") (:resolve pager))
 
 ; Expire old events from the index every 5 seconds.
 (periodically-expire 5)
