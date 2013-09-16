@@ -1,4 +1,4 @@
-api_keys = data_bag_item("api", "pagerduty")
+pagerduty = data_bag_item("secrets", "pagerduty")
 
 chef_gem 'chef-rewind'
 require 'chef/rewind'
@@ -27,7 +27,7 @@ template '/etc/riemann/riemann.config' do
   mode '0644'
   notifies :restart, 'service[riemann]'
   variables({
-    'pagerduty' => api_keys['pagerduty']['pagerduty']
+    'pagerduty' => pagerduty['key']
   })
 end
 
