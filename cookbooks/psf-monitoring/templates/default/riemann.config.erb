@@ -17,14 +17,14 @@
 (def graph (graphite {:host "127.0.0.1" :port 2002}))
 
 (def get-mad-at-ben (rollup 5 3600 (email "benjaminwarfield@gmail.com")))
-(def pager (pagerduty <%= pagerduty %>))
+(def pager (pagerduty "<%= @pagerduty %>"))
 
 (streams graph
   (project [(service #".swap.free.value")
             (service #".swap.used.value")]
     (fn [[free used]]
       (where (> 25.0 (* 100 (/ (:metric used)
-                               (:metric free)))) (:trigger pager))))
+                               (:metric free)))) (:trigger pager)))))
 
   (where (state "error") (:trigger pager))
   (where (state "critical") (:trigger pager))
