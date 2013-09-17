@@ -103,7 +103,7 @@ action :install do
     end
   end
 
-  ["bcrypt", "envdir", "gunicorn"].each do |pkg|
+  ["bcrypt", "gunicorn"].each do |pkg|
     python_pip pkg do
       virtualenv virtualenv
       action :upgrade
