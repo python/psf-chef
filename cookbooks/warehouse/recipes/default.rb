@@ -9,3 +9,6 @@ include_recipe "supervisor"
 
 # Make sure Nginx is installed
 include_recipe "nginx"
+
+# Make sure libffi-dev is installed
+package "libffi-dev" do end
