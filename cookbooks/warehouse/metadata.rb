@@ -3,7 +3,7 @@ maintainer        "Donald Stufft"
 maintainer_email  "donald@stufft.io"
 license           "Apache 2.0"
 description       "Install and configure Warehouse"
-version           "0.0.2"
+version           "0.0.3"
 
 depends "apt"
 depends "python"

@@ -32,6 +32,36 @@ action :install do
     action :create
   end
 
+  gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
+    owner new_resource.user
+    group new_resource.group
+
+    listen "unix:#{::File.join(new_resource.path, "warehouse.sock")}"
+
+    action :create
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
+  end
+
+  template ::File.join(new_resource.path, "settings.py") do
+    owner new_resource.user
+    group new_resource.group
+    mode "0750"
+    backup false
+
+    cookbook "warehouse"
+    source "settings.py.erb"
+
+    variables ({
+      :allowed_hosts => new_resource.domains,
+      :secret_key => new_resource.secret_key,
+      :static_root => ::File.join(new_resource.path, "static"),
+      :database => new_resource.database,
+      :installed_apps => new_resource.installed_apps,
+    })
+
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
+  end
+
   template ::File.join(new_resource.path, "envvars") do
     owner new_resource.user
     group new_resource.group
@@ -78,36 +108,6 @@ action :install do
 
     notifies :restart, "supervisor_service[#{new_resource.name}]"
     notifies :run, "execute[collectstatic]", :immediately
-  end
-
-  gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
-    owner new_resource.user
-    group new_resource.group
-
-    listen "unix:#{::File.join(new_resource.path, "warehouse.sock")}"
-
-    action :create
-    notifies :restart, "supervisor_service[#{new_resource.name}]"
-  end
-
-  template ::File.join(new_resource.path, "settings.py") do
-    owner new_resource.user
-    group new_resource.group
-    mode "0750"
-    backup false
-
-    cookbook "warehouse"
-    source "settings.py.erb"
-
-    variables ({
-      :allowed_hosts => new_resource.domains,
-      :secret_key => new_resource.secret_key,
-      :static_root => ::File.join(new_resource.path, "static"),
-      :database => new_resource.database,
-      :installed_apps => new_resource.installed_apps,
-    })
-
-    notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
   supervisor_service new_resource.name do
