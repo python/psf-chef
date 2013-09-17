@@ -28,6 +28,10 @@ server {
     # the following magic stands for "UWSGI_MODIFIER_MANAGE_PATH_INFO"
     # .. when setting the SCRIPT_NAME remove that bit from the PATH_INFO
     uwsgi_modifier1 30;
+
+    gzip on;
+    gzip_comp_level 9;
+    gzip_vary on;
   }
 
   location /raw-packages {
@@ -58,6 +62,10 @@ server {
     <% if @hsts_seconds %>
     add_header Strict-Transport-Security "max-age=<%= @hsts_seconds %>";
     <% end %>
+
+    gzip on;
+    gzip_comp_level 9;
+    gzip_vary on;
   }
 
   # allow big uploads
