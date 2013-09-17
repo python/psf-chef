@@ -62,6 +62,10 @@ server {
     <% if @hsts_seconds %>
     add_header Strict-Transport-Security "max-age=<%= @hsts_seconds %>";
     <% end %>
+
+    gzip on;
+    gzip_comp_level 9;
+    gzip_vary on;
   }
 
   # allow big uploads
