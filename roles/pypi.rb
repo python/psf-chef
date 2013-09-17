@@ -2,6 +2,7 @@ name "pypi"
 description "Python package index server"
 run_list [
     'recipe[rsyslog::server]',
+    'recipe[psf-postgresql::92]',
     'recipe[warehouse]',
     'recipe[psf-pypi::pgbouncer]',
     'recipe[psf-pypi::logging]',
