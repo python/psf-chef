@@ -3,7 +3,7 @@ use_inline_resources
 action :install do
 
   # Default the virtualenv to a path based off of the main path
-  virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "venv") : new_resource.virtualenv
+  virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "env") : new_resource.virtualenv
 
   # Setup the environment that we'll use for commands and such
   environ = {
@@ -35,7 +35,7 @@ action :install do
   end
 
   # Create our envdir for use with the ``envdir`` program
-  directory ::File.join(new_resource.path, "env") do
+  directory ::File.join(new_resource.path, "vars") do
     owner new_resource.user
     group new_resource.group
     mode "0750"
@@ -44,7 +44,7 @@ action :install do
 
   # Create our envdir files
   environ.each do |k, v|
-    file ::File.join(new_resource.path, "env", k) do
+    file ::File.join(new_resource.path, "vars", k) do
       owner new_resource.user
       group new_resource.group
       mode "0750"
