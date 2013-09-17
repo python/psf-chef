@@ -9,18 +9,26 @@ class Common(Settings):
 
     DATABASES = {
         "default": {
-            "NAME": "<%= @database[:settings][:database] %>",
-            "ENGINE": "django.db.backends.<%= @database[:settings][:engine] %>",
-            "USER": "<%= @database[:settings][:username] %>",
-            "PASSWORD": "<%= @database[:settings][:password] %>",
+            "NAME": "<%= @database[:database] %>",
+            "ENGINE": "django.db.backends.<%= @database[:engine] %>",
+            "USER": "<%= @database[:username] %>",
+            "PASSWORD": "<%= @database[:password] %>",
             "HOST": "<%= @database[:host] %>",
-            "PORT": "<%= @database[:settings][:port] %>",
+            "PORT": "<%= @database[:port] %>",
         },
     }
 
     STATIC_ROOT = "<%= @static_root %>"
 
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.CachedStaticFilesStorage"
+
+    <% unless @installed_apps.nil? %>
+    INSTALLED_APPS = Settings.INSTALLED_APPS + [
+        <% @installed_apps.each do |app| %>
+        "<%= app %>",
+        <% end %>
+    ]
+    <% end %>
 
 
 class Development(Common):
