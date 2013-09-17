@@ -3,7 +3,7 @@ use_inline_resources
 action :install do
 
   # Default the virtualenv to a path based off of the main path
-  virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "env") : new_resource.virtualenv
+  virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "venv") : new_resource.virtualenv
 
   # Setup the environment that we'll use for commands and such
   environ = {
@@ -33,6 +33,26 @@ action :install do
     mode "0755"
     action :create
   end
+
+  # Create our envdir for use with the ``envdir`` program
+  directory ::File.join(new_resource.path, "env") do
+    owner new_resource.user
+    group new_resource.group
+    mode "0750"
+    action :create
+  end
+
+  # Create our envdir files
+  environ.each do |k, v|
+    file ::File.join(new_resource.path, "env", k) do
+      owner new_resource.user
+      group new_resource.group
+      mode "0750"
+      content v
+      action :create
+    end
+  end
+end
 
   gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
     owner new_resource.user
@@ -96,18 +116,12 @@ action :install do
     end
   end
 
-  python_pip "bcrypt" do
-    virtualenv virtualenv
-
-    action :upgrade
-    notifies :restart, "supervisor_service[#{new_resource.name}]"
-  end
-
-  python_pip "gunicorn" do
-    virtualenv virtualenv
-
-    action :upgrade
-    notifies :restart, "supervisor_service[#{new_resource.name}]"
+  ["bcrypt", "envdir", "gunicorn"].each do |pkg|
+    python_pip pkg do
+      virtualenv virtualenv
+      action :upgrade
+      notifies :restart, "supervisor_service[#{new_resource.name}]"
+    end
   end
 
   python_pip "warehouse" do
