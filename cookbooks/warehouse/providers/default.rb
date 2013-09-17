@@ -83,18 +83,6 @@ action :install do
     notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
-  template ::File.join(new_resource.path, "envvars") do
-    owner new_resource.user
-    group new_resource.group
-    mode "0750"
-    backup false
-
-    cookbook "warehouse"
-    source "envvars.erb"
-
-    variables :environment => environ
-  end
-
   python_virtualenv virtualenv do
     interpreter "python3"
     owner new_resource.user
