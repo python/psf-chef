@@ -1,3 +1,4 @@
+# Via http://wiki.postgresql.org/wiki/Apt/FAQ#I_want_only_specific_packages_from_this_repository
 cookbook_file '/etc/apt/preferences.d/pgdg.pref' do
   owner 'root'
   group 'root'
