@@ -58,4 +58,6 @@ warehouse "testpypi" do
     :password => database["testpypi"]["password"],
     :engine => "postgresql_psycopg2",
   })
+
+  create_user false
 end

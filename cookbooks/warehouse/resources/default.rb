@@ -14,3 +14,4 @@ attribute :debug, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :packages, :kind_of => Hash
 attribute :installed_apps, :kind_of => Array
 attribute :settings, :kind_of => Hash
+attribute :create_user, :knife_of => [TrueClass, FalseClass], :default => true

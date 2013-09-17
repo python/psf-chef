@@ -13,16 +13,18 @@ action :install do
   }
   environ.merge! new_resource.environment
 
-  group new_resource.group do
-    system true
-  end
+  if new_resource.create_user
+    group new_resource.group do
+      system true
+    end
 
-  user new_resource.user do
-    comment "#{new_resource.name} Warehouse Service"
-    gid new_resource.group
-    system true
-    shell '/bin/false'
-    home new_resource.path
+    user new_resource.user do
+      comment "#{new_resource.name} Warehouse Service"
+      gid new_resource.group
+      system true
+      shell '/bin/false'
+      home new_resource.path
+    end
   end
 
   directory new_resource.path do
