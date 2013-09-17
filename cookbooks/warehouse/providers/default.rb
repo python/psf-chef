@@ -52,7 +52,6 @@ action :install do
       action :create
     end
   end
-end
 
   gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
     owner new_resource.user
