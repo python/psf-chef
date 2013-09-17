@@ -11,7 +11,12 @@ file '/etc/rsnapshot_postgres_passwords' do
 end
 
 postgres.each do |name, data|
+  version = if data['hostname'] == 'pg2.osuosl.org'
+    '9.2'
+  else
+    '9.1'
+  end
   rsnapshot_script "postgres-#{name}" do
-    command "/usr/bin/env PGPASSFILE=/etc/rsnapshot_postgres_passwords pg_dump -h #{data['hostname']} -U #{data['user']} -f backup.sql #{data['database']}"
+    command "/usr/bin/env PGPASSFILE=/etc/rsnapshot_postgres_passwords /usr/lib/postgresql/#{version}/bin/pg_dump -h #{data['hostname']} -U #{data['user']} -f backup.sql #{data['database']}"
   end
 end
