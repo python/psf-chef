@@ -1,10 +1,11 @@
 # Via http://wiki.postgresql.org/wiki/Apt/FAQ#I_want_only_specific_packages_from_this_repository
-cookbook_file '/etc/apt/preferences.d/pgdg.pref' do
-  owner 'root'
-  group 'root'
-  mode '644'
-  source 'pgdg.pref'
-end
+# Not actually working
+# cookbook_file '/etc/apt/preferences.d/pgdg.pref' do
+#   owner 'root'
+#   group 'root'
+#   mode '644'
+#   source 'pgdg.pref'
+# end
 
 apt_repository 'pgdg' do
   uri 'http://apt.postgresql.org/pub/repos/apt/'
