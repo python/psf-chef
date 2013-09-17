@@ -96,6 +96,13 @@ action :install do
     end
   end
 
+  python_pip "bcrypt" do
+    virtualenv virtualenv
+
+    action :upgrade
+    notifies :restart, "supervisor_service[#{new_resource.name}]"
+  end
+
   python_pip "gunicorn" do
     virtualenv virtualenv
 
