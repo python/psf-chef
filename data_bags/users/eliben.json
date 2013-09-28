@@ -1,0 +1,8 @@
+{
+  "id": "eliben",
+  "comment": "Eli Bendersky",
+  "sudo": ["hg", "buildmaster"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuz/lWvUeomtN53PVbfybsYuwA8ZGYq+FzexbAC9ErFVHc27looSbz1CMkSBghUO0GlKHG7j/rkwRGQhhavPlYiOZzKx3Y2W/zPx+EiTUrHIFnCejhNkQQm4PpYWsjUlgQPAmcMafd7JC4hz8t2emMavI5DG3tyqNihHB5DtX+hQ3lJ51VyD9Ky2ihtAZGfOPSnuRx81EFPAD75uSCxTOvNuPEjCHvkSynsz+tDKCwjAIr7oGlkp/stmWKpqGfiKMVXC4UCskAHSdZgbUTkTWoz6E6K3pqESdFa+nEBzwyyICaBrTyg25tEnIml+OSIjss9rSncijNJibhz6CRL/vmQ== eliben@eliben-desktop"
+  ]
+}
