@@ -11,7 +11,7 @@ run_list [
 ]
 override_attributes({
   :warehouse => {
-    :domains => ["preview.pypi.python.org"],
+    :domains => ["preview-pypi.python.org"],
   },
   :pypi => {
     :web => {
