@@ -3,13 +3,13 @@ use_inline_resources
 action :install do
 
   # Default the virtualenv to a path based off of the main path
-  virtualenv = new_resource.virtualenv.nil? ? ::File.join(new_resource.path, "env") : new_resource.virtualenv
+  virtualenv = new_resource.virtualenv.nil? ? "#{new_resource.path}/env" : new_resource.virtualenv
 
   # Setup the environment that we'll use for commands and such
   environ = {
-    "PATH" => ::File.join(virtualenv, "bin"),
+    "PATH" => "#{virtualenv}/bin",
     "PYTHONPATH" => new_resource.path,
-    "WAREHOUSE_CONF" => ::File.join(new_resource.path, "config.yml"),
+    "WAREHOUSE_CONF" => "#{new_resource.path}/config.yml",
   }
   environ.merge! new_resource.environment
 
@@ -35,7 +35,7 @@ action :install do
   end
 
   # Create our envdir for use with the ``envdir`` program
-  directory ::File.join(new_resource.path, "vars") do
+  directory "#{new_resource.path}/vars" do
     owner new_resource.user
     group new_resource.group
     mode "0750"
@@ -44,7 +44,7 @@ action :install do
 
   # Create our envdir files
   environ.each do |k, v|
-    file ::File.join(new_resource.path, "vars", k) do
+    file "#{new_resource.path}/vars/#{k}" do
       owner new_resource.user
       group new_resource.group
       mode "0750"
@@ -53,17 +53,17 @@ action :install do
     end
   end
 
-  gunicorn_config ::File.join(new_resource.path, "gunicorn.config.py") do
+  gunicorn_config "#{new_resource.path}/gunicorn.config.py" do
     owner new_resource.user
     group new_resource.group
 
-    listen "unix:#{::File.join(new_resource.path, "warehouse.sock")}"
+    listen "unix:#{new_resource.path}/warehouse.sock"
 
     action :create
     notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
-  file ::File.join(new_resource.path, "config.yml") do
+  file "#{new_resource.path}/config.yml" do
     owner new_resource.user
     group new_resource.group
     mode "0750"
@@ -77,7 +77,7 @@ action :install do
       "paths" => new_resource.paths,
       "cache" => new_resource.cache,
       "fastly" => new_resource.fastly,
-    }.to_yaml({}))
+    }.to_yaml)
   end
 
   python_virtualenv virtualenv do
@@ -116,7 +116,7 @@ action :install do
     notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
-  template ::File.join(new_resource.path, "pypi_wsgi.py") do
+  template "#{new_resource.path}/pypi_wsgi.py" do
     owner new_resource.user
     group new_resource.group
     mode "0755"
@@ -127,7 +127,7 @@ action :install do
   end
 
   supervisor_service new_resource.name do
-    command "#{::File.join(virtualenv, "bin", "gunicorn")} -c #{::File.join(new_resource.path, "gunicorn.config.py")} pypi_wsgi"
+    command "#{virtualenv}/bin/gunicorn -c #{new_resource.path}/gunicorn.config.py pypi_wsgi"
     process_name new_resource.name
     directory new_resource.path
     environment environ
@@ -146,7 +146,7 @@ action :install do
 
     variables ({
       :resource => new_resource,
-      :sock => ::File.join(new_resource.path, "warehouse.sock"),
+      :sock => "#{new_resource.path}/warehouse.sock",
       :name => "#{new_resource.name}-warehouse",
     })
 

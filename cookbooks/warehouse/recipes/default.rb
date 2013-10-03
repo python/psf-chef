@@ -11,7 +11,7 @@ include_recipe "supervisor"
 include_recipe "nginx"
 
 # Make sure libffi-dev is installed
-package "libffi-dev" do end
+package "libffi-dev"
 
 # Make sure envdir is installed
-package "daemontools" do end
+package "daemontools"
