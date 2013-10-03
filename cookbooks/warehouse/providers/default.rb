@@ -7,9 +7,9 @@ action :install do
 
   # Setup the environment that we'll use for commands and such
   environ = {
+    "PATH" => ::File.join(virtualenv, "bin"),
     "PYTHONPATH" => new_resource.path,
-    "DJANGO_SETTINGS_MODULE" => "settings",
-    "DJANGO_CONFIGURATION" => new_resource.debug ? "Development" : "Production",
+    "WAREHOUSE_CONF" => ::File.join(new_resource.path, "config.yml"),
   }
   environ.merge! new_resource.environment
 
@@ -63,28 +63,25 @@ action :install do
     notifies :restart, "supervisor_service[#{new_resource.name}]"
   end
 
-  template ::File.join(new_resource.path, "settings.py") do
+  file ::File.join(new_resource.path, "config.yml") do
     owner new_resource.user
     group new_resource.group
     mode "0750"
     backup false
 
-    cookbook "warehouse"
-    source "settings.py.erb"
-
-    variables ({
-      :allowed_hosts => new_resource.domains,
-      :secret_key => new_resource.secret_key,
-      :static_root => ::File.join(new_resource.path, "static"),
-      :database => new_resource.database,
-      :installed_apps => new_resource.installed_apps,
-    })
-
-    notifies :restart, "supervisor_service[#{new_resource.name}]"
+    content ({
+      "debug" => new_resource.debug,
+      "database" => {
+        "url" => new_resource.database,
+      },
+      "paths" => new_resource.paths,
+      "cache" => new_resource.cache,
+      "fastly" => new_resource.fastly,
+    }.to_yaml({}))
   end
 
   python_virtualenv virtualenv do
-    interpreter "python3"
+    interpreter new_resource.python
     owner new_resource.user
     group new_resource.group
     action :create
@@ -117,26 +114,25 @@ action :install do
     action :upgrade
 
     notifies :restart, "supervisor_service[#{new_resource.name}]"
-    notifies :run, "execute[collectstatic]", :immediately
+  end
+
+  template ::File.join(new_resource.path, "pypi_wsgi.py") do
+    owner new_resource.user
+    group new_resource.group
+    mode "0755"
+    backup false
+
+    cookbook "warehouse"
+    source "pypi_wsgi.py.erb"
   end
 
   supervisor_service new_resource.name do
-    command "#{::File.join(virtualenv, "bin", "gunicorn")} -c #{::File.join(new_resource.path, "gunicorn.config.py")} warehouse.wsgi"
+    command "#{::File.join(virtualenv, "bin", "gunicorn")} -c #{::File.join(new_resource.path, "gunicorn.config.py")} pypi_wsgi"
     process_name new_resource.name
     directory new_resource.path
     environment environ
     user new_resource.user
     action :enable
-  end
-
-  execute "collectstatic" do
-    command "#{::File.join(virtualenv, "bin", "warehouse")} collectstatic --noinput"
-    cwd new_resource.path
-    environment environ
-    user new_resource.user
-    group new_resource.group
-
-    action :nothing
   end
 
   template "#{node['nginx']['dir']}/sites-available/#{new_resource.name}.warehouse.conf" do
@@ -152,9 +148,6 @@ action :install do
       :resource => new_resource,
       :sock => ::File.join(new_resource.path, "warehouse.sock"),
       :name => "#{new_resource.name}-warehouse",
-      :static_files => {
-        "/static" => ::File.join(new_resource.path, "static"),
-      }
     })
 
     notifies :reload, "service[nginx]"

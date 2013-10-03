@@ -2,12 +2,6 @@ server {
   listen 80;
   server_name <%= @resource.domains.join(' ') %>;
 
-  <% @static_files.each do |url, path| %>
-  location <%= url %> {
-    alias <%= path %>;
-  }
-  <% end %>
-
   location / {
     proxy_pass       http://unix:<%= @sock %>:;
     proxy_set_header Host $http_host;
