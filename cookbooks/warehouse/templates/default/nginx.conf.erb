@@ -2,6 +2,12 @@ server {
   listen 80;
   server_name <%= @resource.domains.join(' ') %>;
 
+  add_header Strict-Transport-Security "max-age=31536000";
+
+  if ($http_x_forwarded_proto = "http") {
+    rewrite  ^/(.*)$  https://<%= @resource.domains.first %>/$1 permanent;
+  }
+
   location / {
     proxy_pass       http://unix:<%= @sock %>:;
     proxy_set_header Host $http_host;
