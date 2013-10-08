@@ -107,12 +107,14 @@ cron "staging-pycon account expunge" do
   hour "0"
   minute "0"
   command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py expunge_deleted"
+  user "www-data"
 end
 
 cron "staging-pycon update tutorial registrants" do
   hour "0"
-  minute "0"
+  minute "20"
   command "cd /srv/staging-pycon.python.org/current && /srv/staging-pycon.python.org/shared/env/bin/python manage.py update_tutorial_registrants"
+  user "www-data"
 end
 
 firewall 'ufw' do
