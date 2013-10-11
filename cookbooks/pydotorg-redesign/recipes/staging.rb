@@ -73,6 +73,10 @@ dpkg_package "yui-compressor" do
     action :install
 end
 
+package "subversion" do
+    action :install
+end
+
 # pip really doesn't like being run without a good env encoding, so fix that.
 ENV['LANG'] = "en_US.UTF-8"
 
@@ -145,6 +149,7 @@ application "redesign.python.org" do
         application_server_role "redesign-staging"
         server_name [node['fqdn'], 'preview.python.org']
         static_files "/static" => 'static-root'
+        static_files "/images" => 'static-root/images'
         application_port 8080
     end
 end
