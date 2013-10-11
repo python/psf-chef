@@ -1,6 +1,6 @@
 name "redesign-staging"
 description "Staging server for web redesign project"
-# Owner: Jacob Kaplan-Moss <jacob@jacobian.org>
+# Owners: Jacob Kaplan-Moss <jacob@jacobian.org>, Frank Wiles <frank@revsys.com>
 run_list [
     "recipe[pydotorg-redesign::staging]"
 ]
