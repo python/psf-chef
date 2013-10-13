@@ -148,8 +148,8 @@ application "redesign.python.org" do
     nginx_load_balancer do
         application_server_role "redesign-staging"
         server_name [node['fqdn'], 'preview.python.org']
-        static_files "/static" => 'static-root'
-        static_files "/images" => 'static-root/images'
+        static_files "/static" => 'static-root',
+                     "/images" => 'static-root/images'
         application_port 8080
     end
 end
