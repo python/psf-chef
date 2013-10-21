@@ -17,3 +17,6 @@ attribute :create_user, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :fastly, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cache, :kind_of => Hash, :default => {}
 attribute :paths, :kind_of => Hash, :default => {}
+attribute :urls, :kind_of => Hash, :default => {}
+attribute :redis, :kind_of => String
+attribute :site_name, :kind_of => String, :default => "Warehouse"

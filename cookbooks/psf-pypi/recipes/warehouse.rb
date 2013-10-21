@@ -20,6 +20,8 @@ warehouse "pypi" do
   python "python3.3"
   path "/opt/warehouse"
 
+  site_name "Python Package Index (Preview)"
+
   packages ({
     "raven" => :latest,
   })
@@ -33,17 +35,25 @@ warehouse "pypi" do
     "browser" => {
       "simple" => 900,
       "packages" => 900,
+      "project_detail" => 60,
     },
     "varnish" => {
       "simple" => 86400,
       "packages" => 86400,
+      "project_detail" => 60,
     },
   })
 
   paths ({
     "packages" => "/data/packages",
+    "documentation" => "/data/packagedocs",
+  })
+
+  urls ({
+    "documentation" => "http://pythonhosted.org/",
   })
 
   domains node["warehouse"]["domains"]
   database database["pypi"]["url"]
+  redis "redis://localhost:6379/0"
 end
