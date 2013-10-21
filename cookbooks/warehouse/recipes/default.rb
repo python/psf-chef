@@ -10,6 +10,14 @@ include_recipe "supervisor"
 # Make sure Nginx is installed
 include_recipe "nginx"
 
+# Make sure Node.js is installed
+include_recipe "nodejs::install_from_binary"
+
+# Make sure lessc is installed
+execute "install_lessc" do
+  command "npm install -g less"
+end
+
 # Make sure libffi-dev is installed
 package "libffi-dev"
 

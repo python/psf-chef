@@ -8,7 +8,11 @@ server {
     rewrite  ^/(.*)$  https://<%= @resource.domains.first %>/$1 permanent;
   }
 
-  location / {
+  root <%= @static_root %>;
+
+  try_files /system/maintenance.html $uri $uri/index.html $uri.html @warehouse;
+
+  location @warehouse {
     proxy_pass       http://unix:<%= @sock %>:;
     proxy_set_header Host $http_host;
   }

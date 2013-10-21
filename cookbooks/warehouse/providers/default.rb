@@ -7,7 +7,6 @@ action :install do
 
   # Setup the environment that we'll use for commands and such
   environ = {
-    "PATH" => "#{virtualenv}/bin",
     "PYTHONPATH" => "#{new_resource.path}/var/pypi",
     "WAREHOUSE_CONF" => "#{new_resource.path}/etc/config.yml",
   }
@@ -109,13 +108,21 @@ action :install do
         "url" => new_resource.redis,
       },
       "assets" => {
-        "directory" => "#{new_resource.path}/var/www"
+        "directory" => "#{new_resource.path}/var/www/static"
       },
       "urls" => new_resource.urls,
       "paths" => new_resource.paths,
       "cache" => new_resource.cache,
       "fastly" => new_resource.fastly,
     }.to_yaml)
+  end
+
+  execute "collectstatic" do
+    command "#{virtualenv}/bin/warehouse -c #{new_resource.path}/etc/config.yml collectstatic"
+    environment environ
+    user new_resource.user
+    group new_resource.group
+    action :nothing
   end
 
   python_virtualenv virtualenv do
@@ -151,6 +158,7 @@ action :install do
     virtualenv virtualenv
     action :upgrade
 
+    notifies :run, "execute[collectstatic]", :immediately
     notifies :restart, "supervisor_service[#{new_resource.name}]", :immediately
   end
 
@@ -186,6 +194,7 @@ action :install do
       :resource => new_resource,
       :sock => "#{new_resource.path}/var/warehouse.sock",
       :name => "#{new_resource.name}-warehouse",
+      :static_root => "#{new_resource.path}/var/www",
     })
 
     notifies :reload, "service[nginx]", :immediately
