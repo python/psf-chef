@@ -7,6 +7,7 @@ action :install do
 
   # Setup the environment that we'll use for commands and such
   environ = {
+    "LANG" => "en_US.UTF8",
     "PYTHONPATH" => "#{new_resource.path}/var/pypi",
     "WAREHOUSE_CONF" => "#{new_resource.path}/etc/config.yml",
   }
