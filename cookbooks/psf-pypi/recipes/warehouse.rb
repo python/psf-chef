@@ -151,7 +151,6 @@ template "#{node['nginx']['dir']}/sites-available/warehouse.conf" do
   mode "0755"
   backup false
 
-  cookbook "psf-pypi"
   source "nginx-warehouse.conf.erb"
 
   variables ({
