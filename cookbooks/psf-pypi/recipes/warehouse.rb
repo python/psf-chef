@@ -131,6 +131,11 @@ file "/opt/warehouse/etc/config.yml" do
         "project_detail" => 60,
       },
     },
+    "security" => {
+      "csp" => {
+        "default-src" => ["https://" + node["warehouse"]["domains"].first],
+      },
+    },
   }.to_yaml)
 
   notifies :restart, "supervisor_service[warehouse]"
