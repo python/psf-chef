@@ -61,7 +61,7 @@ end
 
 # TODO: Figure out how to do this in warehouse packaging
 execute "fixup /opt/warehouse owner" do
-  command "chown -Rf warehouse:warehouse /opt/warehouse"
+  command "chown -Rf root:warehouse /opt/warehouse"
   action :nothing
 end
 
@@ -69,14 +69,14 @@ end
 execute "collectstatic" do
   command "/opt/warehouse/bin/warehouse -c /opt/warehouse/etc/config.yml collectstatic"
   environment environ
-  user "warehouse"
+  user "root"
   group "warehouse"
   action :nothing
 end
 
 # TODO: Can we move this into packaging?
 gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
-  owner "warehouse"
+  owner "root"
   group "warehouse"
 
   listen "unix:/opt/warehouse/var/warehouse.sock"
@@ -86,9 +86,9 @@ gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
 end
 
 file "/opt/warehouse/etc/config.yml" do
-  owner "warehouse"
+  owner "root"
   group "warehouse"
-  mode "0750"
+  mode "0640"
   backup false
 
   content ({
@@ -148,7 +148,7 @@ end
 template "#{node['nginx']['dir']}/sites-available/warehouse.conf" do
   owner "root"
   group "root"
-  mode "0755"
+  mode "0640"
   backup false
 
   source "nginx-warehouse.conf.erb"
