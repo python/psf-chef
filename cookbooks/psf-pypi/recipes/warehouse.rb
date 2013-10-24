@@ -55,6 +55,7 @@ package "warehouse" do
   action :upgrade
 
   notifies :run, "execute[fixup /opt/warehouse owner]", :immediately
+  notifies :run, "execute[fixup /opt/warehouse/var owner]", :immediately
   notifies :run, "execute[collectstatic]"
   notifies :restart, "supervisor_service[warehouse]"
 end
@@ -62,6 +63,12 @@ end
 # TODO: Figure out how to do this in warehouse packaging
 execute "fixup /opt/warehouse owner" do
   command "chown -Rf root:warehouse /opt/warehouse"
+  action :nothing
+end
+
+# TODO: Figure out how to do this in warehouse packaging
+execute "fixup /opt/warehouse/var owner" do
+  command "chown -Rf warehouse:warehouse /opt/warehouse/var"
   action :nothing
 end
 
