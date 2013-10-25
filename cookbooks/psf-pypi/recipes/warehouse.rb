@@ -36,44 +36,17 @@ execute "update repositories" do
   command "apt-get update -q -y"
 end
 
-group "warehouse" do
-  system true
-end
-
-user "warehouse" do
-  comment "Warehouse Service"
-  gid "warehouse"
-  system true
-  shell '/bin/false'
-  home "/opt/warehouse"
-end
-
 package "warehouse" do
   action :upgrade
 
-  notifies :run, "execute[fixup /opt/warehouse owner]", :immediately
-  notifies :run, "execute[fixup /opt/warehouse/var owner]", :immediately
   notifies :restart, "supervisor_service[warehouse]"
 end
 
-# TODO: Figure out how to do this in warehouse packaging
-execute "fixup /opt/warehouse owner" do
-  command "chown -Rf root:warehouse /opt/warehouse"
-  action :nothing
-end
-
-# TODO: Figure out how to do this in warehouse packaging
-execute "fixup /opt/warehouse/var owner" do
-  command "chown -Rf warehouse:warehouse /opt/warehouse/var"
-  action :nothing
-end
-
-# TODO: Can we move this into packaging?
 gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
   owner "root"
   group "warehouse"
 
-  listen "unix:/opt/warehouse/var/warehouse.sock"
+  listen "unix:/opt/warehouse/var/run/warehouse.sock"
 
   action :create
   notifies :restart, "supervisor_service[warehouse]"
@@ -128,7 +101,6 @@ file "/opt/warehouse/etc/config.yml" do
   notifies :restart, "supervisor_service[warehouse]"
 end
 
-# TODO: Move this into packaging
 python_pip "gunicorn" do
   virtualenv "/opt/warehouse"
   action :upgrade
@@ -154,7 +126,7 @@ template "#{node['nginx']['dir']}/sites-available/warehouse.conf" do
 
   variables ({
     :domains => node["warehouse"]["domains"],
-    :sock => "/opt/warehouse/var/warehouse.sock",
+    :sock => "/opt/warehouse/var/run/warehouse.sock",
     :name => "warehouse",
     :static_root => "/opt/warehouse/var/www",
   })
