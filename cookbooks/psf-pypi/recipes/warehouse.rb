@@ -10,14 +10,6 @@ include_recipe "nginx"
 # Make sure supervisor is available to us
 include_recipe "supervisor"
 
-# Make sure Node.js is installed
-include_recipe "nodejs::install_from_binary"
-
-# Make sure lessc is installed
-execute "install_lessc" do
-  command "npm install -g less"
-end
-
 environ = {
   "LANG" => "en_US.UTF8",
   "WAREHOUSE_CONF" => "/opt/warehouse/etc/config.yml",
@@ -61,7 +53,6 @@ package "warehouse" do
 
   notifies :run, "execute[fixup /opt/warehouse owner]", :immediately
   notifies :run, "execute[fixup /opt/warehouse/var owner]", :immediately
-  notifies :run, "execute[collectstatic]"
   notifies :restart, "supervisor_service[warehouse]"
 end
 
@@ -74,15 +65,6 @@ end
 # TODO: Figure out how to do this in warehouse packaging
 execute "fixup /opt/warehouse/var owner" do
   command "chown -Rf warehouse:warehouse /opt/warehouse/var"
-  action :nothing
-end
-
-# TODO: Can we move this into packaging?
-execute "collectstatic" do
-  command "/opt/warehouse/bin/warehouse -c /opt/warehouse/etc/config.yml collectstatic"
-  environment environ
-  user "root"
-  group "warehouse"
   action :nothing
 end
 
