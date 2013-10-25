@@ -36,7 +36,8 @@ apt_repository "warehouse" do
     uri "http://f30946d9bf6d8f30a9b7-8a1b7b6e827d25e65cef20ed702fa327.r51.cf5.rackcdn.com/"
     distribution node['lsb']['codename']
     components ["main"]
-    key "http://f30946d9bf6d8f30a9b7-8a1b7b6e827d25e65cef20ed702fa327.r51.cf5.rackcdn.com/pubkey.gpg"
+    arch "amd64"
+    key "warehouse.gpg"
 end
 
 group "warehouse" do
