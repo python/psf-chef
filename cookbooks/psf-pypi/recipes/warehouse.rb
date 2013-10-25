@@ -33,11 +33,15 @@ apt_repository "pypy" do
 end
 
 apt_repository "warehouse" do
-    uri "http://f30946d9bf6d8f30a9b7-8a1b7b6e827d25e65cef20ed702fa327.r51.cf5.rackcdn.com/"
+    uri "http://162.209.104.234/"
     distribution node['lsb']['codename']
     components ["main"]
     arch "amd64"
     key "warehouse.gpg"
+end
+
+execute "update repositories" do
+  command "apt-get update -q -y"
 end
 
 group "warehouse" do
