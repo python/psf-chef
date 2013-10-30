@@ -96,6 +96,9 @@ file "/opt/warehouse/etc/config.yml" do
         "default-src" => ["https://" + node["warehouse"]["domains"].first],
       },
     },
+    "sentry" => {
+      "dsn" => secrets["sentry"]["dsn"],
+    }
   }.to_yaml)
 
   notifies :restart, "supervisor_service[warehouse]"
