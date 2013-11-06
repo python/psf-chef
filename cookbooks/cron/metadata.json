@@ -1,0 +1,37 @@
+{
+  "name": "cron",
+  "version": "1.2.8",
+  "description": "Installs cron",
+  "long_description": "cron Cookbook\n=============\nInstalls the cron package and starts the crond service.\n\n\nRequirements\n------------\nPlatforms:\n- RHEL family\n- Debian family\n\n\nResources and Providers\n-----------------------\n### `cron_d`\nThe `cron_d` LWRP can be used to manage files in `/etc/cron.d`. It supports the same interface as Chef's built-in `cron` resource:\n\n```ruby\ncron_d 'daily-usage-report' do\n  minute  0\n  hour    23\n  command '/srv/app/scripts/daily_report'\n  user    'appuser'\nend\n```\n\n#### Attributes\n* `minute`, `hour`, `day`, `month`, `weekday` - schedule your cron job. These correspond exactly to their equivalents in the crontab file. All default to \"*\".\n* `command` - the command to run. Required.\n* `user` - the user to run as. Defaults to \"root\".\n* `mailto`, `path`, `home`, `shell` - set the corresponding environment variables in the cron.d file. No default.\n\n\nLicense & Authors\n-----------------\n- Author:: Joshua Timberman (joshua@opscode.com)\n\n```text\nCopyright 2010-2012, Opscode, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n```\n",
+  "maintainer": "Opscode, Inc.",
+  "maintainer_email": "cookbooks@opscode.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "redhat": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "amazon": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "raspbian": ">= 0.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  }
+}
