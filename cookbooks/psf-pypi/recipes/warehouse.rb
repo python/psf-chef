@@ -82,8 +82,10 @@ file "/opt/warehouse/etc/config.yml" do
     },
     "search" => {
       "hosts" => eshosts,
-      "auth" => [elasticsearch["username"], elasticsearch["password"]],
-      "ssl" => true,
+      "client_options" => {
+        "auth" => [elasticsearch["username"], elasticsearch["password"]],
+        "use_ssl" => true,
+      },
     },
     "assets" => {
       "directory" => "/opt/warehouse/var/www/static"
