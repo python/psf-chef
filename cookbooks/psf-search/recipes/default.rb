@@ -49,24 +49,9 @@ firewall_rule "elasticsearch-nginx" do
   action :allow
 end
 
-search(:node, "role:elasticsearch AND chef_environment:#{node.chef_environment}") do |n|
-  if n.attribute?('cloud')
-    address = n['cloud']['local_ipv4']
-  else
-    address = n['ipaddress']
-  end
-
-  firewall_rule "elasticsearch-http-#{address}" do
-    port node["elasticsearch"]["http"]["port"]
-    protocol   :tcp
-    source address
-    action :allow
-  end
-
-  firewall_rule "elasticsearch-tcp-#{address}" do
-    port_range 9300..9400
-    protocol   :tcp
-    source address
-    action :allow
-  end
+firewall_rule "elasticsearch-internal" do
+  protocol :tcp
+  port_range 9200..9400
+  source "192.168.3.0/24"
+  action :allow
 end

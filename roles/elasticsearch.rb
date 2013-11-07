@@ -8,6 +8,9 @@ run_list [
 override_attributes({
   :elasticsearch => {
     :version => "0.90.6",
+    :network => {
+      :host => "_eth2_",
+    },
   },
   :java => {
     :oracle => {
