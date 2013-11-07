@@ -30,6 +30,7 @@ cookbook "firewall", '= 0.10.2'
 cookbook "rsyslog"
 cookbook "postgresql"
 cookbook "nodejs", '= 1.1.2'
+cookbook "reprepro"
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"
