@@ -83,7 +83,7 @@ file "/opt/warehouse/etc/config.yml" do
     "search" => {
       "hosts" => eshosts,
       "client_options" => {
-        "auth" => [elasticsearch["username"], elasticsearch["password"]],
+        "http_auth" => "#{elasticsearch['username']}:#{elasticsearch['password']}",
         "use_ssl" => true,
       },
     },
