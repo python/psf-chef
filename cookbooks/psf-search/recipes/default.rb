@@ -30,3 +30,43 @@ end
 nginx_site "default" do
   enable false
 end
+
+
+# Setup the Firewall to disallow ElasticSearch not via Nginx from anything other
+#   than other ES nodes.
+firewall "ufw" do
+  action :enable
+end
+
+firewall_rule "ssh" do
+  port     22
+  action   :allow
+  notifies :enable, 'firewall[ufw]'
+end
+
+firewall_rule "elasticsearch-nginx" do
+  port   8200
+  action :allow
+end
+
+search(:node, "role:elasticsearch AND chef_environment:#{node.chef_environment}") do |n|
+  if n.attribute?('cloud')
+    address = n['cloud']['local_ipv4']
+  else
+    address = n['ipaddress']
+  end
+
+  firewall_rule "elasticsearch-http-#{address}" do
+    port node["elasticsearch"]["http"]["port"]
+    protocol   :tcp
+    source address
+    action :allow
+  end
+
+  firewall_rule "elasticsearch-tcp-#{address}" do
+    port_range 9300..9400
+    protocol   :tcp
+    source address
+    action :allow
+  end
+end
