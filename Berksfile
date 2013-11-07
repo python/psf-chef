@@ -33,6 +33,7 @@ cookbook "nodejs", '= 1.1.2'
 cookbook "reprepro"
 cookbook "poise", :git => "https://github.com/poise/poise-cookbook.git"
 cookbook "jenkins", :git => "https://github.com/balanced-cookbooks/jenkins.git"
+cookbook "elasticsearch"
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"

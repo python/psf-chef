@@ -4,3 +4,6 @@ default["pypi"]["cdn"]["logging"]["process_script"] = "/data/pypi/tools/rsyslog-
 
 # Warehouse Domain Setup
 default["warehouse"]["domains"] = ["pypi.python.org"]
+
+# Warehouse Elasticsearch Setup
+default["warehouse"]["elasticsearch"]["hosts"] = []
