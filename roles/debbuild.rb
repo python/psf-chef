@@ -3,7 +3,7 @@ description "Ubuntu APT Server"
 run_list [
     "recipe[reprepro]",
     "recipe[psf-debbuild]",
-    #"recipe[psf-pypi::build]",
+    "recipe[psf-debbuild::warehouse]",
 ]
 override_attributes({
     :reprepro => {
