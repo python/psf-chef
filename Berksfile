@@ -2,7 +2,7 @@ site :opscode
 
 cookbook "apt", '= 1.9.0'
 cookbook "chef-client", '= 1.1.2'
-cookbook "sudo", '= 1.1.0'
+cookbook "sudo", '= 2.2.2'
 cookbook "jn_sysctl", '= 1.1.0'
 cookbook "heartbeat", :git => "https://github.com/coderanger/heartbeat.git"
 cookbook "ntp", '= 1.1.8'
