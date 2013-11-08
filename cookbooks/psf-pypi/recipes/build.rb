@@ -1,11 +1,3 @@
-# Install our apt repository
-apt_repository "psf" do
-    uri "http://162.242.213.234/"
-    distribution node['lsb']['codename']
-    components ["main"]
-    key "psf.gpg"
-end
-
 # Install the PyPy PPA
 apt_repository "pypy" do
     uri "http://ppa.launchpad.net/pypy/ppa/ubuntu"
