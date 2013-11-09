@@ -5,4 +5,7 @@ license           "Apache 2.0"
 description       "Installs and configures builders"
 version           "0.0.19"
 
-depends "reprepro"
+depends           "reprepro"
+depends           "poise"
+depends           "jenkins"
+depends           "postgresql"

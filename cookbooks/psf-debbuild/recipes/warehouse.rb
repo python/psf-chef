@@ -7,8 +7,9 @@ apt_repository "pypy" do
     key "2862D0785AFACD8C65B23DB0251104D968854915"
 end
 
-# Install Python-Virtualenv
-package "python-virtualenv"
+# Install PyPy
+package "pypy"
 
-# Install dh-virtualenv
-package "dh-virtualenv"
+# Install Invoke
+python_pip "invoke" do action :upgrade end
+python_pip "wheel" do action :upgrade end

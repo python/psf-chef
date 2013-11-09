@@ -1,6 +1,7 @@
 name "debbuild"
 description "Ubuntu APT Server"
 run_list [
+    "recipe[java]",
     "recipe[reprepro]",
     "recipe[psf-debbuild]",
     "recipe[psf-debbuild::warehouse]",
