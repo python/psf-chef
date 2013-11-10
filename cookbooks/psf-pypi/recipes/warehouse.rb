@@ -4,6 +4,8 @@ database = data_bag_item("secrets", "postgres")
 # Get our secrets
 secrets = data_bag_item("secrets", "pypi")
 
+elasticsearch = data_bag_item("secrets", "elasticsearch")
+
 # Make sure Nginx is installed
 include_recipe "nginx"
 
@@ -52,6 +54,15 @@ gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
   notifies :restart, "supervisor_service[warehouse]"
 end
 
+eshosts = []
+if node["warehouse"]["elasticsearch"]["hosts"].empty?
+  search(:node, "role:elasticsearch AND chef_environment:#{node.chef_environment}") do |n|
+    eshosts << {"host" => n['fqdn'], "port" => 8200}
+  end
+else
+  eshosts = node["warehouse"]["elasticsearch"]["hosts"]
+end
+
 file "/opt/warehouse/etc/config.yml" do
   owner "root"
   group "warehouse"
@@ -69,6 +80,13 @@ file "/opt/warehouse/etc/config.yml" do
     "redis" => {
       "url" => "redis://localhost:6379/0",
     },
+    "search" => {
+      "hosts" => eshosts,
+      "client_options" => {
+        "http_auth" => "#{elasticsearch['username']}:#{elasticsearch['password']}",
+        "use_ssl" => true,
+      },
+    },
     "assets" => {
       "directory" => "/opt/warehouse/var/www/static"
     },
@@ -81,14 +99,18 @@ file "/opt/warehouse/etc/config.yml" do
     },
     "cache" => {
       "browser" => {
+        "index" => 900,
         "simple" => 900,
         "packages" => 900,
-        "project_detail" => 60,
+        "project_detail" => 900,
+        "user_profile" => 900,
       },
       "varnish" => {
+        "index" => 60,
         "simple" => 86400,
         "packages" => 86400,
         "project_detail" => 60,
+        "user_profile" => 60,
       },
     },
     "security" => {
