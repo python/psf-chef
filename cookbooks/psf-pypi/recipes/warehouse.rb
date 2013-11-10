@@ -27,11 +27,10 @@ apt_repository "pypy" do
 end
 
 apt_repository "warehouse" do
-    uri "http://162.209.104.234/"
+    uri "http://162.242.214.29/"
     distribution node['lsb']['codename']
     components ["main"]
-    arch "amd64"
-    key "warehouse.gpg"
+    key "psf.gpg"
 end
 
 execute "update repositories" do
@@ -41,7 +40,7 @@ end
 package "warehouse" do
   action :upgrade
 
-  notifies :restart, "supervisor_service[warehouse]"
+  notifies :restart, "service[warehouse]"
 end
 
 gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
@@ -51,7 +50,7 @@ gunicorn_config "/opt/warehouse/etc/gunicorn.config.py" do
   listen "unix:/opt/warehouse/var/run/warehouse.sock"
 
   action :create
-  notifies :restart, "supervisor_service[warehouse]"
+  notifies :restart, "service[warehouse]"
 end
 
 eshosts = []
@@ -123,22 +122,31 @@ file "/opt/warehouse/etc/config.yml" do
     }
   }.to_yaml)
 
-  notifies :restart, "supervisor_service[warehouse]"
+  notifies :restart, "service[warehouse]"
 end
 
 python_pip "gunicorn" do
   virtualenv "/opt/warehouse"
   action :upgrade
-  notifies :restart, "supervisor_service[warehouse]"
+  notifies :restart, "service[warehouse]"
 end
 
-supervisor_service "warehouse" do
-  command "/opt/warehouse/bin/gunicorn -c /opt/warehouse/etc/gunicorn.config.py warehouse.wsgi"
-  process_name "warehouse"
-  directory "/opt/warehouse"
-  environment environ
-  user "warehouse"
-  action :enable
+template "/etc/init/warehouse.conf" do
+  source "warehouse.upstart.conf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+
+  variables ({
+    :environment => environ,
+  })
+
+  notifies :restart, "service[warehouse]"
+end
+
+service "warehouse" do
+  provider Chef::Provider::Service::Upstart
+  action [:enable, :start]
 end
 
 template "#{node['nginx']['dir']}/sites-available/warehouse.conf" do
