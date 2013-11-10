@@ -1,0 +1,16 @@
+description "Wsrehouse"
+
+start on (filesystem)
+stop on runlevel [016]
+
+respawn
+console log
+setuid warehouse
+setgid warehouse
+chdir /opt/warehouse
+
+<% @environment.each_pair do |key, value| %>
+env <%= key %>=<%= value %>
+<% end %>
+
+exec /opt/warehouse/bin/gunicorn -c /opt/warehouse/etc/gunicorn.config.py warehouse.wsgi
