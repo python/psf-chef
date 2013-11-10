@@ -10,4 +10,5 @@ Gemfile.lock
 Berksfile.lock
 Vagrantfile
 data_bags/secrets/
+data_bags/reprepro/
 .chef_user
