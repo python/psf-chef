@@ -7,6 +7,7 @@ run_list [
     'recipe[psf-pypi::logging]',
     'recipe[psf-pypi::pypi]',
     'recipe[psf-pypi::warehouse]',
+    'recipe[psf-pypi]'
 ]
 override_attributes({
   :warehouse => {
