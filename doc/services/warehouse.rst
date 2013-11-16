@@ -27,9 +27,9 @@ the Warehouse servers. The process is:
 Environment / Dependencies
 --------------------------
 
-* PyPy (Installed from PPA)
+* PyPy
 * PostgreSQL 9.2+ (Hosted by OSUOL)
-* Elasticsearch (Hosted on es1.psf.io)
+* Elasticsearch
 
 
 Configuration
