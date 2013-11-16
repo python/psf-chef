@@ -8,6 +8,15 @@ Welcome!
 
 Welcome to the Python Infrastructure Team Documentation Index
 
+
+
+.. toctree::
+   :maxdepth: 2
+
+   services/index
+
+
+
 Let's get started
 ==================
 
