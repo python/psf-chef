@@ -24,11 +24,12 @@ the Warehouse servers. The process is:
    for an updated package and will update to the latest version if needed.
 
 
-Environment
------------
+Environment / Dependencies
+--------------------------
 
-Warehouse is deployed on Ubuntu 12.04 with the PyPy interpreter. It uses
-PostgreSQL as its database and Elasticsearch for its search implementation.
+* PyPy
+* PostgreSQL 9.2+
+* Elasticsearch
 
 
 Debian Packages and Virtual Environments
