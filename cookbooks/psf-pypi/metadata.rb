@@ -3,7 +3,7 @@ maintainer        "Noah Kantrowitz"
 maintainer_email  "noah@coderanger.net"
 license           "Apache 2.0"
 description       "Installs and configures PyPI"
-version           "0.0.21"
+version           "0.0.22"
 
 depends           "pgbouncer"
 depends           "rsyslog"
