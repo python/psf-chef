@@ -29,6 +29,8 @@ The following tasks are not directly replaced by knife sub-commands.
 * `install` - Calls `update`, `roles` and `upload_cookbooks` Rake tasks.
 * `ssl_cert` - Create self-signed SSL certificates in `certificates/` dir.
 * `update` - Update the repository from source control server, understands git and svn.
+* `docs` - Builds documentation
+* `docs:publish` - Publish docs to readthedocs.org
 
 The following tasks duplicate functionality from knife and may be removed in a future version of Chef.
 
