@@ -32,6 +32,13 @@ Environment / Dependencies
 * Elasticsearch (Hosted on es1.psf.io)
 
 
+Configuration
+-------------
+
+Warehouse is configured using a YAML file which the cookbook will write to
+``/opt/warehouse/etc/config.yml``.
+
+
 Debian Packages and Virtual Environments
 ----------------------------------------
 
