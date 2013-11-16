@@ -53,7 +53,7 @@ task :bundle_cookbook, :cookbook do |t, args|
   FileUtils.mkdir(temp_dir)
   FileUtils.mkdir(temp_cookbook_dir)
 
-  child_folders = [ "cookbooks/#{args.cookbook}", "site-cookbooks/#{args.cookbook}" ]
+  child_folders = [ "cookbooks/#{args.cookbook}", "~/.berkshelf/cookbooks/#{args.cookbook}" ]
   child_folders.each do |folder|
     file_path = File.join(TOPDIR, folder, ".")
     FileUtils.cp_r(file_path, temp_cookbook_dir) if File.directory?(file_path)
@@ -64,13 +64,37 @@ task :bundle_cookbook, :cookbook do |t, args|
   FileUtils.rm_rf temp_dir
 end
 
-desc "Run librarian"
-task :librarian do
-  puts "** Syncing with Cheffile"
-  system("librarian-chef install")
-end
-
 # Extend the existing task to also call librarian
 task :update do
   Rake::Task[:librarian].invoke
+end
+
+desc "Generate all docs"
+task :docs => ["docs:nodes", "docs:roles", "docs:html"]
+
+namespace :docs do
+  pwd = File.expand_path(File.dirname(__FILE__))
+
+  desc "generate node info for docs"
+  task :nodes do
+    outfile = "#{pwd}/doc/nodes.rst"
+    system("bundle exec knife reporter nodes rst -o #{outfile}")
+    puts "Wrote node documentation to #{outfile}"
+  end
+
+  task :roles do
+    outfile = "#{pwd}/doc/roles.rst"
+    system("bundle exec knife reporter roles rst -o #{outfile}")
+    puts "Wrote role documentation to #{outfile}"
+  end
+
+  desc "generate html documents"
+  task :html do
+    system("cd #{pwd}/doc && make html")
+  end
+
+  desc "publish to readthedocs.org"
+  task :publish do
+    system("cd #{pwd}/doc && make rtd")
+  end
 end
