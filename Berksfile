@@ -34,6 +34,7 @@ cookbook "reprepro"
 cookbook "poise", :git => "https://github.com/poise/poise-cookbook.git"
 cookbook "jenkins", :git => "https://github.com/balanced-cookbooks/jenkins.git"
 cookbook "elasticsearch"
+cookbook "sysctl"
 
 # Our cookbooks
 cookbook "haproxy", :path => "./cookbooks/haproxy"
