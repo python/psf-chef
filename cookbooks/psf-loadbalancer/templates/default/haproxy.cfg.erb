@@ -66,14 +66,16 @@ backend pypi
   server fallback localhost:8080 backup
 
 backend pythonhosted
-  server web0 web0.pypi.io:9010 check port 9010
-  server web1 web1.pypi.io:9010 check port 9010
+  option httpchk HEAD /
+  server web0 web0.pypi.io:9010 check
+  server web1 web1.pypi.io:9010 check
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 
 backend test-pythonhosted
-  server web0 web0.pypi.io:9011 check port 9011
-  server web1 web1.pypi.io:9011 check port 9011
+  option httpchk HEAD /
+  server web0 web0.pypi.io:9011 check
+  server web1 web1.pypi.io:9011 check
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 
