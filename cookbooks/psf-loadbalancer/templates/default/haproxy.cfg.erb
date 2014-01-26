@@ -19,7 +19,7 @@ frontend <%= proto %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
 
   acl host_pypi hdr(host) -i cheeseshop.python.org a.pypi.python.org b.pypi.python.org d.pypi.python.org g.pypi.python.org
-  acl host_pythonhosted hdr(host) -i packages.python.org pythonhosted.org
+  acl host_pythonhosted hdr(host) -i packages.python.org www.pythonhosted.org pythonhosted.org
   acl host_test_pythonhosted hdr(host) -i test.pythonhosted.org
   acl host_preview_pypi hdr(host) -i preview-pypi.python.org
   acl host_testpypi hdr(host) -i testpypi.python.org
