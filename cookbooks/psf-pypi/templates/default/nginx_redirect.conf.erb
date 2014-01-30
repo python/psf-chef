@@ -3,5 +3,5 @@
 
 server {
   server_name <%= @existing_domain %>;
-  rewrite ^ $scheme://<%= @new_domain %>$request_uri permanent;
+  return 301 $scheme://<%= @new_domain %>$request_uri;
 }
