@@ -1,0 +1,19 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 1024 
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-12.04
+
+suites:
+  - name: preview-es
+    run_list: 
+      - recipe[apt]
+      - recipe[java]
+      - recipe[pydotorg-redesign::elasticsearch]
+    attributes:
