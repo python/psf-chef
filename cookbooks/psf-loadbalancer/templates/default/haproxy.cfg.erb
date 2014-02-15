@@ -18,11 +18,7 @@ frontend <%= proto %>
   bind <%= bind %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
 
-  acl host_pypi hdr(host) -i cheeseshop.python.org a.pypi.python.org b.pypi.python.org d.pypi.python.org g.pypi.python.org
-  acl host_pythonhosted hdr(host) -i packages.python.org www.pythonhosted.org pythonhosted.org
-  acl host_test_pythonhosted hdr(host) -i test.pythonhosted.org
-  acl host_preview_pypi hdr(host) -i preview-pypi.python.org
-  acl host_testpypi hdr(host) -i testpypi.python.org
+  acl host_cheeseshop hdr(host) -i cheeseshop.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
   acl host_preview hdr(host) -i preview.python.org preview.front.python.org
@@ -31,11 +27,7 @@ frontend <%= proto %>
   acl host_uspycon hdr(host) -i us.pycon.org
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
 
-  use_backend pypi if host_pypi
-  use_backend pythonhosted if host_pythonhosted
-  use_backend test-pythonhosted if host_test_pythonhosted
-  use_backend preview-pypi if host_preview_pypi
-  use_backend testpypi if host_testpypi
+  use_backend cheeseshop if host_cheeseshop
   use_backend wiki if host_wiki
   use_backend pypy-home if host_pypy
   use_backend preview if host_preview
@@ -45,53 +37,8 @@ frontend <%= proto %>
   use_backend uspycon-staging if host_uspycon_staging
 <%- end -%>
 
-listen pypi-logging
-  bind 0.0.0.0:51450
-  mode tcp
-  option tcplog
-
-  <%- @pypi_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:51450
-  <%- end -%>
-
-  acl fastly src 199.27.72.0/21 83.223.121.248/29 103.244.50.0/24 103.245.222.0/23 103.245.224.0/24 202.21.128.53 203.57.145.55
-  tcp-request connection accept if fastly
-  tcp-request connection reject
-
-backend pypi
-  <%- @pypi_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
-  <%- end -%>
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
-
-backend pythonhosted
-  option httpchk HEAD /
-  server web0 web0.pypi.io:9010 check
-  server web1 web1.pypi.io:9010 check
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
-
-backend test-pythonhosted
-  option httpchk HEAD /
-  server web0 web0.pypi.io:9011 check
-  server web1 web1.pypi.io:9011 check
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
-
-backend preview-pypi
-  <%- @preview_pypi_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
-  <%- end -%>
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
-
-backend testpypi
-  <%- @testpypi_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
-  <%- end -%>
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
+backend cheeseshop
+  redirect prefix https://pypi.python.org
 
 backend wiki
   reqidel ^X-Forwarded-For:.*
