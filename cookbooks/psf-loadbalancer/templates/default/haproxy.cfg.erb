@@ -38,7 +38,7 @@ frontend <%= proto %>
 <%- end -%>
 
 backend cheeseshop
-  redirect prefix https://pypi.python.org
+  redirect prefix https://pypi.python.org code 301
 
 backend wiki
   reqidel ^X-Forwarded-For:.*
