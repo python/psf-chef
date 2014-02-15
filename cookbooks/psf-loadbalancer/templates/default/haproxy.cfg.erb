@@ -18,7 +18,7 @@ frontend <%= proto %>
   bind <%= bind %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
 
-  acl host_pypi hdr(host) -i cheeseshop.python.org
+  acl host_cheeseshop hdr(host) -i cheeseshop.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
   acl host_preview hdr(host) -i preview.python.org preview.front.python.org
@@ -27,7 +27,7 @@ frontend <%= proto %>
   acl host_uspycon hdr(host) -i us.pycon.org
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
 
-  use_backend pypi if host_pypi
+  use_backend cheeseshop if host_cheeseshop
   use_backend wiki if host_wiki
   use_backend pypy-home if host_pypy
   use_backend preview if host_preview
@@ -37,12 +37,8 @@ frontend <%= proto %>
   use_backend uspycon-staging if host_uspycon_staging
 <%- end -%>
 
-backend pypi
-  <%- @pypi_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
-  <%- end -%>
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
+backend cheeseshop
+  redirect prefix https://pypi.python.org
 
 backend wiki
   reqidel ^X-Forwarded-For:.*
