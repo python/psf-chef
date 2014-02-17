@@ -1,8 +1,8 @@
-name 'pydotorg-prod-web'
-description 'Production role for pydotorg web machines'
+name 'pydotorg-staging-web'
+description 'Staging role for pydotorg web machines'
 override_attributes(
   'pydotorg-redesign' => {
-    'env' => 'prod'
+    'env' => 'staging'
   }
 )
 run_list [

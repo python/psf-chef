@@ -1,6 +1,8 @@
 include_recipe 'python'
 include_recipe 'java'
 
+current_env = node['pydotorg-redesign']['env']
+
 #
 # Override the python/django application resource to take a python_interpreter
 # option. Python 3 dudes. This is a hack; it really shouldn't be here but in a
@@ -117,7 +119,7 @@ python_virtualenv '/srv/redesign.python.org/shared/env' do
 end
 
 secrets = data_bag_item('secrets', 'pydotorg-redesign')
-db = data_bag_item('secrets', 'postgres')['redesign-staging']
+db = data_bag_item('secrets', 'postgres')["redesign-#{current_env}"]
 
 application 'redesign.python.org' do
   path '/srv/redesign.python.org'
@@ -128,14 +130,14 @@ application 'redesign.python.org' do
 
   pydotorg_django do
     requirements 'requirements.txt'
-    migration_command '/srv/redesign.python.org/shared/env/bin/python manage.py syncdb --settings pydotorg.settings.prod --migrate --noinput'
+    migration_command "/srv/redesign.python.org/shared/env/bin/python manage.py syncdb --settings pydotorg.settings.#{current_env} --migrate --noinput"
   end
 
   before_migrate do
-    # Create a prod settings file. Doing this instead of the settings
+    # Create a settings file. Doing this instead of the settings
     # stuff built into the Django resource so that it fits with our app
     # better.
-    template ::File.join(new_resource.release_path, 'pydotorg', 'settings', 'prod.py') do
+    template ::File.join(new_resource.release_path, 'pydotorg', 'settings', "#{current_env}.py") do
       source 'settings.py.erb'
       variables 'db' => db,
                 'secret_key' => secrets['secret_key']
@@ -153,7 +155,7 @@ application 'redesign.python.org' do
     execute "#{python_cmd} manage.py collectstatic -v0 --noinput" do
       cwd new_resource.release_path
       environment 'LC_ALL' => ENV['LANG'],
-                  'DJANGO_SETTINGS_MODULE' => 'pydotorg.settings.prod'
+                  'DJANGO_SETTINGS_MODULE' => "pydotorg.settings.#{current_env}"
     end
   end
 
@@ -164,11 +166,11 @@ application 'redesign.python.org' do
     app_module 'pydotorg.wsgi:application'
     virtualenv '/srv/redesign.python.org/shared/env'
     settings_template 'gunicorn.py.erb'
-    environment 'DJANGO_SETTINGS_MODULE' => 'pydotorg.settings.prod'
+    environment 'DJANGO_SETTINGS_MODULE' => "pydotorg.settings.#{current_env}"
   end
 
   nginx_load_balancer do
-    application_server_role 'pydotorg-prod-web'
+    application_server_role "pydotorg-#{current_env}-web"
     server_name [node['fqdn'], 'preview.python.org']
     static_files '/static' => 'static-root',
                  '/images' => 'static-root/images'
