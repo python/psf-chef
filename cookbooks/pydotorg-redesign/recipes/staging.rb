@@ -143,6 +143,7 @@ application "redesign.python.org" do
         app_module "pydotorg.wsgi:application"
         virtualenv "/srv/redesign.python.org/shared/env"
         settings_template "gunicorn.py.erb"
+        environment "DJANGO_SETTINGS_MODULE" => "pydotorg.settings.staging"
     end
 
     nginx_load_balancer do
