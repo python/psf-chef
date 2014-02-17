@@ -119,7 +119,7 @@ python_virtualenv '/srv/redesign.python.org/shared/env' do
 end
 
 secrets = data_bag_item('secrets', 'pydotorg-redesign')
-db = data_bag_item('secrets', 'postgres')["redesign-#{current_env}"]
+db = data_bag_item('secrets', 'postgres')["pydotorg-#{current_env}"]
 
 application 'redesign.python.org' do
   path '/srv/redesign.python.org'
