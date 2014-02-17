@@ -62,7 +62,7 @@ apt_repository 'deadsnakes' do
   components    ['main']
   distribution  node['lsb']['codename']
   action        :add
-  notifies :run, 'execute[apt-key update]'
+  notifies :run, 'execute[apt-key update]', :immediately
 end
 
 dependencies = %w{
