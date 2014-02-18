@@ -1,1 +1,1 @@
-node.set['elasticsearch']['allocated_memory'] = '256m'
+node.default['pydotorg-redesign']['env'] = 'dev'

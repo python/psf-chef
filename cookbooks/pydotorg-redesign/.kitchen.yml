@@ -5,15 +5,22 @@ driver:
     memory: 1024 
 
 provisioner:
-  name: chef_zero
+  name: chef_solo
 
 platforms:
   - name: ubuntu-12.04
 
 suites:
-  - name: preview-es
+  - name: pydotorg-es
+    roles_path: ../../roles
+    data_bag_path: ../../data_bags
     run_list: 
-      - recipe[apt]
-      - recipe[java]
-      - recipe[pydotorg-redesign::elasticsearch]
+      - role[base]
+      - role[pydotorg-prod-es]
     attributes:
+  - name: pydotorg
+    roles_path: ../../roles/
+    data_bag_path: ../../data_bags/
+    run_list:
+      - role[base]
+      - role[pydotorg-prod]

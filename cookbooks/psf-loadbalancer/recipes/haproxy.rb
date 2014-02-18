@@ -13,6 +13,7 @@ haproxy_section 'python' do
     :wiki_servers => search(:node, 'roles:wiki AND tags:active'),
     :pypy_home_servers => search(:node, 'roles:pypy-home AND tags:active'),
     :preview_servers => search(:node, 'roles:redesign-staging'),
+    :pydotorg_servers => search(:node, 'roles:pydotorg-prod-web AND tags:active'),
     :raspberry_servers => search(:node, 'roles:rpi'),
     :evote_servers => search(:node, 'roles:evote'),
     :uspycon_servers => search(:node, 'roles:pycon-2014 AND tags:production'),
