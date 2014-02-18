@@ -98,7 +98,7 @@ backend uspycon-staging
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 
-backend pydotorg-prod-web
+backend pydotorg_web
   <%- @pydotorg_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
