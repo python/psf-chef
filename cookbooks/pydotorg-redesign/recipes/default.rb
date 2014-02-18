@@ -179,7 +179,8 @@ application 'redesign.python.org' do
     application_server_role "pydotorg-#{current_env}-web"
     server_name [node['fqdn'], 'preview.python.org']
     static_files '/static' => 'static-root',
-                 '/images' => 'static-root/images'
+                 '/images' => 'static-root/images',
+                 '/media' => 'media'
     application_port 8080
   end
 end
