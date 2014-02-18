@@ -12,7 +12,7 @@ haproxy_section 'python' do
     :testpypi_servers => search(:node, 'roles:pypi AND tags:active'),
     :wiki_servers => search(:node, 'roles:wiki AND tags:active'),
     :pypy_home_servers => search(:node, 'roles:pypy-home AND tags:active'),
-    :preview_servers => search(:node, 'roles:redesign-staging'),
+    :preview_servers => search(:node, 'roles:pydotorg-staging-web'),
     :pydotorg_servers => search(:node, 'roles:pydotorg-prod-web AND tags:active'),
     :raspberry_servers => search(:node, 'roles:rpi'),
     :evote_servers => search(:node, 'roles:evote'),
