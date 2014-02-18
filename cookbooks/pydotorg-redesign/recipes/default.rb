@@ -107,9 +107,10 @@ ENV['LANG'] = 'en_US.UTF-8'
 # hood) doesn't check very hard that the virtualenv exists at any particular
 # version. So we'll (ab)use that fact and create a Python 3.3 virtualenv; the
 # django application provider will sorta silently pick that up and be happy.
-%w{/srv/redesign.python.org /srv/redesign.python.org/shared}.each do |d|
+%w{/srv/redesign.python.org /srv/redesign.python.org/shared /srv/redesign.python.org/shared/media}.each do |d|
   directory d do
     action :create
+    recursive true
   end
 end
 
@@ -149,6 +150,11 @@ application 'redesign.python.org' do
       cwd new_resource.release_path
     end
 
+    link "#{new_resource.release_path}/media" do
+      to '/srv/redesign.python.org/shared/media'
+      owner 'www-data'
+    end
+
     # We can't use the Django resource's collectstatic because of CHEF-2784
     # again (see above), so do it here by hand instead.
     python_cmd = ::File.join(new_resource.path, 'shared', 'env', 'bin', 'python')
@@ -173,7 +179,8 @@ application 'redesign.python.org' do
     application_server_role "pydotorg-#{current_env}-web"
     server_name [node['fqdn'], 'preview.python.org']
     static_files '/static' => 'static-root',
-                 '/images' => 'static-root/images'
+                 '/images' => 'static-root/images',
+                 '/m' => 'media'
     application_port 8080
   end
 end
