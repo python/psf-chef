@@ -180,7 +180,7 @@ application 'redesign.python.org' do
     server_name [node['fqdn'], 'preview.python.org']
     static_files '/static' => 'static-root',
                  '/images' => 'static-root/images',
-                 '/media' => 'media'
+                 '/m' => 'media'
     application_port 8080
   end
 end
