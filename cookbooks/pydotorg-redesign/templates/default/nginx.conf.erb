@@ -262,8 +262,8 @@ server {
     return 301 http://pypi.python.org/pypi$1?$args;
   }
 
-  location /ftp/ {
-    return 301 http://legacy.python.org/ftp/;
+  location ~ ^/ftp(.*)$ {
+    return 301 http://legacy.python.org/ftp/$1;
   }
 
   <% @resource.static_files.each do |url, path| %>
