@@ -1,0 +1,38 @@
+upstream <%= @resource.application.name %> {
+  <% unless @application_socket.empty? -%>
+    <% @application_socket.each do |socket_name| -%>
+  server unix:<%= socket_name %>;
+    <% end -%>
+  <% end -%>
+  <% @hosts.each do |node| %>
+  server <%= node %>:<%= @resource.application_port %>;
+  <% end %>
+}
+
+server {
+  listen 80 default;
+  location / {
+      return 403;
+  }
+}
+
+server {
+  listen <%= @resource.port %>;
+  server_name <%= @resource.server_name.is_a?(Array) ? @resource.server_name.join(' ') : @resource.server_name %>;
+  <% if @resource.ssl %>
+  ssl on;
+  ssl_certificate <%= @resource.ssl_certificate %>;
+  ssl_certificate_key <%= @resource.ssl_certificate_key %>;
+  <% end %>
+  <% @resource.static_files.each do |url, path| %>
+  location <%= url %> {
+    alias <%= path %>;
+  }
+  <% end %>
+  location / {
+    proxy_pass http://<%= @resource.application.name %>;
+    proxy_set_header   Host             $host;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+  }
+}

@@ -176,6 +176,7 @@ application 'redesign.python.org' do
   end
 
   nginx_load_balancer do
+    template 'nginx.conf.erb'
     application_server_role "pydotorg-#{current_env}-web"
     server_name [node['fqdn'], 'preview.python.org']
     static_files '/static' => 'static-root',
