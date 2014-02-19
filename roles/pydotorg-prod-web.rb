@@ -7,5 +7,7 @@ override_attributes(
 )
 run_list [
     'recipe[pydotorg-redesign::default]',
-    'recipe[pydotorg-redesign::crons]'
+    'recipe[pydotorg-redesign::crons]',
+    'recipe[pydotorg-redesign::base-rules]',
+    'recipe[pydotorg-redesign::web-rules]'
 ]

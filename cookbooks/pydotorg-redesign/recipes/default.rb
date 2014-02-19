@@ -3,6 +3,9 @@ include_recipe 'java'
 
 current_env = node['pydotorg-redesign']['env']
 
+es_node = search(:node, 'roles:pydotorg-prod-es').first['fqdn']
+es_index = "haystack-#{current_env}"
+
 #
 # Override the python/django application resource to take a python_interpreter
 # option. Python 3 dudes. This is a hack; it really shouldn't be here but in a
@@ -141,7 +144,9 @@ application 'redesign.python.org' do
     template ::File.join(new_resource.release_path, 'pydotorg', 'settings', "#{current_env}.py") do
       source 'settings.py.erb'
       variables 'db' => db,
-                'secret_key' => secrets['secret_key']
+                'secret_key' => secrets['secret_key'],
+                'es_node' => es_node,
+                'es_index' => es_index
     end
   end
 

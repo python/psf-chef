@@ -12,6 +12,14 @@ DATABASES = {
     },
 }
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://<%= @es_node %>:9200/',
+        'INDEX_NAME': '<%= @es_index %>',
+    },
+}
+
 SECRET_KEY = '<%= @secret_key %>'
 
 ALLOWED_HOSTS = ["www.python.org", "python.org", "preview.python.org", "redesign.python.org", "<%= node["fqdn"] %>"]
