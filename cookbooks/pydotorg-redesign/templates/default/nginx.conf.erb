@@ -9,14 +9,20 @@ upstream <%= @resource.application.name %> {
   <% end %>
 }
 
-# Revisit this later
-# https://github.com/python/psf-chef/issues/89
-# server {
-#   listen 80 default;
-#   location / {
-#       return 403;
-#   }
-# }
+# Catch requests without host header
+# Pass back a 200 on options requests (for LB health check)
+# Deny the rest
+server {
+  listen 80 default;
+  location / {
+    if ($request_method = OPTIONS) {
+      add_header Content-Length 0;
+      add_header Content-Type text/plain;
+      return 200;
+    }
+    return 403;
+  }
+}
 
 server {
   listen <%= @resource.port %>;
