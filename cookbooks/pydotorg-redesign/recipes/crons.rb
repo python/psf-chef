@@ -1,0 +1,15 @@
+current_env = node['pydotorg-redesign']['env']
+
+cron_d 'import-blog-feeds' do
+  command "/srv/redesign.python.org/shared/env/bin/python /srv/redesign.python.org/current/manage.py update_blogs --settings pydotorg.settings.#{current_env}"
+  user 'www-data'
+  minute 0
+  hour 4
+end
+
+cron_d 'import-ics-events' do
+  command "/srv/redesign.python.org/shared/env/bin/python /srv/redesign.python.org/current/manage.py import_ics_calendars --settings pydotorg.settings.#{current_env}"
+  user 'www-data'
+  minute 0
+  hour 3
+end
