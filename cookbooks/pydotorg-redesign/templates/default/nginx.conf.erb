@@ -267,7 +267,7 @@ server {
   }
 
   location ~ ^/pypi(.*)$ {
-    rewrite ^ http://pypi.python.org/pypi$1?$args last;
+    return 301 http://pypi.python.org/pypi$1?$args;
   }
 
   <% @resource.static_files.each do |url, path| %>
@@ -275,6 +275,7 @@ server {
     alias <%= path %>;
   }
   <% end %>
+
   location / {
     proxy_pass http://<%= @resource.application.name %>;
     proxy_set_header   Host             $host;
