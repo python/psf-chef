@@ -75,11 +75,11 @@ server {
   }
 
   location /doc/Summary {
-    return 301 http://www.python.org/doc/intros/summary;
+    return 301 http://legacy.python.org/doc/intros/summary;
   }
 
   location /doc/NonEnglish.html {
-    return 301 http://www.python.org/doc/nonenglish/;
+    return 301 https://wiki.python.org/moin/Languages;
   }
 
   location /doc/nonenglish/ {
@@ -123,7 +123,7 @@ server {
   }
 
   location /dev/lists.html {
-    return 301 http://www.python.org/community/lists.html;
+    return 301 http://www.python.org/community/lists;
   }
 
   location /dev/doc/devel {
@@ -211,7 +211,7 @@ server {
   }
 
   location /python.rdf {
-    return 301 http://www.python.org/channews.rdf;
+    return 301 http://legacy.python.org/channews.rdf;
   }
 
   location /mailman-bugs/ {
@@ -260,6 +260,10 @@ server {
 
   location ~ ^/pypi(.*)$ {
     return 301 http://pypi.python.org/pypi$1?$args;
+  }
+
+  location /ftp/ {
+    return 301 http://legacy.python.org/ftp/;
   }
 
   <% @resource.static_files.each do |url, path| %>
