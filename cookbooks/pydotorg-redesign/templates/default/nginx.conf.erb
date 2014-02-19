@@ -139,7 +139,11 @@ server {
   }
 
   location /Jobs.html {
-    return 301 http://www.python.org/community/jobs/;
+    return 301 http://legacy.python.org/community/jobs/;
+  }
+
+  location /jobs/ {
+    return 301 http://legacy.python.org/community/jobs/;
   }
 
   location /Help.html {
@@ -264,6 +268,14 @@ server {
 
   location ~ ^/ftp(.*)$ {
     return 301 http://legacy.python.org/ftp/$1;
+  }
+
+  location /peps/ {
+    return 301 http://legacy.python.org/dev/peps/;
+  }
+
+  location /sf/ {
+    return 301 http://legacy.python.org/sf/;
   }
 
   <% @resource.static_files.each do |url, path| %>
