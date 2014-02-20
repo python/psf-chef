@@ -127,9 +127,8 @@ db = data_bag_item('secrets', 'postgres')["pydotorg-#{current_env}"]
 
 application 'redesign.python.org' do
   path '/srv/redesign.python.org'
-  repository 'git@github.com:proevo/pythondotorg.git'
-  deploy_key secrets['deploy_key']
-  revision 'master'
+  repository 'https://github.com/python/pythondotorg.git'
+  revision 'release'
   packages ['libxml2-dev', 'libxslt-dev']
 
   pydotorg_django do
