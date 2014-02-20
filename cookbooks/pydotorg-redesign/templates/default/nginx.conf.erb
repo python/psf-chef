@@ -14,6 +14,7 @@ upstream <%= @resource.application.name %> {
 # Deny the rest
 server {
   listen 80 default;
+  server_tokens off;
   location / {
     if ($request_method = OPTIONS) {
       add_header Content-Length 0;
@@ -33,6 +34,8 @@ server {
   ssl_certificate_key <%= @resource.ssl_certificate_key %>;
   <% end %>
 
+  server_tokens off;
+
   # Legacy redirects & Rewrites from dinsdale apache
   location ~ ^/~(barry|bwarsaw)$ {
     return 301 http://barry.warsaw.us/;
@@ -40,6 +43,14 @@ server {
 
   location ~ ^/~rmasse$ {
     return 301 http://www.rogermasse.com;
+  }
+
+  location ~ ^/~(.*)$ {
+    resolver 8.8.8.8;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://legacy.python.org/~$1;
   }
 
   location /consortium {
@@ -271,7 +282,11 @@ server {
   }
 
   location /peps/ {
-    return 301 http://legacy.python.org/dev/peps/;
+    return 302 http://legacy.python.org/dev/peps/;
+  }
+
+  location ~ ^/dev/peps/(.*)$ {
+    return 302 http://legacy.python.org/dev/peps/$1;
   }
 
   location /sf/ {
