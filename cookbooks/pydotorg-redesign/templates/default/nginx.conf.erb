@@ -289,8 +289,11 @@ server {
     return 302 http://legacy.python.org/dev/peps/$1;
   }
 
-  location /sf/ {
-    return 301 http://legacy.python.org/sf/;
+  location ~ ^/sf(.*)$ {
+    if ($is_args != "") {
+        return 301 http://legacy.python.org/sf?$args;
+    }
+    return 301 http://legacy.python.org/sf;
   }
 
   <% @resource.static_files.each do |url, path| %>
