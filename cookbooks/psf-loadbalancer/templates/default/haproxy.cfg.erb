@@ -28,6 +28,7 @@ frontend <%= proto %>
   acl host_uspycon hdr(host) -i us.pycon.org
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
   acl host_pydotorg_web hdr(host) -i www.python.org python.org
+  acl host_jobs hdr(host) -i jobs.python.org
 
   use_backend cheeseshop if host_cheeseshop
   use_backend packages if host_packages
@@ -39,6 +40,7 @@ frontend <%= proto %>
   use_backend uspycon if host_uspycon
   use_backend uspycon-staging if host_uspycon_staging
   use_backend pydotorg_web if host_pydotorg_web
+  use_backend jobs if host_jobs
 <%- end -%>
 
 backend cheeseshop
@@ -46,6 +48,9 @@ backend cheeseshop
 
 backend packages
   redirect prefix https://pythonhosted.org code 301
+
+backend jobs
+  redirect location https://www.python.org/jobs code 302
 
 backend wiki
   reqidel ^X-Forwarded-For:.*
