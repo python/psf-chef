@@ -265,12 +265,12 @@ server {
     return 301 http://www.jython.org/;
   }
 
-  location /mailman/ {
-    return 301 http://mail.python.org/mailman/;
+  location ~ ^/mailman/(.*)$ {
+    return 301 https://mail.python.org/mailman/$1;
   }
 
-  location /pipermail/ {
-    return 301 http://mail.python.org/pipermail/;
+  location ~ ^/pipermail/(.*)$ {
+    return 301 https://mail.python.org/pipermail/$1;
   }
 
   location ~ ^/pypi(.*)$ {
