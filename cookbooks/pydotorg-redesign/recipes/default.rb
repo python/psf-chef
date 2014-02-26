@@ -1,7 +1,7 @@
 include_recipe 'python'
 include_recipe 'java'
 
-current_env = node['pydotorg-redesign']['env']
+current_env = node.chef_environment
 
 es_node = search(:node, 'roles:pydotorg-prod-es').first['fqdn']
 es_index = "haystack-#{current_env}"
