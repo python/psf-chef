@@ -150,7 +150,11 @@ server {
   }
 
   location /Jobs.html {
-    return 301 http://www.python.org/jobs/;
+    return 301 http://www.python.org/community/jobs/;
+  }
+
+  location /jobs/ {
+    return 301 http://www.python.org/community/jobs/;
   }
 
   location /Help.html {
