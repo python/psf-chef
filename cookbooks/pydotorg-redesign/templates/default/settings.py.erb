@@ -25,6 +25,7 @@ SECRET_KEY = '<%= @secret_key %>'
 ALLOWED_HOSTS = ["www.python.org", "python.org", "preview.python.org", "redesign.python.org", "<%= node["fqdn"] %>"]
 
 EMAIL_HOST = "mail.python.org"
+DEFAULT_FROM_EMAIL = "webmaster@python.org"
 
 # Ubuntu uses a non-standard name for the yuicompressor binary :(
 PIPELINE_YUI_BINARY = 'yui-compressor'
