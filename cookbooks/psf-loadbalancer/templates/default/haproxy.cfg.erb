@@ -28,7 +28,8 @@ frontend <%= proto %>
   acl host_evote hdr(host) -i vote.python.org
   acl host_uspycon hdr(host) -i us.pycon.org
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
-  acl host_pydotorg_web hdr(host) -i www.python.org python.org
+  acl host_pydotorg_web hdr(host) -i python.org
+  acl host_www_pydotorg_web hdr(host) -i www.python.org
   acl host_jobs hdr(host) -i jobs.python.org
 
   use_backend cheeseshop if host_cheeseshop
@@ -42,6 +43,7 @@ frontend <%= proto %>
   use_backend uspycon if host_uspycon
   use_backend uspycon-staging if host_uspycon_staging
   use_backend pydotorg_web if host_pydotorg_web
+  use_backend www_pydotorg_web if host_www_pydotorg_web
   use_backend jobs if host_jobs
 <%- end -%>
 
@@ -109,12 +111,15 @@ backend uspycon-staging
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 
-backend pydotorg_web
+backend www_pydotorg_web
   <%- @pydotorg_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
+
+backend pydotorg_web
+  redirect prefix https://www.python.org code 301
 
 listen stats 127.0.0.1:1936
   mode http
