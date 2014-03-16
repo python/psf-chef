@@ -32,4 +32,6 @@ PIPELINE_YUI_BINARY = 'yui-compressor'
 
 MEDIA_ROOT = '/srv/redesign.python.org/shared/media'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_FASTLY_SSL', '1')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
