@@ -35,3 +35,10 @@ MEDIA_ROOT = '/srv/redesign.python.org/shared/media'
 SECURE_PROXY_SSL_HEADER = ('HTTP_FASTLY_SSL', '1')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+LOGGING['handlers']['log_file'] = {
+    'level': 'ERROR',
+    'class': 'logging.handlers.WatchedFileHandler',
+    'filename': '/var/log/pydotorg.error',
+}
+LOGGING['loggers']['django.request']['handlers'].append('log_file')
