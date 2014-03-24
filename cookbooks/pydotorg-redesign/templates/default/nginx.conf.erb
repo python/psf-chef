@@ -281,10 +281,6 @@ server {
     return 301 http://pypi.python.org/pypi$1?$args;
   }
 
-  location ~ ^/ftp(.*)$ {
-    return 301 http://legacy.python.org/ftp/$1;
-  }
-
   location /peps/ {
     return 302 http://legacy.python.org/dev/peps/;
   }
