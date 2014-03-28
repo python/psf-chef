@@ -113,14 +113,8 @@ backend pydotorg_web_insecure
   redirect prefix https://python.org code 301
 
 backend pydotorg_web_secure
-  # Send the request to nginx to be redirected to www.python.org. We could do
-  # this in haproxy, except we want to add the Strict-Transport-Security header
-  # and haproxy is incapable of adding headers (except Set-Cookie) to redirects.
-  <%- @pydotorg_servers.each do |server| -%>
-  server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
-  <%- end -%>
-  # provide a maintenance page functionality, only used when all other servers are down
-  server fallback localhost:8080 backup
+  http-request redirect prefix https://www.python.org code 301
+  rspadd Strict-Transport-Security:\ max-age=63072000
 
 listen stats 127.0.0.1:1936
   mode http
