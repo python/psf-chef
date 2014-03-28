@@ -113,8 +113,8 @@ backend pydotorg_web_insecure
   redirect prefix https://python.org code 301
 
 backend pydotorg_web_secure
-  http-request redirect prefix https://www.python.org code 301
   rspadd Strict-Transport-Security:\ max-age=63072000
+  http-request redirect prefix https://www.python.org code 301
 
 listen stats 127.0.0.1:1936
   mode http
