@@ -23,7 +23,7 @@ action :install do
     mode '755'
   end
 
-  package_file_name = "haproxy_1.5-dev22_amd64.deb"
+  package_file_name = "haproxy_1.5-dev22-r1_amd64.deb"
 
   cookbook_file "#{Chef::Config[:file_cache_path]}/#{package_file_name}" do
     source package_file_name
