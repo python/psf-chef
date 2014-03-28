@@ -40,7 +40,7 @@ frontend <%= proto %>
   use_backend evote if host_evote
   use_backend uspycon if host_uspycon
   use_backend uspycon-staging if host_uspycon_staging
-  use_backend pydotorg_web if host_pydotorg_web
+  use_backend <% if proto == 'https' %>pydotorg_web_secure<% else %>pydotorg_web_insecure<% end %> if host_pydotorg_web
   use_backend www_pydotorg_web if host_www_pydotorg_web
   use_backend jobs if host_jobs
 <%- end -%>
@@ -109,7 +109,11 @@ backend www_pydotorg_web
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
 
-backend pydotorg_web
+backend pydotorg_web_insecure
+  redirect prefix https://python.org code 301
+
+backend pydotorg_web_secure
+  rspadd Strict-Transport-Security:\ max-age=63072000
   redirect prefix https://www.python.org code 301
 
 listen stats 127.0.0.1:1936
