@@ -113,8 +113,10 @@ backend pydotorg_web_insecure
   redirect prefix https://python.org code 301
 
 backend pydotorg_web_secure
-  rspadd Strict-Transport-Security:\ max-age=63072000
-  http-request redirect prefix https://www.python.org code 301
+  # This is a horrible, horrible hack to add the Strict-Transport-Security
+  # header to the redirect response, which haproxy (as of 1.5dev22) won't
+  # otherwise let us do.
+  redirect prefix https://www.python.org code 301 clear-cookie ignore=;\ path=/;\r\nStrict-Transport-Security:\ max-age=63072000\r\nSet-Cookie:\ ignore=
 
 listen stats 127.0.0.1:1936
   mode http
