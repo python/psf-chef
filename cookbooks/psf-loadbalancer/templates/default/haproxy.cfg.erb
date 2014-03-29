@@ -110,7 +110,7 @@ backend www_pydotorg_web
   server fallback localhost:8080 backup
 
 backend pydotorg_web_insecure
-  redirect scheme https 301
+  redirect scheme https code 301
 
 backend pydotorg_web_secure
   # This is a horrible, horrible hack to add the Strict-Transport-Security
