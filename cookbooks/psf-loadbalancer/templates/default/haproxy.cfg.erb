@@ -30,6 +30,7 @@ frontend <%= proto %>
   acl host_pydotorg_web hdr(host) -i python.org
   acl host_www_pydotorg_web hdr(host) -i www.python.org
   acl host_jobs hdr(host) -i jobs.python.org
+  acl host_jpython hdr(host) -i www.jpython.org
 
   use_backend cheeseshop if host_cheeseshop
   use_backend packages if host_packages
@@ -43,6 +44,7 @@ frontend <%= proto %>
   use_backend <% if proto == 'https' %>pydotorg_web_secure<% else %>pydotorg_web_insecure<% end %> if host_pydotorg_web
   use_backend www_pydotorg_web if host_www_pydotorg_web
   use_backend jobs if host_jobs
+  use_backend jpython if host_jpython
 <%- end -%>
 
 backend cheeseshop
@@ -108,6 +110,9 @@ backend www_pydotorg_web
   <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
   server fallback localhost:8080 backup
+
+backend jpython
+  redirect prefix http://www.jython.org code 301
 
 backend pydotorg_web_insecure
   redirect scheme https code 301
