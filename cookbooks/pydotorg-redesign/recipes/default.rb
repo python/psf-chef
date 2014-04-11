@@ -182,7 +182,7 @@ application 'redesign.python.org' do
   nginx_load_balancer do
     template 'nginx.conf.erb'
     application_server_role "pydotorg-#{current_env}-web"
-    server_name [node['fqdn'], 'www.python.org']
+    server_name [node['fqdn'], 'www.python.org', 'staging.python.org']
     static_files '/static' => 'static-root',
                  '/images' => 'static-root/images',
                  '/m' => 'media'
