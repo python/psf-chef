@@ -303,6 +303,7 @@ server {
   <% end %>
 
   location / {
+    gzip               off;
     proxy_pass http://<%= @resource.application.name %>;
     proxy_set_header   Host             $host;
     proxy_set_header   X-Real-IP        $remote_addr;
