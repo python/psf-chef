@@ -85,8 +85,9 @@ application app_name do
     application_server_role is_production ? "pycon-2014" : "pycon-2014-staging"
     server_name [node['fqdn'], 'staging-pycon.python.org', 'us.pycon.org']
     static_files({
-      "/2014/site_media/static" => "site_media/static",
-      "/2014/site_media/media" => "/srv/staging-pycon.python.org/shared/media",
+      "/2015/site_media/static" => "site_media/static",
+      "/2015/site_media/media" => "/srv/staging-pycon.python.org/shared/media",
+      "/2014" => "/srv/pycon-archive/2014",
       "/2013" => "/srv/pycon-archive/2013",
       "/2012" => "/srv/pycon-archive/2012",
       "/2011" => "/srv/pycon-archive/2011",

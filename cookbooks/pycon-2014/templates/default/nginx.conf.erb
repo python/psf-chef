@@ -27,7 +27,7 @@ server {
     alias <%= path %>;
   }
   <% end %>
-  location /2014 {
+  location /2015 {
     client_max_body_size 20M;
     proxy_pass http://<%= @resource.application.name %>;
     proxy_set_header Host $http_host;
