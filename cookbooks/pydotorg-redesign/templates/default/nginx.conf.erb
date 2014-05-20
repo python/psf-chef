@@ -86,7 +86,7 @@ server {
   }
 
   location /doc/Summary {
-    return 301 https://legacy.python.org/doc/intros/summary;
+    return 301 http://legacy.python.org/doc/intros/summary;
   }
 
   location /doc/NonEnglish.html {
@@ -230,7 +230,7 @@ server {
   }
 
   location /python.rdf {
-    return 301 https://legacy.python.org/channews.rdf;
+    return 301 http://legacy.python.org/channews.rdf;
   }
 
   location /mailman-bugs/ {
@@ -282,18 +282,18 @@ server {
   }
 
   location /peps/ {
-    return 302 https://legacy.python.org/dev/peps/;
+    return 302 http://legacy.python.org/dev/peps/;
   }
 
   location ~ ^/dev/peps/(.*)$ {
-    return 302 https://legacy.python.org/dev/peps/$1;
+    return 302 http://legacy.python.org/dev/peps/$1;
   }
 
   location ~ ^/sf(.*)$ {
     if ($is_args != "") {
-        return 302 https://legacy.python.org/sf?$args;
+        return 302 http://legacy.python.org/sf?$args;
     }
-    return 302 https://legacy.python.org/sf$1;
+    return 302 http://legacy.python.org/sf$1;
   }
 
   <% @resource.static_files.each do |url, path| %>
