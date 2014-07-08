@@ -1,0 +1,8 @@
+{
+  "id": "jburch",
+  "comment": "Jacob Burch",
+  "sudo": ["pydotorg-staging-web", "pydotorg-prod-web"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDACY8qOdKTC+XJ2NnwQwNhn/2iP1Z16fxjEysGreSyovxokaTtJqignnNAvWVRZ8gOq+Mn1WgwpPtauHLGk5drQoZ4Y+XM6mwcGfWVieW0lzMJ5zeMJg6zcktnNH/nndqHMQRNYIV5eyD5Tk0UUb+2MWJ1cBpoaFmqCabZ7INsivpjqSmZIREFuNkFSH62zUr/LGUWJe//hYkFrRo4iDYAj6Lb+YObSNGkvIIJ1Bf5BFZ8zix7DRgK9W8u1GxhdV6D8csK7MWsauoCTaK+jLujpgj9hwSZV2nwWtkETM298NmSb1Hd94+OLwMhIommWklUN5A8/zuQyWJNcf1rdS5m0ACPfXEt5LvohtI8uMceJmCZVQAW91fP7OVb4rrDtfhHJGK3sgQXCQli6ySfWr2mDwzXKYnfjNImE6omlCWxHMC3kiSQb4+aX+E1z9YfsOx+Z1K+H/zI4sVDI3pLFub9MmKgP5E7JS6tFHPx7UJYq6z6XnkOjMrk39Iz0izKWl9+onWx43jonbhq5sXhC+/0cYP5E/j7T+7DIlZrsI0v+wA222V6ooEIn3SXOC8YukK9mh+rJMQ5k/LwBEY11NCWsQU1M7jltxc8b+ly5SxKnRz4uIj1T+wi9JT5ourXEG3gozhSg/vYI+RbuQoo76hTILxEthlRUZf02pS4t0oT7Q=="
+  ]
+}
