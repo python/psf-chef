@@ -1,10 +1,10 @@
-secrets = data_bag_item("secrets", "pycon-2014")
+secrets = data_bag_item("secrets", "pycon")
 is_production = tagged?('production')
 if is_production
-  db = data_bag_item("secrets", "postgres")["pycon2014"]
+  db = data_bag_item("secrets", "postgres")["pycon2015"]
   app_name = "us.pycon.org"
 else
-  db = data_bag_item("secrets", "postgres")["pycon2014-staging"]
+  db = data_bag_item("secrets", "postgres")["pycon2015-staging"]
   app_name = "staging-pycon.python.org"
 end
 
