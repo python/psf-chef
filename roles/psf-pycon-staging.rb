@@ -1,4 +1,4 @@
-name "pycon-staging"
+name "psf-pycon-staging"
 description "Staging for Pycon website"
 # Owner: Diana Clark
 run_list [

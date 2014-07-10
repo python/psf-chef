@@ -1,4 +1,4 @@
-name "pycon"
+name "psf-pycon"
 description "Production Pycon website"
 # Owner: Diana Clark
 run_list [
