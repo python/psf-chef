@@ -82,7 +82,7 @@ application app_name do
   nginx_load_balancer do
     template 'nginx.conf.erb' # Remove this once /2014/ is the default
     hosts ['localhost'] if Chef::Config[:solo] # For testing in Vagrant
-    application_server_role is_production ? "psf-pycon" : "psf-pycon-staging"
+    application_server_role is_production ? "pycon" : "pycon-staging"
     server_name [node['fqdn'], 'staging-pycon.python.org', 'us.pycon.org']
     static_files({
       "/2015/site_media/static" => "site_media/static",
