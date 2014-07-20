@@ -281,6 +281,10 @@ server {
     return 301 https://pypi.python.org/pypi$1?$args;
   }
 
+  location = /peps/pep-0263.html {
+    return 302 http://legacy.python.org/dev/peps/pep-0263/;
+  }
+
   location /peps/ {
     return 302 http://legacy.python.org/dev/peps/;
   }
