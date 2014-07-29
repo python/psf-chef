@@ -8,9 +8,11 @@ else
   app_name = "staging-pycon.python.org"
 end
 
+include_recipe "psf-pycon::apt_pgdg_postgresql"
 include_recipe "nodejs::install_from_binary"
 include_recipe "git"
 include_recipe "firewall"
+
 
 # Common env for Django processes
 app_env = {
@@ -40,7 +42,7 @@ application app_name do
   path "/srv/staging-pycon.python.org"
   repository "git://github.com/caktus/pycon.git"
   revision is_production ? "production" : "staging"
-  packages ["libpq-dev", "git-core", "libjpeg8-dev"]
+  packages ["postgresql-client-#{node['postgresql']['version']}", "libpq-dev", "git-core", "libjpeg8-dev"]
   migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
   migrate true
 
