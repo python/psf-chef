@@ -145,7 +145,8 @@ application 'redesign.python.org' do
       variables 'db' => db,
                 'secret_key' => secrets['secret_key'],
                 'es_node' => es_node,
-                'es_index' => es_index
+                'es_index' => es_index,
+                'staging' => current_env == 'staging'
     end
   end
 
