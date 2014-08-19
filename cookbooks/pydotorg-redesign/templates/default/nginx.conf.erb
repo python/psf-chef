@@ -281,6 +281,7 @@ server {
     return 301 https://pypi.python.org/pypi$1?$args;
   }
 
+  <% if @resource.application_server_role != 'pydotorg-staging-web' %>
   location = /peps/pep-0263.html {
     return 302 http://legacy.python.org/dev/peps/pep-0263/;
   }
@@ -292,6 +293,7 @@ server {
   location ~ ^/dev/peps/(.*)$ {
     return 302 http://legacy.python.org/dev/peps/$1;
   }
+  <% end %>
 
   location ~ ^/sf(.*)$ {
     if ($is_args != "") {
