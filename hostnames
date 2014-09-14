@@ -1,4 +1,4 @@
-speed-python.osuosl.org 140.211.15.123 - base, python-speed
+\speed-python.osuosl.org 140.211.15.123 - base, python-speed
 virt-h669vt.psf.osuosl.org 140.211.10.66 - base, loadbalancer
 virt-wzmlmm.psf.osuosl.org 140.211.10.67 - base, advocacy
 virt-gwhg4e.psf.osuosl.org 140.211.10.76 - base, coverity
@@ -11,7 +11,7 @@ virt-sxw5uy.psf.osuosl.org 140.211.10.70 - base, loadbalancer
 virt-k4b2sa.psf.osuosl.org 140.211.10.80 - base, rsnapshot
 virt-yfae7i.psf.osuosl.org 140.211.10.68 - base, wiki (pre-hack) (deleted)
 virt-8joqck.psf.osuosl.org 140.211.10.75 - base, rpi
-virt-7yvsjn.psf.osuosl.org 140.211.10.72 - base, hg
+virt-7yvsjn.psf.osuosl.org 140.211.10.72 - base, hg (deleted)
 virt-oku3tm.psf.osuosl.org 140.211.10.73 - base, pypi (deleted)
 virt-sae8wg.psf.osuosl.org 140.211.10.81 - iperf
 virt-7tac5q.psf.osuosl.org 140.211.10.82 - pypy-home
