@@ -1,7 +1,7 @@
 {
   "id": "alex_gaynor",
   "comment": "Alex Gaynor",
-  "sudo": ["pypy-home", "pypy-codespeed"],
+  "sudo": ["pypy-home", "pypy-codespeed", "psf-pycon", "psf-pycon-staging"],
   "ssh_keys": [
     "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAtbT2HPpIxfBDVRLL/9CJV3bol4ySklqtbUkX525xBfzs0GI1kaqX3bb+WIpUWU7p43EGsqFqxJmtZam7ZSFb09IpLD/qdIXJWPDkEOGsyHEVW8KqmwUQl27lknKP8N63CQxeJkk5l/Z/eLqfLoJQdAP77ucZTGkXzt6dT8h0ZIM2rjjT5RtTppY8DxQ9KsQVE0HpfGrTjch9I+2y+yxIKP7XxgExegZ4iQnaLKG9BqUES/Lc6fgd5f1UC2pceu4oo4K7QSe91MnOC/wPd4mKlO5cduTCKyvzOiTo8J3mXf/7FLiJ80SD+Nov0HeODTo9Uu8nhIOvxhqtqBjX+2iu0w==",
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdLyIJiQEZ3Yn2YexLWdqFfO30SySeQcQi7jyNJQEHwBKF75vTD5MEqNnHP+dw/X8PlftdFDvBUCHVI3xB38dIcm+WWy+K3Ohcj/7+ms9CouvJ/rK3KrgaKxtyLSYDRWNrma9zsOkJe+LbuRENPoqdRdmmFoMj+zNv7YY40yKjdwfTQq2ivfHzarmINeA4ygZIsuxxiU4rq58hUgMCFnCrou5fDCaTxCEyFMIumUYDwTpeqlf61hMecgYuYh92SghN9jg8zpUwfG8Dxw/DbyNms9bwE2b+R2aKwhA4uLaCRz6PM/Z5Y2U4t7bjXu54koqWrd/2Mp5LIjwH/Dtc7mPf alex.gaynor@gmail.com"
