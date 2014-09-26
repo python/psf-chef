@@ -128,7 +128,7 @@ db = data_bag_item('secrets', 'postgres')["pydotorg-#{current_env}"]
 application 'redesign.python.org' do
   path '/srv/redesign.python.org'
   repository 'https://github.com/python/pythondotorg.git'
-  revision 'release'
+  revision if current_env == 'staging' then 'master' else 'release'
   packages ['libxml2-dev', 'libxslt-dev']
 
   pydotorg_django do
