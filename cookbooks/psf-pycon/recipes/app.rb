@@ -3,9 +3,11 @@ is_production = tagged?('production')
 if is_production
   db = data_bag_item("secrets", "postgres")["pycon2015"]
   app_name = "us.pycon.org"
+  sentry_dsn = secrets["sentry_dsn"]["production"]
 else
   db = data_bag_item("secrets", "postgres")["pycon2015-staging"]
   app_name = "staging-pycon.python.org"
+  sentry_dsn = secrets["sentry_dsn"]["staging"]
 end
 
 include_recipe "psf-pycon::apt_pgdg_postgresql"
@@ -26,6 +28,7 @@ app_env = {
     "DB_PASSWORD" => db["password"],
     "EMAIL_HOST" => "mail.python.org",
     "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/",
+    "SENTRY_DSN" => sentry_dsn,
 }
 ENV.update(app_env)
 
