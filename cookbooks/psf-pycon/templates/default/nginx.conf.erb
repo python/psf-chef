@@ -32,5 +32,5 @@ server {
     proxy_pass http://<%= @resource.application.name %>;
     proxy_set_header Host $http_host;
   }
-  rewrite ^/$ /2014/ redirect;
+  rewrite ^/$ /2015/ redirect;
 }
