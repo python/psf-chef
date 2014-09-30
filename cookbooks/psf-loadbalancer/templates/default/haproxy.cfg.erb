@@ -114,7 +114,7 @@ backend www_pydotorg_web
   server fallback localhost:8080 backup
 
 backend staging_pydotorg_web
-  <%- @pydotorg_staging_servers.each do |server| -%>
+  <%- @preview_servers.each do |server| -%>
   server <%= server.name %> <%= server['fqdn'] %>:80 check port 80
   <%- end -%>
   # provide a maintenance page functionality, only used when all other servers are down
