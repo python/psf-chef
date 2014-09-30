@@ -18,3 +18,9 @@ cron_d 'update-es-index' do
   minute 0
   hour 2
 end
+
+cron_d 'update-peps' do
+  command "make -C /srv/peps update all && /srv/redesign.python.org/shared/env/bin/python /srv/redesign.python.org/current/manage.py generate_pep_pages --settings pydotorg.settings.#{current_env}"
+  user 'www-data'
+  minute 10
+end

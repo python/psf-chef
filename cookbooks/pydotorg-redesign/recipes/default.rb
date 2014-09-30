@@ -71,6 +71,8 @@ end
 dependencies = %w{
   build-essential
   git-core
+  mercurial
+  python-docutils
   python3.3
   python3.3-dev
   postgresql-client-9.1
