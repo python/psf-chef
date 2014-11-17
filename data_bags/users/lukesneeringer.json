@@ -1,0 +1,8 @@
+{
+  "id": "luke",
+  "comment": "Luke Sneeringer",
+  "sudo": ["psf-pycon", "psf-pycon-staging"],
+  "ssh_keys": [
+    "ssh-dss AAAAB3NzaC1kc3MAAACBAIQh38wqDVGtVxptNBGvfnKyBXLEoVyViTsFVxp22egblMlzvrtjtkEJKS4hgGmrU0Fc2x2nkBq7oACDKL74Pzjyr+2CKCkE3PAoK09Uj3Dx+jEjvtVJFxNFNAywlUPq5dovSdF9nI0/R3ZH3JaSVSUq+XmPyXNwy8HaLGmqVPk1AAAAFQDXcmI5Z/Qng1BliWvRq2bEkIhSBQAAAIBqWspf5HP39WGsR+OLZyQVEQBAen+eUVhSrMt2vf0xEvjMioTV7P2BKUNY+1xICDQvGx508d+MV4eEf6bt3cprBd7ogpKpRIanutGH7rDKYXZkyyNQZGJjxzSF6U9bpZZtOFOw0tuKx4GPryp1mWegZITcUmqZo9OXMLl+8haCnQAAAIBmRM8t/ulFgLfSYwmxarR2OXy8FbZH0rpyOHsyvn2hakub4f/hMZT29kKcXG0umCeXOnbrjmfMKQnhCu2yeHzfbInmwHBzjwvv3JgxlWQ4IJUaur/xBAtjWJlzPYObXgzl8y99bAJGsO6xRuC8LMhAzre/60EffOspXItoAVCQLA=="
+  ]
+}
