@@ -1,0 +1,8 @@
+{
+    "id": "lvh",
+    "comment": "lvh <_@lvh.io>",
+    "sudo": ["psf-pycon", "psf-pycon-staging"],
+    "ssh_keys": [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0ofk7RiX74N2ElJerfWvtQxq9/ZlAMyymrHS7ovZm1AeT+MtpqOSEamgWKZ4rYBpgRZ5vhDPw6+MuT1RafYCDvuxvM+f/roZwgEsiDI1+PPMYhFHGSrZDZR2z4WmyiCwBz30/QFfD5Yy90H0KnwCRJtdjpj6GcR8EtsMdTeq86rzr9uUSBm2CT+IScDn7F2P9IhnEXMDLUtK/6v8LakKk8jcJzXzTGxv/dIfyb8TDaLGht92FAJF8gS80OgwbIKBs+lUbI1FQICMcw5Lp5hMRm+Chtkn331E9VT7M4Q7weU7Ib4+86FLGL1OJn+yOgUIzulfJLTlg6ENld0YK/K5P lvh"
+    ]
+}
