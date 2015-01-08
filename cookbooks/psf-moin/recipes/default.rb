@@ -30,7 +30,7 @@ user 'moin' do
   comment 'MoinMoin service'
   gid 'moin'
   system true
-  shell '/bin/false'
+  shell '/bin/bash'
   home '/data/moin'
 end
 
