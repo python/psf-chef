@@ -1,9 +1,0 @@
-import os
-import multiprocessing
-
-backlog = 2048
-bind = "0.0.0.0:8080"
-keepalive = 2
-timeout = 30
-worker_class = "sync"
-workers = max(multiprocessing.cpu_count(), 4)

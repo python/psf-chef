@@ -6,7 +6,7 @@ virt-ys0nco.psf.osuosl.org 140.211.10.79 - base, wiki, postfix-relay
 virt-et2yi0.psf.osuosl.org 140.211.10.71 - base, buildmaster
 virt-wdiwcy.psf.osuosl.org 140.211.10.78 - base, pypy-codespeed
 virt-ozvw2q.psf.osuosl.org 140.211.10.74 - base, pypi (deleted)
-virt-l4es2w.psf.osuosl.org 140.211.10.77 - base, redesign-staging
+virt-l4es2w.psf.osuosl.org 140.211.10.77 - base, redesign-staging (deleted)
 virt-sxw5uy.psf.osuosl.org 140.211.10.70 - base, loadbalancer
 virt-k4b2sa.psf.osuosl.org 140.211.10.80 - base, rsnapshot
 virt-yfae7i.psf.osuosl.org 140.211.10.68 - base, wiki (pre-hack) (deleted)
@@ -24,10 +24,10 @@ virt-tkd3sc.psf.osuosl.org 140.211.10.88 - evote (failed, deleted)
 virt-byl2f7.psf.osuosl.org 140.211.10.89 - evote
 virt-ak9lsk.psf.osuosl.org 140.211.10.90 - pycon 2014 production
 virt-flqzel.psf.osuosl.org 140.211.10.91 - future docs sandbox
-virt-c2fg44.psf.osuosl.org 140.211.10.92 - base, pydotorg-prod-es
+virt-c2fg44.psf.osuosl.org 140.211.10.92 - base, pydotorg-prod-es (deleted)
 virt-8pjlh8.psf.osuosl.org 140.211.10.93 -
 virt-82qt2a.psf.osuosl.org 140.211.10.94 -
-virt-q0dzqq.psf.osuosl.org 140.211.10.95 - base, pydotorg-prod-web
+virt-q0dzqq.psf.osuosl.org 140.211.10.95 - base, pydotorg-prod-web (deleted)
 virt-znzn20.psf.osuosl.org 140.211.10.96 -
 virt-ssqrj8.psf.osuosl.org 140.211.10.97 -
 virt-f3pu59.psf.osuosl.org 140.211.10.98 -
