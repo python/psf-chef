@@ -26,7 +26,6 @@ frontend <%= proto %>
   acl host_evote hdr(host) -i vote.python.org
   acl host_uspycon hdr(host) -i us.pycon.org
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
-  acl host_jobs hdr(host) -i jobs.python.org
   acl host_jpython hdr(host) -i www.jpython.org
 
   use_backend packages if host_packages
@@ -37,7 +36,6 @@ frontend <%= proto %>
   use_backend evote if host_evote
   use_backend uspycon if host_uspycon
   use_backend uspycon-staging if host_uspycon_staging
-  use_backend jobs if host_jobs
   use_backend jpython if host_jpython
 <%- end -%>
 
@@ -47,9 +45,6 @@ backend packages
 backend packaging
   reqadd X-RTD-SLUG:\ python-packaging-user-guide
   server readthedocs readthedocs.org:80
-
-backend jobs
-  redirect location https://www.python.org/jobs code 302
 
 backend wiki
   reqidel ^X-Forwarded-For:.*
