@@ -18,7 +18,6 @@ frontend <%= proto %>
   bind <%= bind %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
 
-  acl host_cheeseshop hdr(host) -i cheeseshop.python.org
   acl host_packages hdr(host) -i packages.python.org
   acl host_packaging hdr(host) -i packaging.python.org
   acl host_wiki hdr(host) -i wiki.python.org
@@ -30,7 +29,6 @@ frontend <%= proto %>
   acl host_jobs hdr(host) -i jobs.python.org
   acl host_jpython hdr(host) -i www.jpython.org
 
-  use_backend cheeseshop if host_cheeseshop
   use_backend packages if host_packages
   use_backend packaging if host_packaging
   use_backend wiki if host_wiki
@@ -42,9 +40,6 @@ frontend <%= proto %>
   use_backend jobs if host_jobs
   use_backend jpython if host_jpython
 <%- end -%>
-
-backend cheeseshop
-  redirect prefix https://pypi.python.org code 301
 
 backend packages
   redirect prefix https://pythonhosted.org code 301
