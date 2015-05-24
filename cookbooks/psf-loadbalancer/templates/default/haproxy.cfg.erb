@@ -18,7 +18,6 @@ frontend <%= proto %>
   bind <%= bind %>
   reqadd X-Forwarded-Proto:\ <%= proto %>
 
-  acl host_packages hdr(host) -i packages.python.org
   acl host_packaging hdr(host) -i packaging.python.org
   acl host_wiki hdr(host) -i wiki.python.org
   acl host_pypy hdr(host) -i pypy.org www.pypy.org
@@ -28,7 +27,6 @@ frontend <%= proto %>
   acl host_uspycon_staging hdr(host) -i staging-pycon.python.org
   acl host_jpython hdr(host) -i www.jpython.org
 
-  use_backend packages if host_packages
   use_backend packaging if host_packaging
   use_backend wiki if host_wiki
   use_backend pypy-home if host_pypy
@@ -38,9 +36,6 @@ frontend <%= proto %>
   use_backend uspycon-staging if host_uspycon_staging
   use_backend jpython if host_jpython
 <%- end -%>
-
-backend packages
-  redirect prefix https://pythonhosted.org code 301
 
 backend packaging
   reqadd X-RTD-SLUG:\ python-packaging-user-guide
