@@ -1,0 +1,8 @@
+{
+  "id": "bitdancer",
+  "comment": "R. David Murray",
+  "sudo": ["buildmaster"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuYcpQYf83SgoEg4cOkHhJMm8w5+THrouyoCkOeZvoy+Zr0ofYgq9kARwIntORan+RYqmKsuMBjv2hGaiy0gz8REZU07LoE+cokQ2OcqI2ieyQWL18SLU6dJRUKJR5QyStZm/URUHQsE/b13qL6FXqJ5XmOcJNKTTOkvSvoG2Jcgi1aajY1ZMLfAq0VKqI+o6007SMOFC3HILlwcJAmPeRxz5Tf2xT5A26leqWo+Qvi4BPxe6DsbbVF2BmmMguOTNqW/TgOwmGtb2/q/VLF9mJJesAkVFaFI3It2a/ymuyj+hpFLaMBOrEgdtqHtWF7dnOGBBSak1r5hLYwV/SmSH7 rdmurray@hey 20140909"
+  ]
+}
