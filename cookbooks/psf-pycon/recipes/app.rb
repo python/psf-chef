@@ -89,8 +89,9 @@ application app_name do
     hosts ['localhost']
     server_name [node['fqdn'], 'staging-pycon.python.org', 'us.pycon.org']
     static_files({
-      "/2015/site_media/static" => "site_media/static",
-      "/2015/site_media/media" => "/srv/staging-pycon.python.org/shared/media",
+      "/2016/site_media/static" => "site_media/static",
+      "/2016/site_media/media" => "/srv/staging-pycon.python.org/shared/media",
+      "/2015" => "/srv/pycon-archive/2015",
       "/2014" => "/srv/pycon-archive/2014",
       "/2013" => "/srv/pycon-archive/2013",
       "/2012" => "/srv/pycon-archive/2012",
