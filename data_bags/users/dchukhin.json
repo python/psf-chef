@@ -1,0 +1,8 @@
+{
+  "id": "dchukhin",
+  "comment": "Dmitriy Chukhin <dchukhin@caktusgroup.com>",
+  "sudo": ["psf-pycon", "psf-pycon-staging"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCyaAGW8HiLvLP9whINKHck0faKwryO++lqA+GYD9G2XZkbsxcBKqU1b3STGn8jXrDjtr4FcKXFGLq8uOS4/FOiCs45TwLOcA4enyTbaPxrZA05Zw5J5hYZ1y4bBvc+GxytAoyySN3MTG7Q2Mb3TgTTl5G/J+d+zGljHBbrjn1Y3xCRPi9ed82bzqdI+6S8kk7kzub++EScjegTfbPhtsyrY4WbZ0Z/hW0Odtt4rXhsktdfLpYTZ3jJs9YapOBFHblRRlZxtc45o5Q2+4B8z8dr1t3jiFqJJdTL5Cnn+DzD/CHiJE/hT8hc4XcHJPjfymMlX2c6AhxN87RcOWHplTGirkNwSnsyquM4fzZPlXpR7aPbTXQNjGrryk95EEkes+/RmdES6QCptGCqGtcmCRFvIYh4v50r7OvyU12GJUmN3HWyDcLMY6JmDvfYzz2ETBeMPWVP++N4IVDzG08WenjA4vTkw2Yvwaodbhe8m0vodqfkNX/ll13wMKf6TAKLFOLc8NfRh4xP936d4xL7pcsGS6LC6pVd6JjJ3CKKHqGcxRuw/00IzFoRRgs+fzIhmXUKbrFtAJbkXaYpV/rfzRc+no3ddWwZ4hK0FaQ5YBU1rfkCBoJzzIWFdJc8dqfbSMwMohHtFZGDhX9seJoo5KZFUbzl0qSD2hJrehGB3k3fQ== dchukhin@gmail.com"
+  ]
+}
