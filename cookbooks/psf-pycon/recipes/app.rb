@@ -80,7 +80,7 @@ application app_name do
   end
 
   gunicorn do
-    app_module "symposion:wsgi"
+    app_module "symposion.wsgi"
     environment app_env
   end
 
