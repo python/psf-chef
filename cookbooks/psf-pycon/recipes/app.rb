@@ -46,7 +46,7 @@ application app_name do
   repository "git://github.com/caktus/pycon.git"
   revision is_production ? "production" : "staging"
   packages ["postgresql-client-#{node['postgresql']['version']}", "libpq-dev", "git-core", "libjpeg8-dev"]
-  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py syncdb --migrate --noinput"
+  migration_command "/srv/staging-pycon.python.org/shared/env/bin/python manage.py migrate --noinput"
   migrate true
 
   before_deploy do
