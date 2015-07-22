@@ -82,6 +82,7 @@ application app_name do
   gunicorn do
     app_module "symposion.wsgi"
     environment app_env
+    virtualenv "/srv/staging-pycon.python.org/shared/env"
   end
 
   nginx_load_balancer do
