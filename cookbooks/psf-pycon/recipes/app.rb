@@ -4,10 +4,12 @@ if is_production
   db = data_bag_item("secrets", "postgres")["pycon2016"]
   app_name = "us.pycon.org"
   sentry_dsn = secrets["sentry_dsn"]["production"]
+  google_oauth2 = secrets["google_oauth2"]["production"]
 else
   db = data_bag_item("secrets", "postgres")["pycon2016-staging"]
   app_name = "staging-pycon.python.org"
   sentry_dsn = secrets["sentry_dsn"]["staging"]
+  google_oauth2 = secrets["google_oauth2"]["staging"]
 end
 
 include_recipe "psf-pycon::apt_pgdg_postgresql"
@@ -29,6 +31,8 @@ app_env = {
     "EMAIL_HOST" => "mail.python.org",
     "MEDIA_ROOT" => "/srv/staging-pycon.python.org/shared/media/",
     "SENTRY_DSN" => sentry_dsn,
+    "GOOGLE_OAUTH2_CLIENT_ID" => google_oauth2['client_id'],
+    "GOOGLE_OAUTH2_CLIENT_SECRET" => google_oauth2['client_secret'],
 }
 ENV.update(app_env)
 
