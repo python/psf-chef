@@ -48,8 +48,8 @@ Configuration
 
 The repository uses two configuration files.
 
-* config/rake.rb
-* .chef/knife.rb
+* ```config/rake.rb```
+* ```.chef/knife.rb```
 
 The first, `config/rake.rb` configures the Rakefile in two sections.
 
