@@ -1,0 +1,8 @@
+{
+  "id": "miquel",
+  "comment": "Miquel Torres",
+  "sudo": ["pypy-codespeed"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfSW3GspXljmxUqFTo2A/2t4r5g/I7XOEl1bmoLgnuaBYvVi0OfF528FtURKcVuauyOU2D+DGmTZ4XKfS7mVWhfOKMmrNHCcFFwOEpthUPJplHMPZ/BfJJJtx+yvgTrx6PcKBoT7lZDsz9LJqGn5u+KM6FXfbfBo8tllaxgn5hfcn6VVqfY4ZZdUknwto2SzGXuRl3KXap1s0kYYbRXfBORHcVs7kOXMrL5Y9Q1proIsjmMU+/izktqgr9y8uMGCJU0k8SmBVprPfPlmzPspXb5+SjGLUnQ7Py0K0PViPZrpCb3x0BGZ52/y8ej52cwojSo9O0U/32vXE/kzjwfuD1 miquel@MAspire"
+  ]
+}
