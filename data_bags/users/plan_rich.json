@@ -1,0 +1,8 @@
+{
+  "id": "plan_rich",
+  "comment": "Richard Plangger <planrichi@gmail.com>",
+  "sudo": ["pypy-home", "pypy-codespeed"],
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDp5FqKR55YT52HVbmKVjY0A8bwKSJxh7p3yrKnEOD4fn/+Ipb+Hsbd3O21nzLfta/U+sgxewQHAg9efIcfNt7BUXBiWb5Js3DhfTuLka9pkM7CiYJVpoz3KdgRGVHtxE21pTB0gcQuIX7hTOLLWygWMf18+qwdldpoYylk1X6W9ISwAmsFU553IvdhiJE/PpS041iQMPQ8jnSPiNAA16UQL8kd8d8vLlSlOJ8OQm6LEXlJQB7X/m2oCORFyIaQEAAxADyVANMEWx7MRth72+CEK4N2nB5bSKY3pAqlY6AvSOHmaBVPixBQ8AXGdGPT7hUpboP0Q6yR08hobA1Mpq52PnjeC9BLnIsszVTkEwL8XMce/gzQdbikiGlklCGk9O5JfbesxceKz5kg6sk5AP3280mr2ma/HhkGwFV6IjQAy0GTRwGSSf/qDlEeyMBDE5rhRkjtmiX8H9ww1Mo7bgphh3R0X9xKzZEXR/ZBqC+oBFYAHYNippeHuQNtMt271Z4i/JxrXAYOClBbxsQzya//dyrHzzSFQ4j3sJYJeUm7lLkn5vFJ4wBxs4BbmhTxAEmRtu766yegj00u7nIdiks4UmtWKOf/6nFldVD7T50Z6OPoM6m/m8nTiZuJQfxhGcubIA10Dc5gbvzxKlYETj1NyNHgQbUpirt1Wa4veTMOTQ== rich@leno"
+  ]
+}
