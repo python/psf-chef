@@ -13,7 +13,7 @@ server {
   ssl_certificate <%= @resource.ssl_certificate %>;
   ssl_certificate_key <%= @resource.ssl_certificate_key %>;
 
-  add_header Strict-Transport-Security "max-age=31536000";
+  add_header Strict-Transport-Security "max-age=31536000" always;
 <% end %>
 
   <% @resource.static_files.each do |url, path| %>
