@@ -1,7 +1,7 @@
 {
   "id": "alex_gaynor",
   "comment": "Alex Gaynor",
-  "sudo": ["pypy-home", "pypy-codespeed", "psf-pycon", "psf-pycon-staging"],
+  "sudo": ["pypy-home", "pypy-codespeed"],
   "ssh_keys": [
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCOcQscO6WOu1q8x416ikxikp7+J86KY5CAOsqtHtghDMvoG+VCBJ9vJQJvt5M97lsdtSErhdNBZKdFXF2vyFsNBccE4AoBWDuuTSOoA4NjkCXQTpcKkb0xfjuv4z1TS6N/i6fk53G/j3iT2zO7SWrcA9v5pmr3Teiy0VfWR6o6Tw55ROjBE1C8FE2fsz+ZWLVJrYUo/EE7WHlajN7Rh8/gMWBdDVcNJ/g78nso6nvvr4Kfbr1Im34Cz+HuZx+GW2/KbW3h9CoYlmMM4gboKh+gmr+3K8rIoiDsVm7iJd2mrfCcq+MZ6ugoAgOnvayuyPU52eKvyMGy8pAH9T7+qVl5"
   ]
