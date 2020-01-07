@@ -4,7 +4,7 @@ virt-wzmlmm.psf.osuosl.org 140.211.10.67 - base, advocacy
 virt-gwhg4e.psf.osuosl.org 140.211.10.76 - base, coverity
 virt-ys0nco.psf.osuosl.org 140.211.10.79 - base, wiki, postfix-relay
 virt-et2yi0.psf.osuosl.org 140.211.10.71 - base, buildmaster
-virt-wdiwcy.psf.osuosl.org 140.211.10.78 - base, pypy-codespeed
+virt-wdiwcy.psf.osuosl.org 140.211.10.78 - base, pypy-codespeed  # Migrated to DigitalOcean - shutdown.
 virt-ozvw2q.psf.osuosl.org 140.211.10.74 -
 virt-l4es2w.psf.osuosl.org 140.211.10.77 -
 virt-sxw5uy.psf.osuosl.org 140.211.10.70 - base, loadbalancer
